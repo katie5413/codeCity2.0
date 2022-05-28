@@ -1,0 +1,79 @@
+.profileCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+    background: linear-gradient(
+        45deg,
+        var(--primary-dark),
+        var(--secondary-dark)
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 0 1px 15px 0px rgba(45, 68, 215, 0.68);
+
+    .user {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .avatarWrapper {
+            background: var(--primary); /* fallback for old browsers */
+            background: linear-gradient(
+                45deg,
+                var(--primary),
+                var(--secondary),
+                var(--alert)
+            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            border-radius: 50%;
+            margin-bottom: 4px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .avatar {
+            width: 80px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            padding: 1px;
+            background-color: white;
+            margin: 4px;
+        }
+
+        @keyframes float {
+            0% {
+                box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+                transform: translatey(0px);
+            }
+            50% {
+                box-shadow: 0 10px 15px 0px rgba(0, 0, 0, 0.2);
+                transform: translatey(-3px);
+            }
+            100% {
+                box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+                transform: translatey(0px);
+            }
+        }
+
+        .userName {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            color: white;
+        }
+    }
+
+    .status {
+        display: flex;
+        gap: 8px;
+        background-color: rgba(255, 255, 255, 0.8);
+
+        padding: 4px 8px;
+        border-radius: 8px;
+
+        .currentFinishArea,
+        .totalNumArea {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+    }
+}

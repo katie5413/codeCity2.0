@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <link rel="stylesheet" type="text/css" href="../../Common/index.css" />
+        <link rel="stylesheet" type="text/css" href="./index.css" />
+        <link rel="shortcut icon" type="image/png" href="" />
+        <title>ProfileCard</title>
+    </head>
+
+    <body>
+        <div class="profileCard">
+            <div class="user">
+                <div class="avatarWrapper">
+                    <img class="avatar" src="../../Images/avatar.png" alt="user" />
+                </div>
+                <h4 class="userName">name</h4>
+            </div>
+
+            <div class="status">
+                <div class="currentFinishArea">
+                    <img src="../../Images/icon/general/check-circle.svg" alt="完成" />
+                    <p class="currentFinishNum">0</p>
+                </div>
+
+                <div class="totalNumArea">
+                    <img src="../../Images/icon/general/bug.svg" alt="待完成" />
+                    <p class="totalNum">2</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="../../Dependencies/jquery/jquery.min.js"></script>
+        <script src="../../Common/util.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>
