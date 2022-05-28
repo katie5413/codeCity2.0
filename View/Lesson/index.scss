@@ -1,0 +1,46 @@
+.layout {
+    margin: 0 auto;
+    padding: 20px 20px 20px 90px;
+    min-height: 100%;
+    position: relative;
+
+    .contentWrapper {
+        margin: 0 auto;
+        width: calc(100%);
+        border-radius: 8px;
+
+        display: flex;
+
+        .content {
+            padding: 16px;
+            width: -webkit-fill-available;
+            height: -webkit-fill-available;
+            border-radius: 8px;
+            background-color: var(--grey5);
+
+            .pageTitle {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+
+                .lessonIcon {
+                    margin-right: 8px;
+                    width: 40px;
+                    background-color: var(--primary-dark);
+                    height: fit-content;
+                    padding: 8px;
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        .rightArea {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            width: 240px;
+            margin-left: 16px;
+            border-radius: 8px;
+        }
+    }
+}

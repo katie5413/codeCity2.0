@@ -1,0 +1,228 @@
+<?php
+session_start();
+include "../pdoInc.php";
+?>
+
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
+        />
+        <link rel="stylesheet" type="text/css" href="../../Common/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Dependencies/marked/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/SideMenu/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/ProfileCard/index.css" />
+
+        <link rel="stylesheet" type="text/css" href="index.css" />
+        <link rel="shortcut icon" type="image/png" href="" />
+        <!-- Google Tag Manager -->
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-TWGQMN8');
+        </script>
+        <!-- End Google Tag Manager -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CMZ45H5BZ4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-CMZ45H5BZ4');
+        </script>
+    </head>
+
+    <body>
+        <!-- <div id="loader">
+            <div class="loader-inner pacman"></div>
+        </div> -->
+        <div class="layout">
+            <div class="sideMenuArea">
+                <div class="sideMenu">
+                    <img class="logo" src="../../Images/icon/logo.svg" alt="logo" />
+                    <h3>CodeCity</h3>
+                    <nav>
+                        <li id="navTopicMap" class="active">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/general/game.svg"
+                                        alt="地圖"
+                                    />
+                                    <span class="text">課程地圖</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="navRank">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/general/leaderboard.svg"
+                                        alt="排行榜"
+                                    />
+                                    <span class="text">排行榜</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="navNews">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/general/bell.svg"
+                                        alt="最新消息"
+                                    />
+                                    <span class="text">最新消息</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="navForum">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/general/question-answer.svg"
+                                        alt="討論區"
+                                    />
+                                    <span class="text">討論區</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="navClassManage">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/general/groups.svg"
+                                        alt="班級管理"
+                                    />
+                                    <span class="text">班級管理</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="navTopicManage">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/type/book.svg"
+                                        alt="課程管理"
+                                    />
+                                    <span class="text">課程管理</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="navPerson">
+                            <a href="#">
+                                <div class="item" aria-hidden="true">
+                                    <img
+                                        class="icon"
+                                        src="../../Images/icon/general/user.svg"
+                                        alt="個人"
+                                    />
+                                    <span class="text">個人</span>
+                                </div>
+                            </a>
+                            <ul>
+                                <li id="navBadge">
+                                    <a href="#">成就</a>
+                                </li>
+                                <li id="navSetting">
+                                    <a href="#">設定</a>
+                                </li>
+                                <li id="navLogOut">
+                                    <a href="#">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </nav>
+                    <div class="status">
+                        <div class="item close">
+                            <img
+                                class="icon"
+                                src="../../Images/icon/direction/arrow-left-double.svg"
+                                alt="icon"
+                            />
+                            <span>收合</span>
+                        </div>
+                        <div class="item open">
+                            <img
+                                class="icon"
+                                src="../../Images/icon/direction/arrow-left-double.svg"
+                                alt="icon"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentWrapper">
+                <main id="lessonContent" class="content">
+                    <h2 class="pageTitle">
+                        <img class="lessonIcon" src="../../Images/icon/type/category.svg" />單元標題
+                    </h2>
+                </main>
+                <div class="rightArea">
+                    <div class="profileCard">
+                        <div class="user">
+                            <div class="avatarWrapper">
+                                <img class="avatar" src="../../Images/avatar.png" alt="user" />
+                            </div>
+                            <h4 class="userName">如果名字很長的話要怎麼辦？只能讓他長下去了</h4>
+                        </div>
+
+                        <div class="status">
+                            <div class="currentFinishArea">
+                                <img src="../../Images/icon/general/check-circle.svg" alt="完成" />
+                                <p class="currentFinishNum">0</p>
+                            </div>
+
+                            <div class="totalNumArea">
+                                <img src="../../Images/icon/general/bug.svg" alt="待完成" />
+                                <p class="totalNum">2</p>
+                            </div>
+                        </div>
+                    </div>
+                    還沒想要放什麼，先空著也沒關係
+                </div>
+            </div>
+        </div>
+        <script src="../../Common/util.js"></script>
+        <script src="../../Dependencies/jquery/jquery.min.js"></script>
+        <script src="../../Dependencies/marked/marked.min.js"></script>
+        <script src="../../Components/Loader/index.js"></script>
+        <script src="../../Components/SideMenu/index.js"></script>
+        <script src="../../Dependencies/marked/extension.js"></script>
+        <script src="index.js"></script>
+    </body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+        ><iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TWGQMN8"
+            height="0"
+            width="0"
+            style="display: none; visibility: hidden"
+        ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+</html>
