@@ -186,8 +186,9 @@
 .sideMenu nav li ul li {
     padding: 8px 16px;
     border-radius: 0px;
-    border-left: 2px solid #e7eeff;
+    border-left: 2px dotted #e7eeff;
     opacity: 1;
+    margin: 2px 0;
 }
 
 .sideMenu nav li ul li a {
@@ -196,6 +197,7 @@
     letter-spacing: 0.2px;
     opacity: 0.6;
     color: white;
+    white-space: nowrap;
 }
 
 .sideMenu nav li.active {
