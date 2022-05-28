@@ -1,0 +1,1 @@
+.section{margin:32px}.section .area{display:grid;grid-template-columns:repeat(4, 1fr);gap:4px;margin:16px}.section .area .item{display:flex;width:280px}#colorArea .colorItem{display:flex;width:280px;height:80px}#colorArea .colorItem .color{width:60px;height:60px;border-radius:8px;margin:0 10px}#linkArea .linkItem{display:flex;width:280px}

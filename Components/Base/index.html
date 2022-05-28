@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <link rel="stylesheet" type="text/css" href="../../Common/index.css" />
+        <link rel="stylesheet" type="text/css" href="../Link/index.css" />
+        <link rel="stylesheet" type="text/css" href="../Button/index.css" />
+        <link rel="stylesheet" type="text/css" href="../FeedbackMsg/index.css" />
+        <link rel="stylesheet" type="text/css" href="./index.css" />
+        <link rel="shortcut icon" type="image/png" href="" />
+        <title>Base style guide</title>
+    </head>
+
+    <body>
+        <div class="section">
+            <h1>Heading1 42/900</h1>
+            <h2>Heading2 36/bold</h2>
+            <h3>Heading3 20/bold</h3>
+            <p class="large">p.large 18/normal</p>
+            <p>paragraph 15/normal/</p>
+            <p class="small">p.small 14/normal</p>
+        </div>
+        <div class="section">
+            <h2>Color</h2>
+            <div id="colorArea" class="area"></div>
+        </div>
+        <div class="section">
+            <h2>Link</h2>
+            <div id="linkArea" class="area">
+                <div class="linkItem"><a class="primary-link" href="#">.primary-link</a></div>
+                <div class="linkItem"><a class="secondary-link" href="#">.secondary-link</a></div>
+                <div class="linkItem"><a class="gradient-link" href="#">.gradient-link</a></div>
+                <div class="linkItem">
+                    <a class="arrow-link gradient-link" href="#"
+                        >arrow-gradient-link<img
+                            src="../../Images/icon/direction/arrow-right-tail.svg"
+                            alt="link to"
+                    /></a>
+                </div>
+            </div>
+            <h3>button link</h3>
+            <div class="area">
+                <div class="item">
+                    <a class="button btn-primary" href="#">btn-primary</a>
+                </div>
+                <div class="item">
+                    <a class="button btn-secondary" href="#">btn-secondary</a>
+                </div>
+                <div class="item">
+                    <a class="button btn-alert" href="#">btn-alert if content too long will be like this</a>
+                </div>
+            </div>
+            <div class="area">
+                <div class="item">
+                    <a class="button btn-primary btn-hollow" href="#">btn-primary</a>
+                </div>
+                <div class="item">
+                    <a class="button btn-secondary btn-hollow" href="#">btn-secondary</a>
+                </div>
+                <div class="item">
+                    <a class="button btn-alert btn-hollow" href="#">btn-alert if content too long will be like this</a>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Feedback</h2>
+            <div class="area">
+                <div class="item" data-success="true">
+                    <div class="feedbackMsg successMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/check-circle.svg"
+                            alt="success icon"
+                        />
+                        <span class="text">success message</span>
+                    </div>
+                </div>
+                <div class="item" data-success="true">
+                    <div class="feedbackMsg successMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/check-circle.svg"
+                            alt="success icon"
+                        />
+                        <span class="text"
+                            >default success message with long long long long long text and
+                            max-width: 240px</span
+                        >
+                    </div>
+                </div>
+                <div class="item" data-success="true">
+                    <div class="feedbackMsg successMsg maxContent">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/check-circle.svg"
+                            alt="success icon"
+                        />
+                        <span class="text">.maxContent success message to fill container</span>
+                    </div>
+                </div>
+                <div class="item" data-success="false">
+                    <div class="feedbackMsg successMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/check-circle.svg"
+                            alt="success icon"
+                        />
+                        <span class="text">success message 隱藏</span>
+                    </div>
+                </div>
+            </div>
+            <div class="area">
+                <div class="item" data-error="true">
+                    <div class="feedbackMsg errorMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/error.svg"
+                            alt="error icon"
+                        />
+                        <span class="text">error message</span>
+                    </div>
+                </div>
+                <div class="item" data-error="true">
+                    <div class="feedbackMsg errorMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/error.svg"
+                            alt="error icon"
+                        />
+                        <span class="text"
+                            >default error message with long long long long long text and max-width:
+                            240px</span
+                        >
+                    </div>
+                </div>
+                <div class="item" data-error="true">
+                    <div class="feedbackMsg errorMsg maxContent">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/error.svg"
+                            alt="error icon"
+                        />
+                        <span class="text">.maxContent error message to fill container</span>
+                    </div>
+                </div>
+                <div class="item" data-error="false">
+                    <div class="feedbackMsg errorMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/error.svg"
+                            alt="error icon"
+                        />
+                        <span class="text">error message 隱藏</span>
+                    </div>
+                </div>
+            </div>
+            <div class="area">
+                <div class="item" data-info="true">
+                    <div class="feedbackMsg infoMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/info.svg"
+                            alt="info icon"
+                        />
+                        <span class="text">info message</span>
+                    </div>
+                </div>
+                <div class="item" data-info="true">
+                    <div class="feedbackMsg infoMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/info.svg"
+                            alt="info icon"
+                        />
+                        <span class="text"
+                            >default info message with long long long long long text and max-width:
+                            240px</span
+                        >
+                    </div>
+                </div>
+                <div class="item" data-info="true">
+                    <div class="feedbackMsg infoMsg maxContent">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/info.svg"
+                            alt="info icon"
+                        />
+                        <span class="text">maxContent infoMsg message to fill container</span>
+                    </div>
+                </div>
+                <div class="item" data-info="false">
+                    <div class="feedbackMsg infoMsg">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/info.svg"
+                            alt="info icon"
+                        />
+                        <span class="text">info message 隱藏</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../../Dependencies/jquery/jquery.min.js"></script>
+        <script src="../../Common/util.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>

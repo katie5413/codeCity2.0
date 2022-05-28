@@ -1,0 +1,38 @@
+
+.section {
+    margin: 32px;
+
+    .area {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        margin: 16px;
+
+        .item {
+            display: flex;
+            width: 280px;
+        }
+    }
+}
+
+#colorArea {
+    .colorItem {
+        display: flex;
+        width: 280px;
+        height: 80px;
+
+        .color {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin: 0 10px;
+        }
+    }
+}
+
+#linkArea {
+    .linkItem {
+        display: flex;
+        width: 280px;
+    }
+}
