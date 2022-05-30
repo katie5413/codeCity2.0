@@ -9,7 +9,8 @@ const fakeData = [
         id: '2',
         type: 'singleChoice',
         content: {
-            quizTitle: '請選擇答案（單選）',
+            quizTitle: '單選題目的標題（單選）',
+            quizDetail: '作業說明文字（選填）',
             answer: ['0'],
             option: ['答案', '選項一', '選項二', '選項三'],
             studentAnswer:[],
@@ -19,7 +20,7 @@ const fakeData = [
         id: '3',
         type: 'multipleChoice',
         content: {
-            quizTitle: '請選擇答案(多選)',
+            quizTitle: '多選題目的標題(多選)',
             quizDetail: '作業說明文字（選填）',
             answer: ['0', '1'],
             option: ['答案', '答案', '選項二', '選項三'],
@@ -45,7 +46,7 @@ const fakeData = [
         id: '5',
         type: 'uploadImage',
         content: {
-            quizTitle: '上傳圖片',
+            quizTitle: '上傳圖片題目的標題',
             quizDetail: '作業說明文字（選填）',
             studentAnswer:[],
         },
@@ -54,7 +55,7 @@ const fakeData = [
         id: '6',
         type: 'textArea',
         content: {
-            quizTitle: '段落文字',
+            quizTitle: '段落文字題目的標題',
             quizDetail: '作業說明文字（選填）',
             quizImage: '../../Images/city.png',
             quizImageAlt: '圖片說明文字（選填）',
