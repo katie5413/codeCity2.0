@@ -2,7 +2,7 @@ function lessonContentModel(data, field) {
     data.forEach((item) => {
         let contentID = `${item.type}${item.id}`;
         switch (item.type) {
-            case 'text':
+            case 'markdown':
                 marked.use({
                     renderer: CodeCityExtension,
                 });
@@ -24,6 +24,7 @@ function lessonContentModel(data, field) {
                         </h3>
                         <div class="sectionContentArea">
                             <div class="text"></div>
+                            <div class="content-img"></div>
                             <div class="optionArea"></div>
                             <div class="feedbackMsg maxContent">
                             <span class="icon"></span/>
@@ -52,6 +53,25 @@ function lessonContentModel(data, field) {
                         template = template.replace(
                             '<div class="text"></div>',
                             `<div class="text">${content.quizDetail}</div>`,
+                        );
+                    }
+
+                    if (content.quizImage) {
+                        template = template.replace(
+                            '<div class="content-img"></div>',
+                            `<div class="content-img">
+                            <img src="${content.quizImage}" />
+                            <div class="content-img-content"></div>
+                        </div>`,
+                        );
+                    }
+
+                    if (content.quizImageAlt) {
+                        template = template.replace(
+                            '<div class="content-img-content"></div>',
+                            `<div class="content-img-content">
+                            <small>${content.quizImageAlt}</small>
+                        </div>`,
                         );
                     }
 
@@ -458,7 +478,7 @@ function lessonContentModel(data, field) {
                         <div class="content-img"></div>
                         <div class="optionArea">
                         <div class="formInput">
-                            <textarea id="{{quizTypeId}}Input" class="input" placholder="請輸入段落文字"></textarea>
+                            <textarea id="{{quizTypeId}}Input" class="input" placeholder="請輸入段落文字"></textarea>
                         </div>
                         </div>
                         <div class="feedbackMsg maxContent">
