@@ -2,8 +2,9 @@ const fakeData = [
     {
         id: '1',
         type: 'markdown',
-        content:
-            '# h1［文章標題］\n## h2［文章標題］\n### h3［次標題］\n#### h4［小標題］\n> block quote［引言］（bar 會隨著文字高度增加）\n\np［一般文字］\n\n**b［粗體文字］**\n\n一行字當中的`code ［ highlight 文字］`大概是這樣\n\n[a［連結文字］](https://myheroes.tw/codeCity/)\n\n1. 數字列表\n2. 數字列表\n3. 數字列表\n\n- 一般列表\n- 一般列表\n- 一般列表\n\n![圖片說明文字](https://katie5413.github.io/codeCity2.0/Images/city.png)\n\nhint~［提示］提示文字\n\nsum~［總結］總結文字',
+        content: {
+            data: '# h1［文章標題］\n## h2［文章標題］\n### h3［次標題］\n#### h4［小標題］\n> block quote［引言］（bar 會隨著文字高度增加）\n\np［一般文字］\n\n**b［粗體文字］**\n\n一行字當中的`code ［ highlight 文字］`大概是這樣\n\n[a［連結文字］](https://myheroes.tw/codeCity/)\n\n1. 數字列表\n2. 數字列表\n3. 數字列表\n\n- 一般列表\n- 一般列表\n- 一般列表\n\n![圖片說明文字](https://katie5413.github.io/codeCity2.0/Images/city.png)\n\nhint~［提示］提示文字\n\nsum~［總結］總結文字',
+        },
     },
     {
         id: '2',
@@ -15,7 +16,10 @@ const fakeData = [
             quizImageAlt: '圖片說明文字（選填）',
             answer: ['0'],
             option: ['答案', '選項一', '選項二', '選項三'],
-            studentAnswer:[],
+        },
+        studentAnswer: {
+            content: [],
+            score: null,
         },
     },
     {
@@ -28,7 +32,10 @@ const fakeData = [
             quizImageAlt: '圖片說明文字（選填）',
             answer: ['0', '1'],
             option: ['答案', '答案', '選項二', '選項三'],
-            studentAnswer:[],
+        },
+        studentAnswer: {
+            content: [],
+            score: null,
         },
     },
     {
@@ -41,9 +48,12 @@ const fakeData = [
             quizImageAlt: '圖片說明文字（選填）',
             answer: [
                 { id: 'A', ans: ['答案'] },
-                { id: 'B', ans: ['答案','答案一', '答案二'] },
+                { id: 'B', ans: ['答案', '答案一', '答案二'] },
             ],
-            studentAnswer:[],
+        },
+        studentAnswer: {
+            content: ['',''],
+            score: null,
         },
     },
     {
@@ -52,7 +62,10 @@ const fakeData = [
         content: {
             quizTitle: '上傳圖片題目的標題',
             quizDetail: '作業說明文字（選填）',
-            studentAnswer:[],
+        },
+        studentAnswer: {
+            content: [],
+            score: null,
         },
     },
     {
@@ -63,7 +76,10 @@ const fakeData = [
             quizDetail: '作業說明文字（選填）',
             quizImage: '../../Images/city.png',
             quizImageAlt: '圖片說明文字（選填）',
-            studentAnswer:[],
+        },
+        studentAnswer: {
+            content: [],
+            score: null,
         },
     },
 ];
@@ -102,6 +118,21 @@ $(document).ready(function () {
         });
     }
 
-    // 塞課程內容
-    lessonContentModel(pageData.content, $('#lessonContent'));
+    $.ajax({
+        type: 'POST',
+        url: `../../API/getLessonData.php`,
+        data: {
+            lessonID: 1,
+            studentID: 1,
+        },
+        dataType: 'json',
+        success: function (lessonContent) {
+            console.log('getLessonData', lessonContent);
+            // 塞課程內容
+            lessonContentModel(lessonContent.data, $('#lessonContent'));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('getLessonData Fail', jqXHR, textStatus, errorThrown);
+        },
+    });
 });

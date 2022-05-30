@@ -4,7 +4,7 @@
 $db_server = "localhost";
 $db_user = "root";
 $db_passwd = "";
-$db_name = "lineSimu";
+$db_name = "codeCity2.0";
 
 date_default_timezone_set('Asia/Taipei');
 try {

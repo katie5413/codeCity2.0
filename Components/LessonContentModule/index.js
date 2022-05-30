@@ -8,7 +8,7 @@ function lessonContentModel(data, field) {
                 });
 
                 field.append(
-                    `<div class="markdownArea section">${marked.parse(item.content)}</div>`,
+                    `<div id="${contentID}"class="markdownArea section">${marked.parse(item.content.data)}</div>`,
                 );
                 break;
             case 'multipleChoice':
@@ -115,25 +115,24 @@ function lessonContentModel(data, field) {
                     }),
                 );
 
-                // 重新註冊事件
-                activeFeedBack(field);
+                
 
                 // 檢查是否作答過
-                if (item.content.studentAnswer.length > 0) {
-                    for (let i = 0; i < item.content.studentAnswer.length; i++) {
-                        $(`#${item.type}${item.id}-${item.content.studentAnswer[i]}`).click();
+                if (item.studentAnswer.content.length > 0) {
+                    for (let i = 0; i < item.studentAnswer.content.length; i++) {
+                        $(`#${item.type}${item.id}-${item.studentAnswer[i]}`).click();
                     }
                 }
 
-                if (checkAnswerSame(item.content.answer, item.content.studentAnswer)) {
+                if (checkAnswerSame(item.content.answer, item.studentAnswer)) {
                     $(`#${contentID} .status`).addClass('done');
                     $(`#${contentID} .submitAnswer`).remove();
                 }
 
                 function checkAnswerSame(answer, studentAnswer) {
                     let count = 0;
-                    if (answer.length != studentAnswer.length) return false;
-                    for (let i = 0; i < studentAnswer.length; i++) {
+                    if (answer.length != studentAnswer.content.length) return false;
+                    for (let i = 0; i < studentAnswer.content.length; i++) {
                         if (answer.includes(studentAnswer[i])) {
                             count++;
                         }
@@ -289,26 +288,26 @@ function lessonContentModel(data, field) {
                 );
 
                 // 重新註冊事件
-                activeFeedBack(field);
+                activeFeedBack($(`#${contentID}`));
 
                 // 檢查是否作答過
-                if (item.content.studentAnswer.length > 0) {
-                    for (let i = 0; i < item.content.studentAnswer.length; i++) {
+                if (item.studentAnswer.content.length > 0) {
+                    for (let i = 0; i < item.studentAnswer.content.length; i++) {
                         $(`#${item.type}${item.id}-${i}`).attr(
                             'value',
-                            item.content.studentAnswer[i],
+                            item.studentAnswer[i],
                         );
                     }
                 }
 
-                if (checkFillBlankAnswerSame(item.content.answer, item.content.studentAnswer)) {
+                if (checkFillBlankAnswerSame(item.content.answer, item.studentAnswer)) {
                     $(`#${contentID} .status`).addClass('done');
                     $(`#${contentID} .submitAnswer`).remove();
                 }
 
                 function checkFillBlankAnswerSame(answer, studentAnswer) {
                     let count = 0;
-                    if (answer.length != studentAnswer.length) return false;
+                    if (answer.length != studentAnswer.content.length) return false;
                     for (let i = 0; i < answer.length; i++) {
                         if (answer[i].ans.includes(studentAnswer[i])) {
                             count++;
@@ -415,13 +414,14 @@ function lessonContentModel(data, field) {
                 );
 
                 // 檢查是否作答過
-                if (item.content.studentAnswer.length > 0) {
+                if (item.studentAnswer.content.length > 0) {
                     $(`#${contentID} .uploadImageArea .imageSubmit`).attr(
                         'src',
-                        item.content.studentAnswer[0].content,
+                        item.studentAnswer.content[0],
                     );
+                    $(`#${contentID} .submitAnswer`).removeClass('hide');
 
-                    if (item.content.studentAnswer[0].score) {
+                    if (item.studentAnswer.score) {
                         $(`#${contentID} .status`).addClass('done');
                     } else {
                         $(`#${contentID} .status`).addClass('wait');
@@ -429,7 +429,7 @@ function lessonContentModel(data, field) {
                 }
 
                 // 重新註冊事件
-                activeFeedBack(field);
+                activeFeedBack($(`#${contentID}`));
 
                 // 上傳留言圖片
                 $(`#${contentID}Button`).change(function () {
@@ -457,9 +457,10 @@ function lessonContentModel(data, field) {
 
                 $(`#${contentID} .submitAnswer`).on('click', function () {
                     $(`#${contentID} .status`).addClass('wait');
-                    $(`#${contentID} .submitAnswer`).remove();
                     checkLessonStatus();
                     // TODO: 把資料送到後端
+
+                    // 還沒過期前可以重複送
                 });
 
                 break;
@@ -538,10 +539,10 @@ function lessonContentModel(data, field) {
                 );
 
                 // 檢查是否作答過
-                if (item.content.studentAnswer.length > 0) {
-                    $(`#${contentID}Input`)[0].value = item.content.studentAnswer[0];
+                if (item.studentAnswer.content.length > 0) {
+                    $(`#${contentID}Input`)[0].value = item.studentAnswer.content;
 
-                    if (item.content.studentAnswer[0].score) {
+                    if (item.studentAnswer.score) {
                         $(`#${contentID} .status`).addClass('done');
                     } else {
                         $(`#${contentID} .status`).addClass('wait');
@@ -549,7 +550,7 @@ function lessonContentModel(data, field) {
                 }
 
                 // 重新註冊事件
-                activeFeedBack(field);
+                activeFeedBack($(`#${contentID}`));
 
                 $(`#${contentID} .submitAnswer`).on('click', function () {
                     let selectItem = $(`#${contentID} .input`);
@@ -560,11 +561,11 @@ function lessonContentModel(data, field) {
                             userAnswer.push(selectItem[i].value);
 
                             $(`#${contentID} .status`).addClass('wait');
-                            $(`#${contentID} .submitAnswer`).remove();
 
                             checkLessonStatus();
 
                             // TODO: 有填才會送資料到後台
+                            // 還沒過期前可以重複送
                         } else {
                             selectItem.eq(i).parent().addClass('alert');
 
