@@ -12,6 +12,7 @@ const fakeData = [
             quizTitle: '請選擇答案（單選）',
             answer: ['0'],
             option: ['答案', '選項一', '選項二', '選項三'],
+            studentAnswer:[],
         },
     },
     {
@@ -22,6 +23,7 @@ const fakeData = [
             quizDetail: '作業說明文字（選填）',
             answer: ['0', '1'],
             option: ['答案', '答案', '選項二', '選項三'],
+            studentAnswer:[],
         },
     },
     {
@@ -36,6 +38,7 @@ const fakeData = [
                 { id: 'A', ans: ['答案'] },
                 { id: 'B', ans: ['答案','答案一', '答案二'] },
             ],
+            studentAnswer:[],
         },
     },
     {
@@ -44,6 +47,7 @@ const fakeData = [
         content: {
             quizTitle: '上傳圖片',
             quizDetail: '作業說明文字（選填）',
+            studentAnswer:[],
         },
     },
     {
@@ -54,6 +58,7 @@ const fakeData = [
             quizDetail: '作業說明文字（選填）',
             quizImage: '../../Images/city.png',
             quizImageAlt: '圖片說明文字（選填）',
+            studentAnswer:[],
         },
     },
 ];
