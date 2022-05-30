@@ -184,7 +184,7 @@
 }
 
 .sideMenu nav li ul li {
-    padding: 8px 16px;
+    padding: 0;
     border-radius: 0px;
     border-left: 2px dotted #e7eeff;
     opacity: 1;
@@ -192,12 +192,14 @@
 }
 
 .sideMenu nav li ul li a {
+    display: block;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.2px;
     opacity: 0.6;
     color: white;
     white-space: nowrap;
+    padding: 8px 16px;
 }
 
 .sideMenu nav li.active {
@@ -218,7 +220,7 @@
 }
 
 .sideMenu nav li ul li.active {
-    padding: 16px;
+    padding: 0;
 }
 
 .sideMenu:hover {
