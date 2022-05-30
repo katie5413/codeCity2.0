@@ -1,9 +1,9 @@
 a {
-    text-decoration: underline;
     transition: all 0.3s ease;
 }
 
 a.primary-link {
+    text-decoration: underline;
     color: var(--primary);
 
     &:hover {
@@ -12,6 +12,7 @@ a.primary-link {
 }
 
 a.secondary-link {
+    text-decoration: underline;
     color: var(--secondary);
 
     &:hover {

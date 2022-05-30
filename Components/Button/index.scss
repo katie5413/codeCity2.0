@@ -59,6 +59,7 @@
     &.btn-hollow {
         color: var(--primary);
         border: 1px solid var(--primary);
+        box-shadow: none;
 
         &:hover {
             color: var(--primary-dark);

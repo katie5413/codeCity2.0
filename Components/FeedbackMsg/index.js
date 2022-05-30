@@ -11,12 +11,25 @@ function setFieldFeedback(field, msg, type) {
     switch (type) {
         case 'error': {
             let $field = transformToJQuery(field);
-            $field.attr('data-error', true);
-            $field.find('.errorMsg').addClass('active');
-            $field.find('.errorMsg .text').text(msg);
+            $field.attr('data-feedback', true);
+            $field.find('.feedbackMsg').addClass('errorMsg').removeClass('successMsg');
+            $field.find('.feedbackMsg .text').text(msg);
+            break;
+        }
+        case 'success': {
+            let $field = transformToJQuery(field);
+            $field.attr('data-feedback', true);
+            $field.find('.feedbackMsg').addClass('successMsg').removeClass('errorMsg');
+            $field.find('.feedbackMsg .text').text(msg);
             break;
         }
     }
+
+    console.log('setFeedBack');
+}
+function activeFeedBack() {
+    setFieldFeedback();
+    clearFieldFeedback();
 }
 
 /**
@@ -25,17 +38,14 @@ function setFieldFeedback(field, msg, type) {
  * @param {(string | JQuery | HTMLElement)} field - Field going to clear.
  * Type of field can be string (field id), jquery element or html element.
  */
-function clearFieldFeedback(field, type) {
-    switch (type) {
-        case 'error': {
-            let $field = transformToJQuery(field);
-            $field.find('[data-error]').attr('data-error', false);
-            if ($field.attr('data-error')) {
-                $field.attr('data-error', false);
-            }
-            $field.find('.errorMsg').removeClass('active');
-            $field.find('.errorMsg .text').text('');
-            break;
+function clearFieldFeedback(field) {
+    if (field) {
+        let $field = transformToJQuery(field);
+        if ($field.attr('data-feedback') == 'true') {
+            $field.attr('data-feedback', false);
+            $field.find('.feedbackMsg').removeClass('successMsg').removeClass('errorMsg');
+            $field.find('.feedbackMsg .text').text('');
         }
     }
+    console.log('clearFeedBack');
 }

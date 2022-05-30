@@ -13,7 +13,15 @@
     }
 
     & > .icon {
+        flex-shrink: 0;
         margin-right: 6px;
+        display: inline-block;
+        cursor: pointer;
+        background-position: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px;
     }
 
     & > .text {
@@ -25,17 +33,25 @@
 
 .successMsg {
     background-color: white;
-	border: 1px solid var(--success);
-    box-shadow: 0 1px 5px 0 rgba(49, 196, 135, 0.75);
+    border: 1px solid var(--primary-light);
+    box-shadow: 0 0 5px 0 rgba(49, 137, 196, 0.75);
+
+    & .icon{
+        background-image: url('../../Images/icon/general/check-circle-done.svg');
+    }
 
     & > .text {
-        color: var(--success-dark);
+        color: var(--primary);
     }
 }
 
 .errorMsg {
     background-color: var(--alert-light);
-	box-shadow: 0 1px 5px 0 rgb(191, 92, 92);
+    box-shadow: 0 0 5px 0 rgba(191, 92, 92,0.6);
+
+    & .icon{
+        background-image: url('../../Images/icon/general/error.svg');
+    }
 
     & > .text {
         color: var(--alert-dark);
@@ -44,19 +60,22 @@
 
 .infoMsg {
     background-color: var(--grey4);
-	box-shadow: 0 1px 5px 0 var(--grey2);
+    box-shadow: 0 0 5px 0 var(--grey2);
+
+    & .icon{
+        background-image: url('../../Images/icon/general/info.svg');
+    }
 
     & > .text {
         color: var(--grey1);
     }
 }
-[data-success='false'] .successMsg,
-[data-error='false'] .errorMsg,
-[data-info='false'] .infoMsg {
+
+[data-feedback='false'] .feedbackMsg {
     display: none;
 }
-[data-success='true'] .successMsg,
-[data-error='true'] .errorMsg,
-[data-info='true'] .infoMsg {
+[data-feedback='true'] .successMsg,
+[data-feedback='true'] .errorMsg,
+[data-feedback='true'] .infoMsg {
     display: flex;
 }

@@ -1,0 +1,154 @@
+.formInput {
+    display: block;
+    margin: 0 auto 8px;
+    position: relative;
+    width: 100%;
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding: 10px 3px;
+        border: 1px solid var(--black);
+        box-sizing: border-box;
+    }
+}
+
+.formInput .title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    color: var(--grey1);
+    margin-bottom: 10px;
+}
+
+.formInput .mustFillLabel {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    color: var(--primary);
+}
+
+.formInput .input {
+    height: 40px;
+    padding: 9px 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid var(--grey5);
+    width: 100%;
+}
+
+.formInput textarea {
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.formInput .input__box {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 8px;
+    border: solid 1px var(--grey5);
+    background-color: white;
+}
+
+.formInput .input__box .dash {
+    background-color: var(--grey1);
+    width: 7px;
+    height: 1px;
+    margin: 0 7px;
+}
+.formInput .input__box .input {
+    width: 58px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.formInput > .input {
+    padding: 9px 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid var(--grey5);
+    width: 100%;
+    background-color: white;
+}
+
+.formInput .input:focus {
+    border-color: var(--primary);
+}
+
+.drop__container {
+    width: 100%;
+}
+
+.formInput.icon {
+    .input {
+        padding-left: 40px;
+        font-size: 14px;
+        color: var(--grey1);
+    }
+}
+
+.formInput .iconArea {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+}
+
+.formInput .formRange {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formInput .formRange .rangeItem {
+    width: 50%;
+}
+
+.formInput .formRange .dash {
+    width: 6px;
+    height: 1px;
+    margin: 0 5px;
+    background-color: var(--grey1);
+}
+
+.formInput.alert {
+    .input {
+        border: 1px solid var(--alert-dark);
+    }
+}
+
+.formInput.form__disable {
+    opacity: 0.6;
+    .title {
+        color: var(--grey3);
+    }
+
+    .input {
+        cursor: not-allowed;
+        color: var(--grey2);
+        background-color: var(--grey5);
+        border-color: var(--grey5);
+    }
+}
+
+::placeholder {
+    color: var(--grey2);
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: var(--grey2);
+}
+
+::-ms-input-placeholder {
+    color: var(--grey2);
+}
+
+.hide {
+    display: none;
+}

@@ -1,46 +1,91 @@
+.bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-image: url(../../Images/mapLine.svg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
 .layout {
     margin: 0 auto;
-    padding: 20px 20px 20px 90px;
+    padding: 20px 40px 20px 90px;
     min-height: 100%;
     position: relative;
 
     .contentWrapper {
-        margin: 0 auto;
-        width: calc(100%);
-        border-radius: 8px;
-
         display: flex;
+        width: calc(100% - 200px);
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.848);
+        box-shadow: 0 1px 2px 0px rgba(126, 85, 196, 0.454), -1px 1px 10px 0 #277de79a,
+            inset 0 0 2px rgb(202, 204, 216);
+
+        &.oneBlock {
+            flex-direction: column;
+        }
 
         .content {
-            padding: 16px;
+            padding: 24px 24px 24px;
             width: -webkit-fill-available;
             height: -webkit-fill-available;
             border-radius: 8px;
-            background-color: var(--grey5);
 
-            .pageTitle {
+            .contentTopArea {
                 display: flex;
                 align-items: center;
-                margin-bottom: 16px;
+                flex-wrap: wrap;
+                margin-bottom: 8px;
 
-                .lessonIcon {
+                #lessonIcon {
                     margin-right: 8px;
                     width: 40px;
-                    background-color: var(--primary-dark);
+                    background: linear-gradient(45deg, var(--primary-dark), var(--secondary-dark));
                     height: fit-content;
                     padding: 8px;
                     border-radius: 8px;
                 }
-            }
-        }
 
-        .rightArea {
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-            width: 240px;
-            margin-left: 16px;
-            border-radius: 8px;
+                #pageTitle {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 8px;
+                }
+
+                .status {
+                    display: flex;
+                    gap: 8px;
+                    border-radius: 8px;
+                    margin-right: 16px;
+
+                    .statusItem{
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                    }
+                }
+            }
+
+            #tagArea {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 8px;
+
+                a {
+                    font-size: 14px;
+                    padding: 4px 8px;
+                    border-radius: 8px;
+                    min-height: 0;
+                    min-width: 0;
+                }
+            }
         }
     }
 }

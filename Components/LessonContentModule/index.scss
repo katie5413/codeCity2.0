@@ -1,0 +1,143 @@
+.section {
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+    margin-bottom: 8px;
+
+    &.quiz {
+        border-radius: 8px;
+        padding: 16px;
+        padding-left: 60px;
+        // box-shadow: 1px -1px 5px 0 #d180d7cd, -1px 1px 13px 0 #277de79a,
+        //     1px 1px 13px 0 #ab4ff782, -1px -1px 5px 0 #dabe6cb0,
+        //     inset 0 0 10px rgb(255, 255, 255);
+        // background-color: rgba(189, 188, 188, 0.1);
+        box-shadow: 0 1px 2px 0px rgba(126, 85, 196, 0.454), -1px 1px 10px 0 #277de79a,
+            inset 0 0 2px rgb(202, 204, 216);
+        background: linear-gradient(
+            45deg,
+            #9ed2af57,
+            #af94b162,
+            #699ad72d,
+            #abb1943e,
+            #d7bc583e,
+            #ab4ff72d,
+            #4f9bf72d
+        );
+
+        .halfCircle {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--secondary-dark));
+            margin: 0 1em 1em 0;
+            height: 50px;
+            width: 40px;
+        }
+
+        .sectionTitle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+
+            .icon {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                width: 40px;
+                height: fit-content;
+                padding: 8px;
+                border-radius: 8px;
+            }
+        }
+
+        .sectionContentArea {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .optionArea {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                width: -webkit-fill-available;
+            }
+
+            .content-img {
+                width: 100%;
+                text-align: center;
+                max-width: 1000px;
+                max-height: 800px;
+                margin: 0 auto 8px;
+
+                img {
+                    max-width: -moz-available;
+                    max-width: -webkit-fill-available;
+                    max-width: fill-available;
+                    text-align: center;
+                    padding: 5px;
+                    border: solid 1px white;
+                    border-radius: 4px;
+                    margin: 0 auto 10px;
+                }
+
+                .uploadImageArea {
+                    cursor: pointer;
+
+                    &.defaultImg {
+                        img {
+                            width: 50%;
+                            padding: 0 32px;
+                            background-color: rgba(255, 255, 255, 0.5);
+                        }
+                    }
+                }
+
+                .content-img-content {
+                    width: auto;
+                    font-size: 14px;
+                    line-height: 1.5;
+                    letter-spacing: 0.5px;
+                    text-align: center;
+                    color: var(--grey1);
+                    text-align: center;
+
+                    small {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .submitAnswer {
+                width: fit-content;
+            }
+        }
+
+        .status {
+            position: absolute;
+            top: 60px;
+            left: 10px;
+
+            display: inline-block;
+            cursor: pointer;
+            background-image: url('../../Images/icon/general/bug.svg');
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            height: 40px;
+            width: 40px;
+
+            &.done {
+                background-image: url('../../Images/icon/general/check-circle-done.svg');
+            }
+
+            &.wait {
+                background-image: url('../../Images/icon/general/waitForScore.svg');
+            }
+        }
+    }
+}
