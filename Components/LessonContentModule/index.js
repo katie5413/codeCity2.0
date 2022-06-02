@@ -1,6 +1,11 @@
 function lessonContentModel(data, field) {
     data.forEach((item) => {
+        // 每道題目會用「題型」＋「id」組成識別用的唯一 id
         let contentID = `${item.type}${item.id}`;
+
+        // 非測驗： markdown, embedRepl, embedYoutube
+        // 測驗（自動批改）： singleChoice, multipleChoice, fillblank
+        // 測驗（教師批改）： uploadImage, textArea
         switch (item.type) {
             case 'markdown':
                 marked.use({
@@ -8,8 +13,68 @@ function lessonContentModel(data, field) {
                 });
 
                 field.append(
-                    `<div id="${contentID}"class="markdownArea section">${marked.parse(item.content.data)}</div>`,
+                    `<div id="${contentID}" class="markdownArea section">${marked.parse(
+                        item.content.data,
+                    )}</div>`,
                 );
+                break;
+            case 'embed':
+                let urlRepl = item.content.url;
+
+                // 正確格式如下： https://replit.com/{@帳號}/{專案名稱}?lite=true
+                if (urlRepl.indexOf('replit.com') != -1) {
+                    // 如果有 # 檔名 就無法成功
+                    if (urlRepl.indexOf('#') != -1) {
+                        urlRepl = urlRepl.split('#')[0];
+                    }
+                    urlRepl += '?lite=true';
+                }
+
+                const embedTemplate = `
+                    <div id="${contentID}" class="section embedBlock">
+                        <div class="sectionContentArea">
+                            <iframe
+                                width="100%"
+                                height="500px"
+                                frameborder="0"
+                                src="${urlRepl}"
+                            ></iframe>
+                        </div>
+                    </div>
+                `;
+
+                field.append(generateHtml(embedTemplate));
+
+                break;
+            case 'embedYoutube':
+                let urlYoutube = item.content.url;
+
+                // 正確格式如下： https://youtu.be/6P11LSAQ_nw
+                if (urlYoutube.indexOf('https://youtu.be/') != -1) {
+                    // 把前面清掉，只留後面
+                    urlYoutube = urlYoutube.replace('https://youtu.be/', '');
+
+                    const embedYoutubeTemplate = `
+                    <div id="${contentID}" class="section embedBlock">
+                        <div class="sectionContentArea">
+                            <iframe
+                                width="100%"
+                                height="500px"
+                                src="https://www.youtube.com/embed/${urlYoutube}"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                    </div>
+                    `;
+
+                    field.append(generateHtml(embedYoutubeTemplate));
+                } else {
+                    console.log('非 Youtube');
+                }
+
                 break;
             case 'multipleChoice':
             case 'singleChoice':
@@ -114,8 +179,6 @@ function lessonContentModel(data, field) {
                         content: item.content,
                     }),
                 );
-
-                
 
                 // 檢查是否作答過
                 if (item.studentAnswer.content.length > 0) {
@@ -293,10 +356,7 @@ function lessonContentModel(data, field) {
                 // 檢查是否作答過
                 if (item.studentAnswer.content.length > 0) {
                     for (let i = 0; i < item.studentAnswer.content.length; i++) {
-                        $(`#${item.type}${item.id}-${i}`).attr(
-                            'value',
-                            item.studentAnswer[i],
-                        );
+                        $(`#${item.type}${item.id}-${i}`).attr('value', item.studentAnswer[i]);
                     }
                 }
 
