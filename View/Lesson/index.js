@@ -3,7 +3,7 @@ const fakeData = [
         id: '1',
         type: 'markdown',
         content: {
-            data: '# h1［文章標題］\n## h2［文章標題］\n### h3［次標題］\n#### h4［小標題］\n> block quote［引言］（bar 會隨著文字高度增加）\n\np［一般文字］\n\n**b［粗體文字］**\n\n一行字當中的`code ［ highlight 文字］`大概是這樣\n\n[a［連結文字］](https://myheroes.tw/codeCity/)\n\n1. 數字列表\n2. 數字列表\n3. 數字列表\n\n- 一般列表\n- 一般列表\n- 一般列表\n\n![圖片說明文字](https://katie5413.github.io/codeCity2.0/Images/city.png)\n\nhint~［提示］提示文字\n\nsum~［總結］總結文字',
+            data: '# h1［文章標題］\n## h2［文章標題］\n### h3［次標題］\n#### h4［小標題］\n> block quote［引言］（bar 會隨著文字高度增加）\n\np［一般文字］\n\n**b［粗體文字］**\n\n一行字當中的`code ［ highlight 文字］`大概是這樣\n\n```python\n x = 1;\n y = 1;\n```\n\n[a［連結文字］](https://myheroes.tw/codeCity/)\n\n1. 數字列表\n2. 數字列表\n3. 數字列表\n\n- 一般列表\n- 一般列表\n- 一般列表\n\n![圖片說明文字](https://katie5413.github.io/codeCity2.0/Images/city.png)\n\nhint~［提示］提示文字\n\nsum~［總結］總結文字',
         },
     },
     {
@@ -82,6 +82,20 @@ const fakeData = [
             score: null,
         },
     },
+    {
+        id: '7',
+        type: 'embed',
+        content: {
+            url: 'https://replit.com/@katie5413/codecityIframe#main.py',
+        },
+    },
+    {
+        id: '7',
+        type: 'embedYoutube',
+        content: {
+            url: 'https://youtu.be/6P11LSAQ_nw',
+        },
+    },
 ];
 
 $(document).ready(function () {
@@ -118,21 +132,23 @@ $(document).ready(function () {
         });
     }
 
-    $.ajax({
-        type: 'POST',
-        url: `../../API/getLessonData.php`,
-        data: {
-            lessonID: 1,
-            studentID: 1,
-        },
-        dataType: 'json',
-        success: function (lessonContent) {
-            console.log('getLessonData', lessonContent);
-            // 塞課程內容
-            lessonContentModel(lessonContent.data, $('#lessonContent'));
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log('getLessonData Fail', jqXHR, textStatus, errorThrown);
-        },
-    });
+    lessonContentModel(fakeData, $('#lessonContent'));
+
+    // $.ajax({
+    //     type: 'POST',
+    //     url: `../../API/getLessonData.php`,
+    //     data: {
+    //         lessonID: 1,
+    //         studentID: 1,
+    //     },
+    //     dataType: 'json',
+    //     success: function (lessonContent) {
+    //         console.log('getLessonData', lessonContent);
+    //         // 塞課程內容
+    //         lessonContentModel(lessonContent.data, $('#lessonContent'));
+    //     },
+    //     error: function (jqXHR, textStatus, errorThrown) {
+    //         console.log('getLessonData Fail', jqXHR, textStatus, errorThrown);
+    //     },
+    // });
 });

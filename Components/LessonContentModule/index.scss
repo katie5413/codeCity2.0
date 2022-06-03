@@ -60,6 +60,10 @@
         flex-wrap: wrap;
         gap: 8px;
 
+        & > .text {
+            color: var(--grey1);
+        }
+
         & > .optionArea {
             display: flex;
             flex-wrap: wrap;

@@ -24,6 +24,12 @@ const CodeCityExtension = {
                 : '</div>\n')
         );
     },
+    code: function (code, language) {
+
+        const highlighted = hljs.highlight(code, { language, ignoreIllegals: true }).value;
+        // Render the highlighted code with `hljs` class.
+        return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;
+    },
     link: function (href, title, text) {
         return `<a href="${href}" target="_blank" title="${title}">${text}</a>`;
     },

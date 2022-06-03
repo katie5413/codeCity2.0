@@ -30,7 +30,7 @@
     margin-bottom: 10px;
 }
 
-.markdownArea code {
+.markdownArea p > code {
     font-size: 15px;
     line-height: 2;
     background-color: var(--primary-light);
@@ -39,6 +39,53 @@
     padding: 4px 8px;
     margin: 0 4px;
     border-radius: 4px;
+}
+
+.markdownArea .hljs {
+    background: linear-gradient(
+        45deg,
+        rgba(153, 195, 250, 0.276),
+        rgba(214, 223, 179, 0.243),
+        rgba(215, 188, 88, 0.243137),
+        rgba(201, 149, 244, 0.176),
+        rgba(135, 183, 241, 0.176)
+    );
+}
+
+/* for block of numbers */
+.markdownArea .hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    text-align: center;
+    color: var(--grey3);
+    border-right: 2px solid var(--primary);
+    vertical-align: top;
+    padding-right: 10px;
+
+    /* your custom style here */
+}
+
+/* for block of code */
+.markdownArea .hljs-ln-code {
+    padding-left: 10px;
+    color: var(--black);
+    font-family: 'JetBrainsMono', sans-serif;
+}
+
+.markdownArea .hljs-ln-code * {
+    font-family: 'JetBrainsMono', sans-serif;
+}
+
+.markdownArea pre code {
+    padding: 16px;
+    margin: 0;
+    border-radius: 4px;
+    font-size: 15px;
 }
 
 .markdownArea a {

@@ -12,11 +12,17 @@ function lessonContentModel(data, field) {
                     renderer: CodeCityExtension,
                 });
 
+                hljs.initLineNumbersOnLoad();
+
                 field.append(
                     `<div id="${contentID}" class="markdownArea section">${marked.parse(
                         item.content.data,
                     )}</div>`,
                 );
+
+                $('code.hljs').each(function(i, block) {
+                    hljs.lineNumbersBlock(block);
+                });
                 break;
             case 'embed':
                 let urlRepl = item.content.url;
