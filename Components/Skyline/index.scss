@@ -1,0 +1,73 @@
+#parallax {
+    perspective: 1px;
+    perspective-origin: 50% 10%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 0;
+    height: 100%;
+    background: rgb(255, 175, 84);
+    background: linear-gradient(0deg, rgba(255, 175, 84, 1) 50%, rgb(49, 68, 108) 100%);
+
+    .layer {
+        position: absolute;
+        width: 100vw;
+        overflow: hidden;
+    }
+
+    #tokyo_tower {
+        fill: #463154;
+        transform: translateZ(-0.25px) translateY(15%) scale(1.25);
+    }
+
+    #city3 {
+        fill: rgb(50, 67, 84);
+        transform: translateZ(-0.5px) translateY(35%) scale(1.5);
+    }
+
+    #city4 {
+        fill: #302e41;
+        transform: translateZ(-0.5px) translateY(15%) scale(1.5);
+    }
+
+    #taipei101 {
+        fill: #0f142e;
+        transform: translateY(5px);
+    }
+
+    #skytree {
+        fill: #222032;
+        transform: translateZ(-0.75px) translateY(25%) scale(1.75);
+    }
+
+    #hills {
+        fill: #0e2f1c;
+        transform: translateZ(-2.25px) translateY(55%) scale(3.25);
+    }
+
+    #cloud1 {
+        fill: #bbb2aa;
+        transform: translateZ(-2.5px) translateY(30%) scale(3.5);
+    }
+
+    #fuji {
+        fill: #5f5d99;
+        transform: translateZ(-3px) scale(4);
+    }
+
+    #cloud2 {
+        fill: #9385a7;
+        transform: translateZ(-3.5px) translateY(-25%) scale(4.5);
+    }
+
+    #sun {
+        fill: rgb(249, 227, 155);
+        transform: translateZ(-6px) scale(7) translateX(-28%);
+    }
+
+    #sensoji {
+        fill: #ffffff00;
+        transform: translateZ(0px) scale(1);
+        height: 100vh;
+        overflow: visible;
+    }
+}

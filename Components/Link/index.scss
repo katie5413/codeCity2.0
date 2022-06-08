@@ -52,6 +52,52 @@ a.arrow-link {
     }
 }
 
+a.arrow-link-back {
+    color: var(--grey2);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    padding-left: 24px;
+    position: relative;
+
+    &::before {
+        border-color: var(--grey2);
+        border-style: solid;
+        border-width: 0 0 2px 2px;
+        height: 6px;
+        width: 6px;
+        margin-top: -3px;
+        top: 50%;
+        transition: left 0.3s ease;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    &::after {
+        background: var(--grey2);
+        height: 2px;
+        top: 50%;
+        width: 15px;
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        transition: left 0.3s ease;
+        left: 0px;
+        border-radius: 1px;
+    }
+
+    &:hover {
+        &:before,
+        &:after {
+            left: -4px;
+        }
+    }
+}
+
 a.gradient-link.button {
     text-decoration: none;
     color: white;

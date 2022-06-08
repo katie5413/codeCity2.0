@@ -1,0 +1,188 @@
+.tab {
+    position: absolute;
+    height: fit-content;
+    top: 50%;
+    left: 50%;
+    width: fit-content;
+    transform: translate(-50%, -50%);
+
+    .wrapper {
+        display: none;
+        position: relative;
+        border-radius: 8px;
+        margin: 0 auto;
+        min-width: 450px;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 1px 2px 0px rgba(126, 85, 196, 0.454), -1px 1px 10px 0 #277de79a,
+            inset 0 0 2px rgb(202, 204, 216);
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            background-image: url(../../Images/mapLine.svg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-color: rgba(250, 245, 252, 0.9);
+
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+
+            & > .contentArea {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .logo {
+            width: 70px;
+            margin-right: 16px;
+        }
+
+        .loginForm {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 16px 60px 32px;
+            background: linear-gradient(
+                45deg,
+                #9ed2af2d,
+                #af94b12d,
+                #699ad72d,
+                #abb1942d,
+                #d5b6432d,
+                #ab4ff72d,
+                #4f9bf72d
+            );
+
+            .formArea {
+                margin-bottom: 16px;
+
+                .formInput.iconWithTitle {
+                    .input {
+                        padding-left: 40px;
+                    }
+
+                    .iconArea {
+                        position: absolute;
+                        top: 40px;
+                        left: 16px;
+                    }
+                }
+
+                #userName .iconArea {
+                    top: 42px;
+                    left: -2px;
+                    transform: translate(50%, 0);
+                }
+
+                #userEmail .iconArea {
+                    top: 50%;
+                    left: 0;
+                    transform: translate(50%, 50%);
+                }
+
+                #userEmail .iconArea {
+                    top: 50%;
+                    left: 0;
+                    transform: translate(50%, 50%);
+                }
+
+                #userNickName .iconArea {
+                    left: -2px;
+                    transform: translate(50%, 0);
+                }
+
+                #userPassword .iconArea,
+                #userPasswordCheck .iconArea {
+                    top: 50%;
+                    left: 4px;
+                    transform: translate(50%, 25%);
+                }
+
+                #userClassCode {
+                    input {
+                        text-transform: uppercase;
+                    }
+
+                    .iconArea {
+                        left: -2px;
+                        transform: translate(50%, 0);
+                    }
+                }
+            }
+
+            .divider {
+                height: 2px;
+                width: 100%;
+                background: linear-gradient(
+                    45deg,
+                    #af94b170,
+                    #699ad770,
+                    #abb19470,
+                    #d7bb5870,
+                    #ab4ff770,
+                    #4f9bf770
+                );
+                border-radius: 8px;
+                margin-top: 32px;
+                margin-bottom: 32px;
+            }
+
+            .divider-vertical {
+                top: 50%;
+                height: 200px;
+                width: 2px;
+                background: linear-gradient(
+                    45deg,
+                    #af94b170,
+                    #699ad770,
+                    #abb19470,
+                    #d7bb5870,
+                    #ab4ff770,
+                    #4f9bf770
+                );
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 8px;
+            }
+
+            .buttonArea {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 16px;
+                gap: 24px;
+
+                .button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &#registerTab {
+        .wrapper {
+            min-width: 600px;
+        }
+        .loginForm {
+            display: flex;
+            flex-direction: column;
+
+            .formArea {
+                display: flex;
+                gap: 32px;
+                justify-content: space-between;
+
+                .left,
+                .right {
+                    width: -webkit-fill-available;
+                }
+            }
+        }
+    }
+}

@@ -52,7 +52,7 @@ const fakeData = [
             ],
         },
         studentAnswer: {
-            content: ['',''],
+            content: ['', ''],
             score: null,
         },
     },
@@ -103,8 +103,6 @@ $(document).ready(function () {
     //     $('#loader').fadeOut(800);
     // }, 2000);
 
-    // 處理側邊欄
-    activeSideMenu({ currentPage: 'navLesson', name: '單元名稱', link: '#' });
     // 動態顯示單元內容
     const pageData = {
         title: '單元標題',
@@ -122,6 +120,17 @@ $(document).ready(function () {
             $('#tagArea').append(generateTag({ name: tag }));
         });
     }
+
+    // 處理側邊欄
+
+    addSideMenuSubPage({
+        targetID: 'navTopicMap',
+        subPage: [{ id: 'lessonID', name: pageData.title, link: '#' }],
+    });
+
+    activeSideMenu({ id: 'lessonID', type: 'sub' });
+
+    // 側邊欄 END
 
     function generateTag(props) {
         const tagTemplate = `

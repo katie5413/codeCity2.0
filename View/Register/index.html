@@ -7,6 +7,7 @@
     <meta name="google-signin-client_id"
         content="685825699644-gou84ncq4etnkgmoof1ri4mb0b8171ai.apps.googleusercontent.com">
     <link rel="stylesheet" type="text/css" href="../../Common/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../Dependencies/Cropper/cropper.min.css" />
     <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
     <link rel="stylesheet" type="text/css" href="../../Components/Link/index.css" />
     <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
@@ -16,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../Components/LoginTab/index.css" />
     <link rel="stylesheet" type="text/css" href="index.css" />
     <link rel="shortcut icon" type="image/png" href="../../Images/icon/logo.svg" />
-    <title>登入</title>
+    <title>註冊</title>
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
@@ -50,8 +51,8 @@
 
 <body>
     <div id="loader">
-            <div class="loader-inner pacman"></div>
-        </div>
+        <div class="loader-inner pacman"></div>
+    </div>
     <div id="parallax">
         <div id="sun" class="layer">
             <svg viewBox="0 0 400 300">
@@ -143,8 +144,9 @@
             </svg>
         </div>
     </div>
-    <div id="loginTab" class="tab">
+    <div id="registerTab" class="tab">
         <div class="wrapper">
+
             <div class="hero">
                 <div class="contentArea">
                     <div class="logo">
@@ -154,20 +156,69 @@
                 </div>
             </div>
             <div class="loginForm">
+                <div class="back">
+                    <a class="arrow-link-back" href="../Login">
+                        已有帳號？
+                    </a>
+                </div>
+
                 <div class="formArea">
-                    <div id="userEmail" class="formInput iconWithTitle">
-                        <div class="title">信箱</div>
-                        <div class="iconArea">
-                            <img src="../../Images/icon/general/mail.svg" alt="mail" />
+                    <div class="left">
+                        <div id="userName" class="formInput iconWithTitle">
+                            <div class="title">姓名<span class="mustFillLabel">必填</span></div>
+                            <div class="iconArea">
+                                <img src="../../Images/icon/general/user-dark.svg" alt="name" />
+                            </div>
+                            <input class="input mustFill" type="text" onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9]/g, '')" />
                         </div>
-                        <input class="input" type="text" onkeyup="value=value.replace(/[^\w_@.]/g,'')" />
+                        <div id="userEmail" class="formInput iconWithTitle">
+                            <div class="title">信箱<span class="mustFillLabel">必填</span></div>
+                            <div class="iconArea">
+                                <img src="../../Images/icon/general/mail.svg" alt="mail" />
+                            </div>
+                            <input class="input mustFill emailVerify" type="text" onkeyup="value=value.replace(/[^\w_@.-]/g,'')" />
+                        </div>
+                        <div id="userPassword" class="formInput iconWithTitle">
+                            <div class="title">密碼<span class="mustFillLabel">必填</span></div>
+                            <div class="iconArea">
+                                <img src="../../Images/icon/general/lock.svg" alt="password" />
+                            </div>
+                            <input class="input mustFill" type="password" onkeyup="value=value.replace(/[^\w_-]/g,'')" />
+                        </div>
+                        <div id="userPasswordCheck" class="formInput iconWithTitle">
+                            <div class="title">確認密碼<span class="mustFillLabel">必填</span></div>
+                            <div class="iconArea">
+                                <img src="../../Images/icon/general/lock.svg" alt="password" />
+                            </div>
+                            <input class="input mustFill passwordVerify" type="password" onkeyup="value=value.replace(/[^\w_-]/g,'')" />
+                        </div>
                     </div>
-                    <div id="userPassword" class="formInput iconWithTitle">
-                        <div class="title">密碼</div>
-                        <div class="iconArea">
-                            <img src="../../Images/icon/general/lock.svg" alt="password" />
+                    <div class="divider-vertical"></div>
+                    <div class="right">
+                        <div id="profileAvatar">
+                            <input type="file" name="upload_user_img" id="upload_user_img" accept=".jpg, .jpeg, .png, .svg" hidden />
+                            <div id="user_img_area" class="img">
+                                <img id="userAvatar" src="../../Images/avatar.png" alt="member_submit" />
+                            </div>
+                            <label for="upload_user_img">
+                                <img src="../../Images/icon/general/edit.svg" alt="image upload" />
+                            </label>
                         </div>
-                        <input class="input" type="password" onkeyup="value=value.replace(/[^\w_-]/g,'')" />
+                        
+                        <div id="userNickName" class="formInput iconWithTitle">
+                            <div class="title">暱稱</div>
+                            <div class="iconArea">
+                                <img src="../../Images/icon/general/idCard.svg" alt="班級代號" />
+                            </div>
+                            <input class="input" type="text" placeholder="（選填）" onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9]/g, '')" />
+                        </div>
+                        <div id="userClassCode" class="formInput iconWithTitle">
+                            <div class="title">班級代號</div>
+                            <div class="iconArea">
+                                <img src="../../Images/icon/general/groups-dark.svg" alt="班級代號" />
+                            </div>
+                            <input class="input" type="text" maxLength="6" placeholder="（選填）" onkeyup="value=value.replace(/[\W]/g,'')" />
+                        </div>
                     </div>
                 </div>
                 <div class="item" data-feedback="false">
@@ -176,11 +227,11 @@
                         <span class="text">error message</span>
                     </div>
                 </div>
+
+
                 <div class="buttonArea">
-                    <button id="loginBtn" type="button" class="button btn-secondary">登入</button>
-                    <a class="button btn-secondary btn-hollow" href="../Register/">註冊</a>
+                    <button id="registerBtn" type="button" class="button btn-secondary btn-hollow">註冊</button>
                 </div>
-                <div class="divider"></div>
                 <div class="buttonArea">
                     <div id="g_id_onload"
                         data-client_id="685825699644-gou84ncq4etnkgmoof1ri4mb0b8171ai.apps.googleusercontent.com"
@@ -192,6 +243,7 @@
                         data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -199,6 +251,7 @@
     <script src="../../Common/util.js"></script>
     <script src="../../Dependencies/jquery/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="../../Dependencies/Cropper/cropper.min.js"></script>
     <script src="../../Dependencies/jwt/jwt-decode.js"></script>
     <script src="../../Components/Loader/index.js"></script>
     <script src="../../Components/FeedbackMsg/index.js"></script>

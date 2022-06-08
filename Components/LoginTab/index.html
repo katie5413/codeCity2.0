@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+    <meta name="google-signin-client_id"
+        content="685825699644-gou84ncq4etnkgmoof1ri4mb0b8171ai.apps.googleusercontent.com">
+    <link rel="stylesheet" type="text/css" href="../../Common/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../Components/Link/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../Components/FeedbackMsg/index.css" />
+    <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="shortcut icon" type="image/png" href="../../Images/icon/logo.svg" />
+    <title>登入</title>
+</head>
+
+<body>
+    <div id="loginTab" class="tab">
+        <div class="wrapper">
+
+            <div class="hero">
+                <div class="contentArea">
+                    <div class="logo">
+                        <img src="../../Images/icon/logo.svg" alt="logo" />
+                    </div>
+                    <h2>CodeCity</h2>
+                </div>
+            </div>
+            <div class="loginForm">
+                <div class="formArea">
+                    <div id="userEmail" class="formInput iconWithTitle">
+                        <div class="title">信箱</div>
+                        <div class="iconArea">
+                            <img src="../../Images/icon/general/mail.svg" alt="mail" />
+                        </div>
+                        <input class="input" type="text" onkeyup="value=value.replace(/[^\w_@.]/g,'')" />
+                    </div>
+                    <div id="userPassword" class="formInput iconWithTitle">
+                        <div class="title">密碼</div>
+                        <div class="iconArea">
+                            <img src="../../Images/icon/general/lock.svg" alt="password" />
+                        </div>
+                        <input class="input" type="password" onkeyup="value=value.replace(/[^\w_-]/g,'')" />
+                    </div>
+                </div>
+                <div class="item" data-feedback="false">
+                    <div class="feedbackMsg errorMsg fillAvailable">
+                        <span class="icon"></span />
+                        <span class="text">error message</span>
+                    </div>
+                </div>
+                <div class="buttonArea">
+                    <button id="loginBtn" type="button" class="button btn-secondary">登入</button>
+                    <a class="button btn-secondary btn-hollow" href="../Register/">註冊</a>
+                </div>
+                <div class="divider"></div>
+                <div class="buttonArea">
+                    <div id="g_id_onload"
+                        data-client_id="685825699644-gou84ncq4etnkgmoof1ri4mb0b8171ai.apps.googleusercontent.com"
+                        data-login_uri="http://localhost/codeCity2.0/View/Login/" data-auto_prompt="false"
+                        data-prompt_parent_id="g_id_onload" data-auto_select="true"
+                        data-callback="handleCredentialResponse" style="position: absolute; top: 100px; right: 30px;
+                        width: 0; height: 0; z-index: 1001;"></div>
+                    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                        data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="../../Common/util.js"></script>
+    <script src="../../Dependencies/jquery/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="../../Dependencies/jwt/jwt-decode.js"></script>
+    <script src="../../Dependencies/googleIdentity/index.js"></script>
+    <script src="../../Components/FeedbackMsg/index.js"></script>
+    <script src="../../Components/Input/index.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

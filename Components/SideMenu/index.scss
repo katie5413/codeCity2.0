@@ -16,8 +16,8 @@
     transition: all 0.3s ease;
     overflow: hidden;
 
-    &.debugMode {
-        width: 200px;
+    &.debug {
+        width: 180px;
 
         nav li ul {
             display: block;
@@ -36,7 +36,7 @@
         }
 
         nav {
-            width: 180px;
+            width: calc(100% - 20px);
             height: calc(100% - 150px);
             overflow-y: scroll;
         }
@@ -80,7 +80,7 @@
     left: 5px;
 }
 
-.sideMenu h3{
+.sideMenu h3 {
     position: absolute;
     color: white;
     top: 30px;
@@ -224,7 +224,7 @@
 }
 
 .sideMenu:hover {
-    width: 200px;
+    width: 180px;
 }
 
 .sideMenu:hover .logo {
@@ -240,7 +240,7 @@
 }
 
 .sideMenu:hover nav {
-    width: 180px;
+    width: calc(100% - 20px);
     height: calc(100% - 150px);
     overflow-y: scroll;
 }

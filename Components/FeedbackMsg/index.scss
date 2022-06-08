@@ -12,6 +12,10 @@
         max-width: max-content;
     }
 
+    &.fillAvailable {
+        max-width: -webkit-fill-available;
+    }
+
     & > .icon {
         flex-shrink: 0;
         margin-right: 6px;
