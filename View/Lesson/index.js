@@ -188,8 +188,15 @@ const fakeData = [
             ],
         },
         studentAnswer: {
-            content: ['',''],
+            content: ['', ''],
             score: null,
+        },
+    },
+    {
+        id: '7',
+        type: 'embed',
+        content: {
+            url: 'https://replit.com/@katie5413/codecityIframe#main.py',
         },
     },
 ];
