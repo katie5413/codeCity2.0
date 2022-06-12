@@ -30,6 +30,7 @@
     margin-bottom: 10px;
 }
 
+.markdownArea li > code ,
 .markdownArea p > code {
     font-size: 15px;
     line-height: 2;
@@ -181,6 +182,11 @@
     margin: 30px auto;
 }
 
+.markdownArea .content-img.group3 {
+    display: inline-block;
+    max-width: 32%;
+}
+
 .markdownArea .content-img img {
     max-width: -moz-available;
     max-width: -webkit-fill-available;
@@ -200,10 +206,20 @@
     text-align: center;
     color: var(--grey1);
     text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .markdownArea .content-img .content-img-content small {
     font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .markdownArea .hint {

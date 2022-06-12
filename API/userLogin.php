@@ -29,7 +29,7 @@ if (isset($_POST['loginType'])) {
         $findUserClass->execute(array($userDataItem["id"]));
 
         while ($userClassItem = $findUserClass->fetch(PDO::FETCH_ASSOC)) {
-            $attendClass = array("classID" => $userClassItem['class_ID'], "classCode" => $userClassItem['class_code'], "identity" => $userClassItem['identity'], "enrollTime" => $userClassItem['enroll_time']);
+            array_push($attendClass, array("classID" => $userClassItem['class_ID'], "classCode" => $userClassItem['class_code'], "className" => $userClassItem['class_name'], "identity" => $userClassItem['identity'], "enrollTime" => $userClassItem['enroll_time']));
         }
 
         $loginStatus = 1;
@@ -37,7 +37,14 @@ if (isset($_POST['loginType'])) {
         $userData = array("id" => $userDataItem["id"], "email" => $userDataItem["email"], "name" => $userDataItem["name"], "nickName" => $userDataItem["nickName"], "avatar" => $userDataItem["avatar"], "point" => $userDataItem["point"], 'class' => $attendClass);
     }
 
-    $_SESSION['userData'] = json_encode($userData);
+    $_SESSION['userID'] = $userDataItem["id"];
+    $_SESSION['userEmail'] = $userDataItem["email"];
+    $_SESSION['userName'] = $userDataItem["name"];
+    $_SESSION['userNickName'] = $userDataItem["nickName"];
+    $_SESSION['userAvatar'] = $userDataItem["avatar"];
+    $_SESSION['userPoints'] = $userDataItem["points"];
+    $_SESSION['userClass'] = $attendClass; // class_ID
+
     $userDataRes = array("status" => '200', "data" => $userData, "login_status" => $loginStatus);
 } else {
     $userDataRes = array("status" => '404');

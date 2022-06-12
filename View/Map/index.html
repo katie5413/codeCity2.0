@@ -10,7 +10,10 @@
         <link rel="stylesheet" type="text/css" href="../../Dependencies/marked/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/Cropper/cropper.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../Dependencies/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Layout/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Link/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Checkbox/index.css" />
@@ -19,7 +22,9 @@
         <link rel="stylesheet" type="text/css" href="../../Components/ProfileCard/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/FeedbackMsg/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
-        <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Pop/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/DropBox/index.css" />
+
         <link
             rel="stylesheet"
             type="text/css"
@@ -186,56 +191,37 @@
                 </div>
             </div>
             <div class="contentWrapper oneBlock">
-                <main id="lessonContent" class="content">
-                    <div class="contentTopArea">
-                        <img id="lessonIcon" src="../../Images/icon/type/category.svg" />
-                        <h2 id="pageTitle"></h2>
-                        <div class="status">
-                            <div class="statusItem">
-                                <img
-                                    src="../../Images/icon/general/check-circle-done.svg"
-                                    alt="完成"
-                                />
-                                <p id="currentFinishNum"></p>
-                            </div>
-
-                            <div class="statusItem">
-                                <img
-                                    src="../../Images/icon/general/waitForScore.svg"
-                                    alt="待完成"
-                                />
-                                <p id="waitForScoreNum"></p>
-                            </div>
-
-                            <div class="statusItem">
-                                <img src="../../Images/icon/general/bug.svg" alt="待完成" />
-                                <p id="totalNum"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tagArea"></div>
-                </main>
-                <footer>
-                    <div class="footer">
-                        <div class="top"></div>
-                        <div class="bottom">
-                            © <img class="icon" src="../../Images/icon/logo.svg" /> CodeCity 2022
-                        </div>
-                    </div>
-                </footer>
+                <main id="mapContent" class="content"></main>
+            </div>
+        </div>
+        <div id="classCodeArea">
+            <div class="dropBox">
+                <input class="selectSelected" type="text" placeholder="請選擇班級" />
+                <img src="../../Images/icon/direction/drop-right.svg" alt="icon" class="icon" />
+                <img src="../../Images/icon/general/clear.svg" alt="icon" class="drop__clear" />
+                <div class="line"></div>
+                <div class="selectItems"></div>
+            </div>
+        </div>
+        <div class="pop">
+            <div class="contentWrapper">
+                <div class="top">
+                    <img class="icon" src="../../Images/icon/general/bell-primary.svg" alt="info" />
+                    <h3>通知</h3>
+                </div>
+                <p class="middle">這裡是提示文字</p>
+                <div class="bottom">
+                    <button class="button btn-primary close-pop">確認</button>
+                </div>
             </div>
         </div>
         <script src="../../Common/util.js"></script>
         <script src="../../Dependencies/jquery/jquery.min.js"></script>
-        <script src="../../Dependencies//hljs/highlight.min.js"></script>
-        <script src="../../Dependencies//hljs/highlightjs-line-numbers.min.js"></script>
-        <script src="../../Dependencies/marked/marked.min.js"></script>
-        <script src="../../Dependencies/marked/extension.js"></script>
+        <script src="../../Dependencies/slick/slick.min.js"></script>
         <script src="../../Components/Loader/index.js"></script>
         <script src="../../Components/SideMenu/index.js"></script>
-        <script src="../../Components/FeedbackMsg/index.js"></script>
-        <script src="../../Components/Input/index.js"></script>
-        <script src="../../Components/LessonContentModule/index.js"></script>
+        <script src="../../Components/Pop/index.js"></script>
+        <script src="../../Components/DropBox/index.js"></script>
         <script src="index.js"></script>
     </body>
     <!-- Google Tag Manager (noscript) -->

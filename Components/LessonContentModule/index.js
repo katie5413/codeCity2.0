@@ -20,7 +20,29 @@ function lessonContentModel(data, field) {
                     )}</div>`,
                 );
 
-                $('code.hljs').each(function(i, block) {
+                const imgGroup = $(`#${contentID}`).find('.content-img');
+
+                let flag = 1;
+                imgGroup.each(function (i, img) {
+                    console.log(imgGroup.eq(i).next().hasClass('content-img'));
+                    if (imgGroup.eq(i).next().hasClass('content-img')) {
+                        flag++;
+                        console.log(flag);
+                    } else if (flag > 1) {
+                        for (let j = 0; j < flag; j++) {
+                            imgGroup.eq(i - j).addClass(`group${flag}`);
+                        }
+                        flag = 0;
+                    }
+                });
+
+                $('.content-img-content').dotdotdot({
+                    ellipsis: '\u2026',
+                    height: 26,
+                    watch: true,
+                });
+
+                $('code.hljs').each(function (i, block) {
                     hljs.lineNumbersBlock(block);
                 });
                 break;
@@ -366,16 +388,18 @@ function lessonContentModel(data, field) {
                     }
                 }
 
-                if (checkFillBlankAnswerSame(item.content.answer, item.studentAnswer)) {
+                if (checkFillBlankAnswerSame(item.content.answer, item.studentAnswer.content)) {
                     $(`#${contentID} .status`).addClass('done');
                     $(`#${contentID} .submitAnswer`).remove();
                 }
 
                 function checkFillBlankAnswerSame(answer, studentAnswer) {
                     let count = 0;
-                    if (answer.length != studentAnswer.content.length) return false;
+                    console.log(answer.length, studentAnswer.length);
+                    if (answer.length != studentAnswer.length) return false;
                     for (let i = 0; i < answer.length; i++) {
-                        if (answer[i].ans.includes(studentAnswer[i])) {
+                        console.log(answer[i].ans, studentAnswer[i].toLowerCase());
+                        if (answer[i].ans.includes(studentAnswer[i].toLowerCase())) {
                             count++;
                         }
                     }
@@ -398,6 +422,7 @@ function lessonContentModel(data, field) {
                             selectItem.eq(i).parent().addClass('alert');
                         }
                     }
+                    console.log(userAnswer);
 
                     // 檢查答案數量
                     if (userAnswer.length != item.content.answer.length) {
