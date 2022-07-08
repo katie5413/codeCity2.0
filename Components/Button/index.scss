@@ -68,6 +68,28 @@
     }
 }
 
+.btn-success {
+    background-image: linear-gradient(
+        to right,
+        #e4ab40,
+        #e4dc40,
+        #edc862,
+        #d2a21f
+    );
+    box-shadow: 0 2px 10px rgba(196, 164, 49, 0.75);
+
+    &.btn-hollow {
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        box-shadow: none;
+
+        &:hover {
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-dark);
+        }
+    }
+}
+
 .btn-alert {
     background-image: linear-gradient(to right, #eb3941, var(--alert), var(--alert-dark), #e2373f);
     box-shadow: 0 2px 10px rgba(242, 97, 103, 0.7);
