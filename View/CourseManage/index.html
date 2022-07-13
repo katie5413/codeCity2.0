@@ -10,17 +10,26 @@
         <link rel="stylesheet" type="text/css" href="../../Dependencies/marked/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/Cropper/cropper.min.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../Dependencies/datatables/datatables.css"
+        />
         <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Layout/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Link/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Checkbox/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/SideMenu/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Table/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Footer/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/ProfileCard/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/FeedbackMsg/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Pop/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/DropBox/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/MultiDropBox/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Modal/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link
             rel="stylesheet"
@@ -188,78 +197,163 @@
                     </div>
                 </div>
             </div>
-            <div class="contentWrapper oneBlock">
-                <main id="lessonContent" class="content">
+            <div class="contentWrapper oneBlock fixFullScreen">
+                <main class="content" active-tab="topic">
                     <div class="contentTopArea">
                         <img id="lessonIcon" src="../../Images/icon/type/book.svg" />
-                        <h3 id="pageTitle">課程管理</h3>
+                        <h3 id="pageTitle">
+                            <a href="/View/CourseManage/index.html">課程管理</a>
+                            <button class="pageTopicName"></button>
+                            <button class="pageLessonName"></button>
+                        </h3>
                         <div class="right">
-                            <div class="dropContainer">
-                                <div class="title">主題</div>
-                                <div id="topicSelector" class="dropBox">
-                                    <input
-                                        class="selectSelected"
-                                        type="text"
-                                        placeholder="請選擇"
-                                    />
-                                    <img
-                                        src="../../Images/icon/direction/drop-right.svg"
-                                        alt="icon"
-                                        class="icon"
-                                    />
-                                    <img
-                                        src="../../Images/icon/general/clear.svg"
-                                        alt="icon"
-                                        class="drop__clear"
-                                    />
-                                    <div class="line"></div>
-                                    <div class="selectItems">
-                                        <div class="option" value="1">選項一</div>
-                                        <div class="option" value="2">選項二</div>
-                                        <div class="option" value="3">選項三</div>
-                                        <div class="option" value="4">選項四</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropContainer">
-                                <div class="title">單元</div>
-                                <div id="lessonSelector" class="dropBox">
-                                    <input
-                                        class="selectSelected"
-                                        type="text"
-                                        placeholder="請選擇"
-                                    />
-                                    <img
-                                        src="../../Images/icon/direction/drop-right.svg"
-                                        alt="icon"
-                                        class="icon"
-                                    />
-                                    <img
-                                        src="../../Images/icon/general/clear.svg"
-                                        alt="icon"
-                                        class="drop__clear"
-                                    />
-                                    <div class="line"></div>
-                                    <div class="selectItems">
-                                        <div class="option" value="1">選項一</div>
-                                        <div class="option" value="2">選項二</div>
-                                        <div class="option" value="3">選項三</div>
-                                        <div class="option" value="4">選項四</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button action-type="add" action-target="topic" class="button btn-secondary openModal">
+                                新增
+                            </button>
                         </div>
                     </div>
-                    <div id="tagArea"></div>
+                    <div class="contentMainArea">
+                        <div class="tab" tab-name="topic">
+                            <div class="table__container">
+                                <table id="topicTable" class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>主題名稱</th>
+                                            <th>簡介</th>
+                                            <th>編輯</th>
+                                            <th>刪除</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab" tab-name="lesson">
+                            <div class="table__container">
+                                <table id="lessonTable" class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>順序權重</th>
+                                            <th>章節名稱</th>
+                                            <th>簡介</th>
+                                            <th>編輯</th>
+                                            <th>刪除</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab" tab-name="lessonContent">
+
+                        </div>
+                    </div>
                 </main>
-                <footer>
-                    <div class="footer">
-                        <div class="top"></div>
-                        <div class="bottom">
-                            © <img class="icon" src="../../Images/icon/logo.svg" /> CodeCity 2022
+            </div>
+            <div class="pop">
+                <div class="contentWrapper">
+                    <div class="top">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/bell-primary.svg"
+                            alt="info"
+                        />
+                        <h3>通知</h3>
+                    </div>
+                    <p class="middle"></p>
+                    <div class="bottom">
+                        <div class="buttonGroup">
+                            <button class="button btn-primary btn-hollow close-pop">取消</button>
+                            <button class="button btn-alert confirm-pop">確認</button>
                         </div>
                     </div>
-                </footer>
+                </div>
+            </div>
+            <div id="topicModal" class="modal">
+                <div class="modalWrapper">
+                    <div class="content">
+                        <div class="top">
+                            <img class="icon" src="../../Images/icon/general/edit-white.svg" />
+                            <div class="title">新增主題</div>
+                        </div>
+                        <div class="middle">
+                            <div class="formInput mustFill topicName">
+                                <div class="title">
+                                    主題名稱<span class="mustFillLabel">必填</span>
+                                </div>
+                                <input
+                                    class="input"
+                                    type="text"
+                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                />
+                            </div>
+                            <div class="formInput topicDescription">
+                                <div class="title">簡介</div>
+                                <textarea class="input" placeholder="請輸入段落文字"></textarea>
+                            </div>
+                            <div class="item" data-feedback="false">
+                                <div class="feedbackMsg errorMsg fillAvailable">
+                                    <span class="icon"></span />
+                                    <span class="text">error message</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="buttonGroup">
+                                <button class="button btn-primary btn-hollow modalCancel">
+                                    取消
+                                </button>
+                                <button class="button btn-primary modalConfirm">
+                                    確認
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="lessonModal" class="modal">
+                <div class="modalWrapper">
+                    <div class="content">
+                        <div class="top">
+                            <img class="icon" src="../../Images/icon/general/edit-white.svg" />
+                            <div class="title">新增章節</div>
+                        </div>
+                        <div class="middle">
+                            <div class="group two">
+                                <div class="formInput mustFill lessonName">
+                                    <div class="title">
+                                        章節名稱<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+                                <div class="formInput lessonContentOrder">
+                                    <div class="title">順序</div>
+                                    <input class="input" type="text" onkeyup="value=value.replace(/\D/g,'')" />
+                                </div>
+                            </div>
+                            <div class="formInput lessonDescription">
+                                <div class="title">簡介</div>
+                                <textarea class="input" placeholder="請輸入段落文字"></textarea>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="buttonGroup">
+                                <button class="button btn-primary btn-hollow modalCancel">
+                                    取消
+                                </button>
+                                <button class="button btn-primary modalConfirm">
+                                    確認
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="../../Common/util.js"></script>
@@ -268,11 +362,17 @@
         <script src="../../Dependencies//hljs/highlightjs-line-numbers.min.js"></script>
         <script src="../../Dependencies/marked/marked.min.js"></script>
         <script src="../../Dependencies/marked/extension.js"></script>
+        <script src="../../Dependencies/datatables/datatables.min.js"></script>
+        <script src="../../Dependencies/datatables/dataTables.scrollResize.min.js"></script>
+        <script src="../../Components/Table/index.js"></script>
         <script src="../../Components/Loader/index.js"></script>
         <script src="../../Components/SideMenu/index.js"></script>
         <script src="../../Components/FeedbackMsg/index.js"></script>
         <script src="../../Components/Input/index.js"></script>
         <script src="../../Components/DropBox/index.js"></script>
+        <script src="../../Components/MultiDropBox/index.js"></script>
+        <script src="../../Components/Modal/index.js"></script>
+        <script src="../../Components/Pop/index.js"></script>
         <script src="../../Dependencies/dotdotdot/index.js"></script>
         <script src="../../Components/LessonContentModule/index.js"></script>
         <script src="index.js"></script>

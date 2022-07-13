@@ -3,8 +3,8 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        margin-bottom: 8px;
         padding-bottom: 16px;
+        margin-bottom: 16px;
         border-bottom: 1px solid var(--grey5);
 
         #lessonIcon {
@@ -20,12 +20,121 @@
             display: flex;
             align-items: center;
             margin-right: 8px;
+
+            a {
+                color: var(--black);
+            }
+
+            button {
+                position: relative;
+                margin-left: 16px;
+
+                &:before {
+                    position: absolute;
+                    content: ' ';
+                    width: 2px;
+                    height: 50%;
+                    background-color: var(--primary);
+                    left: -8px;
+                    top: 50%;
+                    border-radius: 8px;
+                    transform: translate(-50%, -50%);
+                }
+
+                &.active {
+                    color: var(--primary);
+                }
+            }
         }
 
         .right {
             display: flex;
             margin-left: auto;
             gap: 16px;
+        }
+    }
+
+    .contentMainArea {
+        display: grid;
+        grid-template-columns: 1fr;
+        font-size: 14px;
+        height: calc(100% - 64px);
+
+        .block {
+            display: flex;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .table__container {
+            height: 100%;
+
+            button.manage {
+                color: var(--primary);
+                text-decoration: underline;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: var(--primary-dark);
+                }
+            }
+        }
+
+        #manageArea {
+            margin-right: 20px;
+        }
+
+        #moduleArea {
+            padding: 16px;
+            border-left: 1px solid var(--grey5);
+
+            .moduleItem {
+                width: 100%;
+                padding: 8px;
+                border-radius: 8px;
+                border: 1px solid var(--secondary);
+            }
+        }
+    }
+
+    &[active-tab='topic'] {
+        
+        .tab[tab-name='topic'] {
+            display: initial;
+
+            .table__container {
+                .tableInput {
+                    &.topicName {
+                        min-width: 160px;
+                    }
+                    &.topicDescription {
+                        min-width: 240px;
+                    }
+                }
+            }
+        }
+    }
+
+    &[active-tab='lesson'] {
+        .pageTopicName {
+            color: var(--primary);
+        }
+        .pageLessonName{
+            display: none;
+        }
+        .tab[tab-name='lesson'] {
+            display: initial;
+        }
+    }
+
+    &[active-tab='lessonContent'] {
+        .pageLessonName {
+            color: var(--primary);
+        }
+        .tab[tab-name='lessonContent'] {
+            display: initial;
         }
     }
 }

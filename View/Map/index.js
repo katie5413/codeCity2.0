@@ -40,7 +40,7 @@ $(document).ready(function () {
                     });
                 } else if (applyClass.length > 0) {
                 } else {
-                    setPopMsg('目前未加入班級，前往申請');
+                    setPopMsg({ msg: '目前未加入班級，前往申請' });
                     setTimeout(function () {
                         window.location.href = '../Setting';
                     }, 3000);
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 // } else {
                 // }
             } else {
-                setPopMsg('未登入，三秒後自動跳轉');
+                setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
                     window.location.href = '../Login';
                 }, 3000);
@@ -238,7 +238,7 @@ $(document).ready(function () {
                 if (res.topic_status == 1) {
                     window.location.href = '../Topic';
                 } else {
-                    setPopMsg('無法進入課程，請確認課程已開放');
+                    setPopMsg({ msg: '無法進入課程，請確認課程已開放' });
                 }
             },
         });
