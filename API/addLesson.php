@@ -2,24 +2,24 @@
 session_start();
 include "../pdoInc.php";
 
-$topicDataRes = array();
+$lessonDataRes = array();
 
-if (isset($_POST['name'])&&isset($_POST['topic_ID'])) {
+if (isset($_POST['name']) && isset($_POST['topic_ID'])) {
 
     $topicID = $_POST['topic_ID'];
     $name = $_POST['name'];
     $introduction = $_POST['introduction'];
+    $contentOrder = $_POST['contentOrder'];
 
 
+    $addLesson = $dbh->prepare('INSERT INTO lesson (topic_ID, title, introduction,contentOrder ) VALUES (?, ?, ?, ?)');
+    $addLesson->execute(array($topicID, $name, $introduction, $contentOrder));
 
-    $addLesson = $dbh->prepare('INSERT INTO topic (title, introduction ) VALUES (?, ?)');
-    $addLesson->execute(array($name, $introduction));
+    $lessonData = array("name" => $name, "introduction" => $introduction);
 
-    $topicData = array("name" => $name, "introduction" => $introduction);
-
-    $topicDataRes = array("status" => '200', "data" => $topicData);
+    $lessonDataRes = array("status" => '200', "data" => $lessonData);
 } else {
-    $topicDataRes = array("status" => '404');
+    $lessonDataRes = array("status" => '404');
 }
 
-echo json_encode($topicDataRes);
+echo json_encode($lessonDataRes);

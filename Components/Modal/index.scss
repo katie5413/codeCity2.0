@@ -73,7 +73,7 @@
                     gap: 16px;
 
                     &.two {
-                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-columns: repeat(2, calc(50% - 8px));
 
                         & div {
                             width: 100%;

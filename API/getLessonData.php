@@ -4,60 +4,20 @@ include "../pdoInc.php";
 
 
 $lessonData = array();
-if (isset($_POST['lessonID'])) {
+
+if (isset($_POST['topic_ID'])) {
+
     // getLessonContent
-    $findLessonContent = $dbh->prepare('SELECT * FROM lessonContent WHERE lesson_ID = ?');
-    $findLessonContent->execute(array($_POST['lessonID']));
+    $findLessonData = $dbh->prepare('SELECT * FROM lesson WHERE topic_ID = ? ORDER BY contentOrder');
+    $findLessonData->execute(array($_POST['topic_ID']));
 
-    $lessonContentArr = array();
-    while ($lessonContentItem = $findLessonContent->fetch(PDO::FETCH_ASSOC)) {
-        $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["type"], "content" => json_decode($lessonContentItem["content"]));
+    $lessonDataArr = array();
+    while ($lessonDataItem = $findLessonData->fetch(PDO::FETCH_ASSOC)) {
+        $lessonData = array("id" => $lessonDataItem["id"], "name" => $lessonDataItem["title"], "description" => $lessonDataItem["introduction"], "contentOrder" => $lessonDataItem["contentOrder"]);
 
-        // 如果有給學生 ID
-        if (isset($_POST['studentID'])) {
-            switch ($lessonContentItem['type']) {
-
-                case 'singleChoice':
-                case 'multipleChoice':
-                case 'fillBlank':
-                    $lessonContentItem["studentAnswer"] = array('content' => array(), 'score' => null);
-
-                    $findLessonContentSubmit = $dbh->prepare('SELECT content FROM practiceSubmit WHERE student_ID = ? and practice_ID =? ORDER BY time');
-                    $findLessonContentSubmit->execute(array($_POST['studentID'], $lessonContentItem['id']));
-                    while ($findLessonContentSubmitItem = $findLessonContentSubmit->fetch(PDO::FETCH_ASSOC)) {
-                        if ($findLessonContentSubmit->rowCount() > 0) {
-                            $tempContent = $findLessonContentSubmitItem['content'];
-                            $tempScore = $findLessonContentSubmitItem['score'];
-                            $arr = array();
-                            $template = array('content' => array('0' => $tempContent), 'score' => $tempScore);
-                            $lessonContentItem["studentAnswer"] = $template;
-                        }
-                    }
-                    break;
-                case 'uploadImage':
-                case 'textArea':
-                    $lessonContentItem["studentAnswer"] = array('content' => array(), 'score' => null);
-
-                    $findLessonContentSubmit = $dbh->prepare('SELECT score, content FROM homeworkSubmit WHERE student_ID = ? and homework_ID =? ORDER BY time');
-                    $findLessonContentSubmit->execute(array($_POST['studentID'], $lessonContentItem['id']));
-                    while ($findLessonContentSubmitItem = $findLessonContentSubmit->fetch(PDO::FETCH_ASSOC)) {
-                        if ($findLessonContentSubmit->rowCount() > 0) {
-                            $tempContent = $findLessonContentSubmitItem['content'];
-                            $tempScore = $findLessonContentSubmitItem['score'];
-                            $arr = array();
-                            $template = array('content' => array('0' => $tempContent), 'score' => $tempScore);
-                            $lessonContentItem["studentAnswer"] = $template;
-                        }
-                    }
-                    break;
-            }
-            $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["type"], "content" => json_decode($lessonContentItem["content"]), 'studentAnswer' => $lessonContentItem["studentAnswer"]);
-        }
-
-
-
-        array_push($lessonContentArr, $lessonContent);
+        array_push($lessonDataArr, $lessonData);
     }
-    $lessonData = array("status" => '200', "data" => $lessonContentArr);
-    echo json_encode($lessonData);
+    $lessonData = array("status" => '200', "data" => $lessonDataArr);
 }
+
+echo json_encode($lessonData);

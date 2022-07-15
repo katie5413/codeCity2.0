@@ -26,23 +26,20 @@
             }
 
             button {
+                font-size: 18px;
                 position: relative;
-                margin-left: 16px;
+                margin-left: 24px;
 
                 &:before {
                     position: absolute;
                     content: ' ';
                     width: 2px;
-                    height: 50%;
-                    background-color: var(--primary);
-                    left: -8px;
+                    height: 80%;
+                    background-color: var(--grey2);
+                    left: -12px;
                     top: 50%;
                     border-radius: 8px;
                     transform: translate(-50%, -50%);
-                }
-
-                &.active {
-                    color: var(--primary);
                 }
             }
         }
@@ -51,6 +48,10 @@
             display: flex;
             margin-left: auto;
             gap: 16px;
+
+            .dropBox.selectLessonContent {
+                display: none;
+            }
         }
     }
 
@@ -81,26 +82,9 @@
                 }
             }
         }
-
-        #manageArea {
-            margin-right: 20px;
-        }
-
-        #moduleArea {
-            padding: 16px;
-            border-left: 1px solid var(--grey5);
-
-            .moduleItem {
-                width: 100%;
-                padding: 8px;
-                border-radius: 8px;
-                border: 1px solid var(--secondary);
-            }
-        }
     }
 
     &[active-tab='topic'] {
-        
         .tab[tab-name='topic'] {
             display: initial;
 
@@ -121,7 +105,7 @@
         .pageTopicName {
             color: var(--primary);
         }
-        .pageLessonName{
+        .pageLessonName {
             display: none;
         }
         .tab[tab-name='lesson'] {
@@ -133,8 +117,95 @@
         .pageLessonName {
             color: var(--primary);
         }
+
+        .dropBox.selectLessonContent {
+            display: block !important;
+        }
+
         .tab[tab-name='lessonContent'] {
-            display: initial;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            width: 100%;
+            overflow: hidden;
+        }
+    }
+}
+
+#lessonContentModal {
+    .formModule {
+        display: none;
+    }
+
+    &[target-type='markdown'] {
+        .modalWrapper {
+            width: 80%;
+            max-width: 80%;
+
+            .markdownForm {
+                display: block;
+
+                textarea {
+                    height: 100%;
+                    width: 100%;
+                    min-height: 300px;
+                    max-height: 450px;
+                    overflow: scroll;
+                    resize: vertical;
+                }
+
+                #previewArea {
+                    height: 100%;
+                    width: 100%;
+                    min-height: 300px;
+                    max-height: 450px;
+                    overflow: scroll;
+                    border-radius: 8px;
+                    border: 1px solid var(--grey5);
+                    padding: 8px;
+                }
+            }
+        }
+    }
+
+    &[target-type='textArea'] {
+        .textAreaForm {
+            display: block;
+        }
+    }
+
+    &[target-type='singleChoice'] {
+        .singleChoiceForm {
+            display: block;
+        }
+    }
+
+    &[target-type='multipleChoice'] {
+        .multipleChoiceForm {
+            display: block;
+        }
+    }
+
+    &[target-type='fillBlank'] {
+        .fillBlankForm {
+            display: block;
+        }
+    }
+
+    &[target-type='uploadImage'] {
+        .uploadImageForm {
+            display: block;
+        }
+    }
+
+    &[target-type='embed'] {
+        .embedForm {
+            display: block;
+        }
+    }
+
+    &[target-type='embedYoutube'] {
+        .embedYoutubeForm {
+            display: block;
         }
     }
 }

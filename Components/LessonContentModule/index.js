@@ -468,7 +468,7 @@ function lessonContentModel(data, field) {
                         </div>
 
                         <div class="feedbackMsg maxContent">
-                            <span class="icon"></span />
+                            <span class="icon"></span>
                             <span class="text">error message</span>
                         </div>
                         <button class="submitAnswer quiz-{{quizType}} button btn-secondary hide">提交</button>

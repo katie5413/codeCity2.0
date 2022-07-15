@@ -202,12 +202,44 @@
                     <div class="contentTopArea">
                         <img id="lessonIcon" src="../../Images/icon/type/book.svg" />
                         <h3 id="pageTitle">
-                            <a href="/View/CourseManage/index.html">課程管理</a>
+                            <a href="../CourseManage/">課程管理</a>
                             <button class="pageTopicName"></button>
                             <button class="pageLessonName"></button>
                         </h3>
                         <div class="right">
-                            <button action-type="add" action-target="topic" class="button btn-secondary openModal">
+                            <div class="dropBox selectLessonContent">
+                                <input
+                                    class="selectSelected"
+                                    type="text"
+                                    placeholder="請選擇內容類型"
+                                />
+                                <img
+                                    src="../../Images/icon/direction/drop-right.svg"
+                                    alt="icon"
+                                    class="icon"
+                                />
+                                <img
+                                    src="../../Images/icon/general/clear.svg"
+                                    alt="icon"
+                                    class="drop__clear"
+                                />
+                                <div class="line"></div>
+                                <div class="selectItems">
+                                    <div class="option" value="markdown">markdown</div>
+                                    <div class="option" value="textArea">textArea</div>
+                                    <div class="option" value="singleChoice">singleChoice</div>
+                                    <div class="option" value="multipleChoice">multipleChoice</div>
+                                    <div class="option" value="fillBlank">fillBlank</div>
+                                    <div class="option" value="uploadImage">uploadImage</div>
+                                    <div class="option" value="embed">embed</div>
+                                    <div class="option" value="embedYoutube">embedYoutube</div>
+                                </div>
+                            </div>
+                            <button
+                                action-type="add"
+                                action-target="topic"
+                                class="button btn-secondary openModal"
+                            >
                                 新增
                             </button>
                         </div>
@@ -247,7 +279,22 @@
                             </div>
                         </div>
                         <div class="tab" tab-name="lessonContent">
-
+                            <div class="table__container">
+                                <table id="lessonContentTable" class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>順序權重</th>
+                                            <th>內容類型</th>
+                                            <th>內容</th>
+                                            <th>預覽</th>
+                                            <th>編輯</th>
+                                            <th>刪除</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -295,7 +342,7 @@
                             </div>
                             <div class="item" data-feedback="false">
                                 <div class="feedbackMsg errorMsg fillAvailable">
-                                    <span class="icon"></span />
+                                    <span class="icon"></span>
                                     <span class="text">error message</span>
                                 </div>
                             </div>
@@ -305,9 +352,7 @@
                                 <button class="button btn-primary btn-hollow modalCancel">
                                     取消
                                 </button>
-                                <button class="button btn-primary modalConfirm">
-                                    確認
-                                </button>
+                                <button class="button btn-primary modalConfirm">確認</button>
                             </div>
                         </div>
                     </div>
@@ -334,12 +379,22 @@
                                 </div>
                                 <div class="formInput lessonContentOrder">
                                     <div class="title">順序</div>
-                                    <input class="input" type="text" onkeyup="value=value.replace(/\D/g,'')" />
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        onkeyup="value=value.replace(/\D/g,'')"
+                                    />
                                 </div>
                             </div>
                             <div class="formInput lessonDescription">
                                 <div class="title">簡介</div>
                                 <textarea class="input" placeholder="請輸入段落文字"></textarea>
+                            </div>
+                            <div class="item" data-feedback="false">
+                                <div class="feedbackMsg errorMsg fillAvailable">
+                                    <span class="icon"></span>
+                                    <span class="text">error message</span>
+                                </div>
                             </div>
                         </div>
                         <div class="bottom">
@@ -347,9 +402,159 @@
                                 <button class="button btn-primary btn-hollow modalCancel">
                                     取消
                                 </button>
-                                <button class="button btn-primary modalConfirm">
-                                    確認
+                                <button class="button btn-primary modalConfirm">確認</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="lessonContentModal" class="modal">
+                <div class="modalWrapper">
+                    <div class="content">
+                        <div class="top">
+                            <img class="icon" src="../../Images/icon/general/edit-white.svg" />
+                            <div class="title">新增章節</div>
+                        </div>
+                        <div class="middle">
+                            <div class="group two">
+                                <div class="formInput lessonContentType form__disable">
+                                    <div class="title">內容類型</div>
+                                    <input class="input" type="text" readonly />
+                                </div>
+                                <div class="formInput lessonContentOrder">
+                                    <div class="title">順序</div>
+                                    <input
+                                        class="input"
+                                        type="number"
+                                        onkeyup="value=value.replace(/\D/g,'')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="markdownForm formModule">
+                                <div class="group two">
+                                    <div class="formInput lessonContent mustFill">
+                                        <div class="title">
+                                            內容<span class="mustFillLabel">必填</span>
+                                        </div>
+                                        <textarea
+                                            class="input"
+                                            placeholder="請輸入段落文字"
+                                        ></textarea>
+                                    </div>
+                                    <div class="preview">
+                                        <div class="title">預覽</div>
+                                        <div id="previewArea" class="markdownArea section"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="textAreaForm formModule">
+                                <div class="formInput quizTitle mustFill">
+                                    <div class="title">
+                                        標題<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入標題"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+                                <div class="formInput quizDetail">
+                                    <div class="title">簡介</div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入簡介內容"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+                                <div class="group two">
+                                    <div class="formInput quizImage">
+                                        <div class="title">上傳圖片</div>
+                                        <input
+                                            name="quizImageUpload"
+                                            id="quizImageUpload"
+                                            class="input"
+                                            type="file"
+                                            accept="image/*"
+                                        />
+                                    </div>
+                                    <div class="formInput quizImageAlt">
+                                        <div class="title">圖片說明</div>
+                                        <input
+                                            class="input"
+                                            type="text"
+                                            placeholder="請輸入圖片說明"
+                                            onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="imagePreview"></div>
+                            </div>
+
+                            <div class="uploadImageForm formModule">
+                                <div class="formInput quizTitle mustFill">
+                                    <div class="title">
+                                        標題<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入標題"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+                                <div class="formInput quizDetail">
+                                    <div class="title">說明</div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入說明"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="singleChoiceForm formModule">
+                                <div class="group two">
+                                    <div class="formInput mustFill lessonName">
+                                        <div class="title">
+                                            章節名稱<span class="mustFillLabel">必填</span>
+                                        </div>
+                                        <input
+                                            class="input"
+                                            type="text"
+                                            onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                        />
+                                    </div>
+                                    <div class="formInput lessonContentOrder">
+                                        <div class="title">順序</div>
+                                        <input
+                                            class="input"
+                                            type="text"
+                                            onkeyup="value=value.replace(/\D/g,'')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="formInput lessonDescription">
+                                    <div class="title">簡介</div>
+                                    <textarea class="input" placeholder="請輸入段落文字"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="item" data-feedback="false">
+                                <div class="feedbackMsg errorMsg fillAvailable">
+                                    <span class="icon"></span>
+                                    <span class="text">error message</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="buttonGroup">
+                                <button class="button btn-primary btn-hollow modalCancel">
+                                    取消
                                 </button>
+                                <button class="button btn-primary modalConfirm">確認</button>
                             </div>
                         </div>
                     </div>
