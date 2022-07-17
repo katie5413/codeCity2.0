@@ -153,7 +153,7 @@
                     resize: vertical;
                 }
 
-                #previewArea {
+                .previewArea {
                     height: 100%;
                     width: 100%;
                     min-height: 300px;
@@ -174,20 +174,116 @@
     }
 
     &[target-type='singleChoice'] {
-        .singleChoiceForm {
-            display: block;
+        .modalWrapper {
+            width: 80%;
+            max-width: 80%;
+
+            .singleChoiceForm {
+                display: block;
+
+                .note {
+                    font-size: 12px;
+                    font-weight: 500;
+                    letter-spacing: 0.4px;
+                    color: var(--grey2);
+                    margin-bottom: 10px;
+                }
+
+                .condition__button {
+                    margin-bottom: 12px;
+                    span.text {
+                        width: -webkit-fill-available;
+
+                        .input {
+                            border: none;
+                            height: auto;
+                            padding: 4px;
+                        }
+                    }
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
         }
     }
 
     &[target-type='multipleChoice'] {
-        .multipleChoiceForm {
-            display: block;
+        .modalWrapper {
+            width: 80%;
+            max-width: 80%;
+
+            .multipleChoiceForm {
+                display: block;
+
+                .note {
+                    font-size: 12px;
+                    font-weight: 500;
+                    letter-spacing: 0.4px;
+                    color: var(--grey2);
+                    margin-bottom: 10px;
+                }
+
+                .condition__button {
+                    margin-bottom: 12px;
+                    span.text {
+                        width: -webkit-fill-available;
+
+                        .input {
+                            border: none;
+                            height: auto;
+                            padding: 4px;
+                        }
+                    }
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
         }
     }
 
     &[target-type='fillBlank'] {
-        .fillBlankForm {
-            display: block;
+        .modalWrapper {
+            width: 80%;
+            max-width: 80%;
+
+            .fillBlankForm {
+                display: block;
+
+                .previewImage {
+                    border: 1px solid var(--grey5);
+                    padding: 4px;
+                    border-radius: 8px;
+
+                    img {
+                        width: 100%;
+                        max-height: 300px;
+                    }
+                }
+
+                .optionsArea {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    .optionItem {
+                        display: grid;
+                        grid-template-columns: 100px 1fr;
+                        gap: 8px;
+                    }
+                }
+
+                .note {
+                    font-size: 12px;
+                    font-weight: 500;
+                    letter-spacing: 0.4px;
+                    color: var(--grey2);
+                    margin-bottom: 10px;
+                }
+            }
         }
     }
 
@@ -206,6 +302,23 @@
     &[target-type='embedYoutube'] {
         .embedYoutubeForm {
             display: block;
+        }
+    }
+}
+
+#previewLessonContentModal {
+    .modalWrapper {
+        width: 80%;
+        max-width: 80%;
+
+        .middle {
+            max-height: 500px;
+            padding: 8px 16px;
+            overflow-y: scroll;
+
+            .content-img img{
+                width: 100%;
+            }
         }
     }
 }

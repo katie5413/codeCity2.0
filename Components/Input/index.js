@@ -84,7 +84,7 @@ function check(target, rule){
     }
 }
 
-$('.check').click(function(){
+$('.checkInput').click(function(){
     var allFill = true;
 
     $('.input_box').each(function() {

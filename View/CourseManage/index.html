@@ -443,7 +443,7 @@
                                     </div>
                                     <div class="preview">
                                         <div class="title">預覽</div>
-                                        <div id="previewArea" class="markdownArea section"></div>
+                                        <div class="markdownArea section previewArea"></div>
                                     </div>
                                 </div>
                             </div>
@@ -472,9 +472,7 @@
                                     <div class="formInput quizImage">
                                         <div class="title">上傳圖片</div>
                                         <input
-                                            name="quizImageUpload"
-                                            id="quizImageUpload"
-                                            class="input"
+                                            class="input quizImageUpload"
                                             type="file"
                                             accept="image/*"
                                         />
@@ -489,9 +487,7 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="imagePreview"></div>
                             </div>
-
                             <div class="uploadImageForm formModule">
                                 <div class="formInput quizTitle mustFill">
                                     <div class="title">
@@ -516,29 +512,399 @@
                             </div>
 
                             <div class="singleChoiceForm formModule">
+                                <div class="formInput quizTitle mustFill">
+                                    <div class="title">
+                                        標題<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入標題"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+
+                                <div class="formInput quizOption mustFill">
+                                    <div class="title">
+                                        選項
+                                        <span class="mustFillLabel">必填</span>
+                                    </div>
+
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="0"
+                                            type="checkbox"
+                                            id="singleOption1"
+                                            name="singleOptionAns"
+                                        />
+                                        <label for="singleOption1"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容(必填)"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="1"
+                                            type="checkbox"
+                                            id="singleOption2"
+                                            name="singleOptionAns"
+                                        />
+                                        <label for="singleOption2"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容(必填)"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="2"
+                                            type="checkbox"
+                                            id="singleOption3"
+                                            name="singleOptionAns"
+                                        />
+                                        <label for="singleOption3"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="3"
+                                            type="checkbox"
+                                            id="singleOption4"
+                                            name="singleOptionAns"
+                                        />
+                                        <label for="singleOption4"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <span class="note"
+                                        >註：至少兩個選項、其餘若不需要可留白，點選左側圓圈選擇答案</span
+                                    >
+                                </div>
+
+                                <div class="formInput quizDetail">
+                                    <div class="title">簡介</div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入簡介內容"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
                                 <div class="group two">
-                                    <div class="formInput mustFill lessonName">
+                                    <div class="formInput quizImage">
+                                        <div class="title">上傳圖片</div>
+                                        <input
+                                            class="input quizImageUpload"
+                                            type="file"
+                                            accept="image/*"
+                                        />
+                                    </div>
+                                    <div class="formInput quizImageAlt">
+                                        <div class="title">圖片說明</div>
+                                        <input
+                                            class="input"
+                                            type="text"
+                                            placeholder="請輸入圖片說明"
+                                            onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="multipleChoiceForm formModule">
+                                <div class="formInput quizTitle mustFill">
+                                    <div class="title">
+                                        標題<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入標題"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+
+                                <div class="formInput quizOption mustFill">
+                                    <div class="title">
+                                        選項
+                                        <span class="mustFillLabel">必填</span>
+                                    </div>
+
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="0"
+                                            type="checkbox"
+                                            id="multipleOption1"
+                                            name="multipleOptionAns"
+                                        />
+                                        <label for="multipleOption1"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容(必填)"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="1"
+                                            type="checkbox"
+                                            id="multipleOption2"
+                                            name="multipleOptionAns"
+                                        />
+                                        <label for="multipleOption2"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容(必填)"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="2"
+                                            type="checkbox"
+                                            id="multipleOption3"
+                                            name="multipleOptionAns"
+                                        />
+                                        <label for="multipleOption3"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <div class="condition__button">
+                                        <input
+                                            select-id="3"
+                                            type="checkbox"
+                                            id="multipleOption4"
+                                            name="multipleOptionAns"
+                                        />
+                                        <label for="multipleOption4"
+                                            ><span class="check"></span
+                                            ><span class="text"
+                                                ><input
+                                                    class="input"
+                                                    type="text"
+                                                    placeholder="請輸入選項內容"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')" /></span
+                                        ></label>
+                                    </div>
+                                    <span class="note"
+                                        >註：至少兩個選項、其餘若不需要可留白，點選左側圓圈選擇答案</span
+                                    >
+                                </div>
+
+                                <div class="formInput quizDetail">
+                                    <div class="title">簡介</div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="請輸入簡介內容"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                    />
+                                </div>
+                                <div class="group two">
+                                    <div class="formInput quizImage">
+                                        <div class="title">上傳圖片</div>
+                                        <input
+                                            class="input quizImageUpload"
+                                            type="file"
+                                            accept="image/*"
+                                        />
+                                    </div>
+                                    <div class="formInput quizImageAlt">
+                                        <div class="title">圖片說明</div>
+                                        <input
+                                            class="input"
+                                            type="text"
+                                            placeholder="請輸入圖片說明"
+                                            onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fillBlankForm formModule">
+                                <div class="group two">
+                                    <div class="formInput quizTitle mustFill">
                                         <div class="title">
-                                            章節名稱<span class="mustFillLabel">必填</span>
+                                            標題<span class="mustFillLabel">必填</span>
                                         </div>
                                         <input
                                             class="input"
                                             type="text"
+                                            placeholder="請輸入標題"
                                             onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
                                         />
                                     </div>
-                                    <div class="formInput lessonContentOrder">
-                                        <div class="title">順序</div>
+
+                                    <div class="formInput quizDetail">
+                                        <div class="title">簡介</div>
                                         <input
                                             class="input"
                                             type="text"
-                                            onkeyup="value=value.replace(/\D/g,'')"
+                                            placeholder="請輸入簡介內容"
+                                            onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
                                         />
                                     </div>
                                 </div>
-                                <div class="formInput lessonDescription">
-                                    <div class="title">簡介</div>
-                                    <textarea class="input" placeholder="請輸入段落文字"></textarea>
+
+                                <div class="group two">
+                                    <div class="formInput quizImage mustFill">
+                                        <div class="title">
+                                            上傳圖片<span class="mustFillLabel">必填</span>
+                                        </div>
+                                        <input
+                                            class="input quizImageUpload"
+                                            type="file"
+                                            accept="image/*"
+                                        />
+                                    </div>
+                                    <div class="formInput quizImageAlt">
+                                        <div class="title">圖片說明</div>
+                                        <input
+                                            class="input"
+                                            type="text"
+                                            placeholder="請輸入圖片說明"
+                                            onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="group two">
+                                    <div class="formInput">
+                                        <div class="title">圖片預覽</div>
+                                        <div class="previewImage">
+                                            <img src="../../Images/city.png" />
+                                        </div>
+                                    </div>
+
+                                    <div class="formInput quizOptionGroup mustFill">
+                                        <div class="title">
+                                            選項
+                                            <span class="mustFillLabel">必填</span>
+                                        </div>
+                                        <div class="optionsArea">
+                                            <div class="optionItem">
+                                                <input
+                                                    class="input quizNumber"
+                                                    type="text"
+                                                    placeholder="請輸入題號"
+                                                    onkeyup="value=value.replace(/[\W]/g,'')"
+                                                />
+                                                <input
+                                                    class="input quizAnswer"
+                                                    type="text"
+                                                    placeholder="請輸入答案"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                                />
+                                            </div>
+                                            <div class="optionItem">
+                                                <input
+                                                    class="input quizNumber"
+                                                    type="text"
+                                                    placeholder="請輸入題號"
+                                                    onkeyup="value=value.replace(/[\W]/g,'')"
+                                                />
+                                                <input
+                                                    class="input quizAnswer"
+                                                    type="text"
+                                                    placeholder="請輸入答案"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                                />
+                                            </div>
+                                            <div class="optionItem">
+                                                <input
+                                                    class="input quizNumber"
+                                                    type="text"
+                                                    placeholder="請輸入題號"
+                                                    onkeyup="value=value.replace(/[\W]/g,'')"
+                                                />
+                                                <input
+                                                    class="input quizAnswer"
+                                                    type="text"
+                                                    placeholder="請輸入答案"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                                />
+                                            </div>
+                                            <div class="optionItem">
+                                                <input
+                                                    class="input quizNumber"
+                                                    type="text"
+                                                    placeholder="請輸入題號"
+                                                    onkeyup="value=value.replace(/[\W]/g,'')"
+                                                />
+                                                <input
+                                                    class="input quizAnswer"
+                                                    type="text"
+                                                    placeholder="請輸入答案"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                                />
+                                            </div>
+                                            <div class="optionItem">
+                                                <input
+                                                    class="input quizNumber"
+                                                    type="text"
+                                                    placeholder="請輸入題號"
+                                                    onkeyup="value=value.replace(/[\W]/g,'')"
+                                                />
+                                                <input
+                                                    class="input quizAnswer"
+                                                    type="text"
+                                                    placeholder="請輸入答案"
+                                                    onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9\u3001]/g, '')"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="embedForm formModule">
+                                <div class="formInput embedLink mustFill">
+                                    <div class="title">
+                                        連結<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input class="input" type="text" placeholder="請輸入嵌入連結" />
+                                </div>
+                            </div>
+
+                            <div class="embedYoutubeForm formModule">
+                                <div class="formInput embedLink mustFill">
+                                    <div class="title">
+                                        連結<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <input class="input" type="text" placeholder="請輸入嵌入連結" />
                                 </div>
                             </div>
 
@@ -548,6 +914,27 @@
                                     <span class="text">error message</span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="buttonGroup">
+                                <button class="button btn-primary btn-hollow modalCancel">
+                                    取消
+                                </button>
+                                <button class="button btn-primary modalConfirm">確認</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="previewLessonContentModal" class="modal">
+                <div class="modalWrapper">
+                    <div class="content">
+                        <div class="top">
+                            <img class="icon" src="../../Images/icon/general/edit-white.svg" />
+                            <div class="title">新增章節</div>
+                        </div>
+                        <div class="middle">
+                            <div id="lessonContent"></div>
                         </div>
                         <div class="bottom">
                             <div class="buttonGroup">

@@ -27,6 +27,9 @@ function closeModal() {
     // textarea
     $('.modal').find('textarea').val('');
 
+    // checkbox
+    $('.modal').find('input[type="checkbox"]').attr('checked', false);
+
     // feedback msg
     clearFieldFeedback($('.modal'));
 }
