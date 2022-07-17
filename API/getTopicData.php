@@ -6,7 +6,7 @@ include "../pdoInc.php";
 $topicData = array();
 
 // getLessonContent
-$findTopicData = $dbh->prepare('SELECT * FROM topic ORDER BY orderNum');
+$findTopicData = $dbh->prepare('SELECT * FROM topic ORDER BY order_num');
 $findTopicData->execute(array());
 
 $topicDataArr = array();

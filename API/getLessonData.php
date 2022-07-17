@@ -8,12 +8,12 @@ $lessonData = array();
 if (isset($_POST['topic_ID'])) {
 
     // getLessonContent
-    $findLessonData = $dbh->prepare('SELECT * FROM lesson WHERE topic_ID = ? ORDER BY contentOrder');
+    $findLessonData = $dbh->prepare('SELECT * FROM lesson WHERE topic_ID = ? ORDER BY content_order');
     $findLessonData->execute(array($_POST['topic_ID']));
 
     $lessonDataArr = array();
     while ($lessonDataItem = $findLessonData->fetch(PDO::FETCH_ASSOC)) {
-        $lessonData = array("id" => $lessonDataItem["id"], "name" => $lessonDataItem["title"], "description" => $lessonDataItem["introduction"], "contentOrder" => $lessonDataItem["contentOrder"]);
+        $lessonData = array("id" => $lessonDataItem["id"], "name" => $lessonDataItem["title"], "description" => $lessonDataItem["introduction"], "contentOrder" => $lessonDataItem["content_order"]);
 
         array_push($lessonDataArr, $lessonData);
     }

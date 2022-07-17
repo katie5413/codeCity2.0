@@ -11,7 +11,7 @@ if (isset($_POST['lessonID'])) {
 
     $lessonContentArr = array();
     while ($lessonContentItem = $findLessonContent->fetch(PDO::FETCH_ASSOC)) {
-        $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["contentType"], "contentOrder" => $lessonContentItem["contentOrder"], "content" => json_decode($lessonContentItem["content"]));
+        $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["contentType"], "contentOrder" => $lessonContentItem["content_order"], "content" => json_decode($lessonContentItem["content"]));
 
         // 如果有給學生 ID
         if (isset($_POST['studentID'])) {
@@ -51,7 +51,7 @@ if (isset($_POST['lessonID'])) {
                     }
                     break;
             }
-            $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["contentType"], "contentOrder" => $lessonContentItem["contentOrder"], "content" => json_decode($lessonContentItem["content"]), 'studentAnswer' => $lessonContentItem["studentAnswer"]);
+            $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["contentType"], "contentOrder" => $lessonContentItem["content_order"], "content" => json_decode($lessonContentItem["content"]), 'studentAnswer' => $lessonContentItem["studentAnswer"]);
         }
 
         array_push($lessonContentArr, $lessonContent);
