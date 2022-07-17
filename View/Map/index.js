@@ -40,10 +40,7 @@ $(document).ready(function () {
                     });
                 } else if (applyClass.length > 0) {
                 } else {
-                    setPopMsg({ msg: '目前未加入班級，前往申請' });
-                    setTimeout(function () {
-                        window.location.href = '../Setting';
-                    }, 3000);
+                    setPopMsg({ msg: '目前未加入班級，前往 [設定頁面] 申請' });
                 }
 
                 function getTopicsData(classID) {
