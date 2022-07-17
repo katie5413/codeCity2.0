@@ -221,23 +221,4 @@ $(document).ready(function () {
     //     $('#mapContent').slick('resize');
     // });
 
-    $('.card-wrap:not(".disable")').on('click', function () {
-        const topicID = $(this).attr('topic-id');
-        $.ajax({
-            type: 'POST',
-            url: `../../API/setTopicID.php`,
-            data: {
-                topicID: topicID,
-            },
-            dataType: 'json',
-            success: function (res) {
-                console.log(res);
-                if (res.topic_status == 1) {
-                    window.location.href = '../Topic';
-                } else {
-                    setPopMsg({ msg: '無法進入課程，請確認課程已開放' });
-                }
-            },
-        });
-    });
 });

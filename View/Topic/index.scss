@@ -27,32 +27,30 @@ p + p {
         .content {
             margin: 0;
             padding: 0;
-        }
 
-        .tmpContent {
             display: flex;
             flex-direction: column;
             max-width: 600px;
             gap: 32px;
+        }
 
-            .group {
-                display: flex;
-                justify-content: space-between;
+        .group {
+            display: flex;
+            justify-content: space-between;
 
-                &.center{
-                    justify-content: center;
-                }
+            &.center {
+                justify-content: center;
+            }
 
-                &.arrow{
-                    justify-content: space-around;
-                }
+            &.arrow {
+                justify-content: space-around;
+            }
 
-                .arrow-left{
-                    transform: rotate(45deg);
-                }
-                .arrow-right{
-                    transform: rotate(-45deg);
-                }
+            .arrow-left {
+                transform: rotate(45deg);
+            }
+            .arrow-right {
+                transform: rotate(-45deg);
             }
         }
 

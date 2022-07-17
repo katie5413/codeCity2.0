@@ -141,11 +141,15 @@ $(document).ready(function () {
 
     // lessonContentModel(fakeData, $('#lessonContent'));
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const lessonID = urlParams.get('lessonID')
+
     $.ajax({
         type: 'POST',
         url: `../../API/getLessonContentData.php`,
         data: {
-            lessonID: 1,
+            lessonID: lessonID,
             studentID: 1,
         },
         dataType: 'json',
