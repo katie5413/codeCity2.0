@@ -24,6 +24,8 @@ $(document).ready(function () {
                 if (enrollClass.length > 0) {
                     // 如果已經有註冊，一律選第一個
                     $('#classCodeArea input').val(enrollClass[0].className);
+                    sessionStorage.setItem('classID', enrollClass[0].classID);
+
 
                     // deal dropBox options
                     for (let i = 0; i < enrollClass.length; i++) {
@@ -33,49 +35,13 @@ $(document).ready(function () {
                         option.append(document.createTextNode(enrollClass[i].className));
                         $('#classCodeArea .selectItems').append(option);
                     }
-
-                    // get Topics data
-                    $(document).on('click', '#classCodeArea .dropBox .option', function () {
-                        getTopicsData($(this).attr('value'));
-                    });
                 } else if (applyClass.length > 0) {
                 } else {
                     setPopMsg({ msg: '目前未加入班級，前往 [設定頁面] 申請' });
                 }
 
-                function getTopicsData(classID) {
-                    $.ajax({
-                        type: 'POST',
-                        url: `../../API/getTopicsData.php`,
-                        data: {
-                            classID: classID,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('getTopicsData', data);
-                        },
-                    });
-                }
-
                 console.log(enrollClass, applyClass);
 
-                // switch (userClassData.length) {
-                //     case 0:
-                //         setPopMsg('目前未加入班級，前往申請');
-                //         setTimeout(function () {
-                //             window.location.href = '../Setting';
-                //         }, 3000);
-                //         break;
-                //     case 1:
-                //         break;
-                //     default:
-                //         break;
-                // }
-
-                // if (0) {
-                //     $('#classCodeArea .selectSelected').val($(this).text());
-                // } else {
-                // }
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {

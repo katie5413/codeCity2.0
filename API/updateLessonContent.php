@@ -11,7 +11,7 @@ if (isset($_POST['id']) && isset($_POST['content']) && isset($_POST['contentOrde
     $contentOrder = $_POST['contentOrder'];
 
 
-    $updateLessonContent = $dbh->prepare('UPDATE lessonContent SET content = ?, contentOrder = ?  WHERE id = ?');
+    $updateLessonContent = $dbh->prepare('UPDATE lessonContent SET content = ?, content_order = ?  WHERE id = ?');
     $updateLessonContent->execute(array($content, $contentOrder, $ID));
 
     $lessonContentData = array("contentType" => $contentType, "content" => $content);

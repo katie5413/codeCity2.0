@@ -51,6 +51,7 @@ function logout() {
         type: 'GET',
         url: `../../API/logout.php`,
         success: function () {
+            sessionStorage.removeItem('classID');
             window.location.href = '../../View/Login';
         },
     });

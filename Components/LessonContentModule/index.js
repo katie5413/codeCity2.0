@@ -24,7 +24,6 @@ function lessonContentModel(data, field) {
 
                 let flag = 1;
                 imgGroup.each(function (i, img) {
-                    console.log(imgGroup.eq(i).next().hasClass('content-img'));
                     if (imgGroup.eq(i).next().hasClass('content-img')) {
                         flag++;
                         console.log(flag);
@@ -209,33 +208,16 @@ function lessonContentModel(data, field) {
                 );
 
                 // 檢查是否作答過
-                if (item.studentAnswer.content.length > 0) {
-                    for (let i = 0; i < item.studentAnswer.content.length; i++) {
-                        $(`#${item.type}${item.id}-${item.studentAnswer[i]}`).click();
-                    }
+                if (item.studentAnswer.length > 0) {
+                    checkOpenStatus({
+                        type: 'auto',
+                        studentAnswer: item.studentAnswer,
+                        passLimit: 100,
+                        contentID,
+                    });
                 }
 
-                if (checkAnswerSame(item.content.answer, item.studentAnswer)) {
-                    $(`#${contentID} .status`).addClass('done');
-                    $(`#${contentID} .submitAnswer`).remove();
-                }
-
-                function checkAnswerSame(answer, studentAnswer) {
-                    let count = 0;
-                    if (answer.length != studentAnswer.content.length) return false;
-                    for (let i = 0; i < studentAnswer.content.length; i++) {
-                        if (answer.includes(studentAnswer[i])) {
-                            count++;
-                        }
-
-                        if (count == answer.length) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                }
-
+                // 提交
                 $(`#${contentID} .submitAnswer`).on('click', function () {
                     let selectItem = $(`#${contentID}`).find('input[type="checkbox"]:checked');
                     let userAnswer = [];
@@ -245,7 +227,8 @@ function lessonContentModel(data, field) {
                         // 一個都沒選的話，不會送到後台
                         setFieldFeedback($(`#${contentID}`), '請選擇答案', 'error');
                     } else {
-                        let count = 0;
+                        let score = 0;
+                        let count = 0; // 與答案相符的題數
                         for (let i = 0; i < selectItem.length; i++) {
                             let selectId = selectItem[i].getAttribute('id');
                             userAnswer.push(selectId.charAt(selectId.length - 1));
@@ -264,16 +247,30 @@ function lessonContentModel(data, field) {
                             item.content.answer.length == selectItem.length
                         ) {
                             // 改該題的 status
-                            $(`#${contentID} .status`).addClass('done');
-                            // 答對就不要再送了
+                            score = 100;
 
-                            $(`#${contentID} .submitAnswer`).remove();
+                            checkOpenStatus({
+                                type: 'auto',
+                                studentAnswer: [
+                                    {
+                                        score,
+                                        submitTime: new Date(),
+                                    },
+                                ],
+                                passLimit: 100,
+                                contentID,
+                            });
                         } else {
                             setFieldFeedback($(`#${contentID}`), '再檢查一下吧', 'error');
                         }
 
-                        checkLessonStatus();
-                        // TODO: 不管對不對都要送「userAnswer」到後台
+                        updateLessonStatus();
+
+                        submitAnswer({
+                            homeworkID: item.id,
+                            studentAnswer: JSON.stringify(userAnswer),
+                            score: score,
+                        });
                     }
                 });
 
@@ -378,42 +375,21 @@ function lessonContentModel(data, field) {
                     }),
                 );
 
-                // 重新註冊事件
-                activeFeedBack($(`#${contentID}`));
-
                 // 檢查是否作答過
-                if (item.studentAnswer.content.length > 0) {
-                    for (let i = 0; i < item.studentAnswer.content.length; i++) {
-                        $(`#${item.type}${item.id}-${i}`).attr('value', item.studentAnswer[i]);
-                    }
+                if (item.studentAnswer.length > 0) {
+                    checkOpenStatus({
+                        type: 'auto',
+                        studentAnswer: item.studentAnswer,
+                        passLimit: 100,
+                        contentID,
+                    });
                 }
 
-                if (checkFillBlankAnswerSame(item.content.answer, item.studentAnswer.content)) {
-                    $(`#${contentID} .status`).addClass('done');
-                    $(`#${contentID} .submitAnswer`).remove();
-                }
-
-                function checkFillBlankAnswerSame(answer, studentAnswer) {
-                    let count = 0;
-                    console.log(answer.length, studentAnswer.length);
-                    if (answer.length != studentAnswer.length) return false;
-                    for (let i = 0; i < answer.length; i++) {
-                        console.log(answer[i].ans, studentAnswer[i].toLowerCase());
-                        if (answer[i].ans.includes(studentAnswer[i].toLowerCase())) {
-                            count++;
-                        }
-                    }
-
-                    if (count == answer.length) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-
+                // 提交
                 $(`#${contentID} .submitAnswer`).on('click', function () {
                     let selectItem = $(`#${contentID} .input`);
                     let userAnswer = [];
+                    let score = 0;
 
                     for (let i = 0; i < selectItem.length; i++) {
                         if (selectItem[i].value.length > 0) {
@@ -422,22 +398,52 @@ function lessonContentModel(data, field) {
                             selectItem.eq(i).parent().addClass('alert');
                         }
                     }
-                    console.log(userAnswer);
 
                     // 檢查答案數量
                     if (userAnswer.length != item.content.answer.length) {
                         // 沒填完的話，不會送到後台
                         setFieldFeedback($(`#${contentID}`), '請輸入答案', 'error');
                     } else {
-                        if (checkFillBlankAnswerSame(item.content.answer, userAnswer)) {
-                            $(`#${contentID} .status`).addClass('done');
-                            $(`#${contentID} .submitAnswer`).remove();
+                        const answer = item.content.answer;
+                        let count = 0;
+                        let totalQuestion = answer.length;
+                        let score = 0;
+                        // console.log(answer, userAnswer);
+                        if (answer.length != userAnswer.length) return false;
+                        for (let i = 0; i < answer.length; i++) {
+                            // console.log(answer[i].ans, userAnswer[i].toLowerCase());
+                            if (answer[i].ans.includes(userAnswer[i].toLowerCase())) {
+                                count++;
+                            }
+                        }
+
+                        // 算分
+                        score = Math.round((count / totalQuestion) * 100);
+
+                        if (count == answer.length) {
+                            checkOpenStatus({
+                                type: 'auto',
+                                studentAnswer: [
+                                    {
+                                        score,
+                                        submitTime: new Date(),
+                                    },
+                                ],
+                                passLimit: 100,
+                                contentID,
+                            });
                         } else {
                             setFieldFeedback($(`#${contentID}`), '再檢查一下吧', 'error');
                         }
 
-                        checkLessonStatus();
-                        // TODO: 不管對不對都要送「userAnswer」到後台
+                        updateLessonStatus();
+                        // 不管對不對都要送「userAnswer」到後台
+
+                        submitAnswer({
+                            homeworkID: item.id,
+                            studentAnswer: JSON.stringify(userAnswer),
+                            score: score,
+                        });
                     }
                 });
 
@@ -505,18 +511,16 @@ function lessonContentModel(data, field) {
                 );
 
                 // 檢查是否作答過
-                if (item.studentAnswer.content.length > 0) {
-                    $(`#${contentID} .uploadImageArea .imageSubmit`).attr(
-                        'src',
-                        item.studentAnswer.content[0],
-                    );
-                    $(`#${contentID} .submitAnswer`).removeClass('hide');
+                if (item.studentAnswer.length > 0) {
+                    checkOpenStatus({
+                        type: 'manual',
+                        studentAnswer: item.studentAnswer,
+                        contentID,
+                    });
+                    const imageSrc = JSON.parse(item.studentAnswer[0].content);
+                    $(`#${contentID} .uploadImageArea`).removeClass('defaultImg');
 
-                    if (item.studentAnswer.score) {
-                        $(`#${contentID} .status`).addClass('done');
-                    } else {
-                        $(`#${contentID} .status`).addClass('wait');
-                    }
+                    $(`#${contentID} .uploadImageArea .imageSubmit`).attr('src', imageSrc);
                 }
 
                 // 重新註冊事件
@@ -547,11 +551,27 @@ function lessonContentModel(data, field) {
                 });
 
                 $(`#${contentID} .submitAnswer`).on('click', function () {
-                    $(`#${contentID} .status`).addClass('wait');
-                    checkLessonStatus();
-                    // TODO: 把資料送到後端
+                    const userAnswer = [
+                        $(`#${contentID} .uploadImageArea .imageSubmit`).attr('src'),
+                    ];
+                    let score = -1;
 
-                    // 還沒過期前可以重複送
+                    checkOpenStatus({
+                        type: 'manual',
+                        studentAnswer: [
+                            {
+                                score,
+                            },
+                        ],
+                        contentID,
+                    });
+
+                    submitAnswer({
+                        homeworkID: item.id,
+                        studentAnswer: JSON.stringify(userAnswer),
+                    });
+
+                    updateLessonStatus();
                 });
 
                 break;
@@ -630,14 +650,14 @@ function lessonContentModel(data, field) {
                 );
 
                 // 檢查是否作答過
-                if (item.studentAnswer.content.length > 0) {
-                    $(`#${contentID}Input`)[0].value = item.studentAnswer.content;
-
-                    if (item.studentAnswer.score) {
-                        $(`#${contentID} .status`).addClass('done');
-                    } else {
-                        $(`#${contentID} .status`).addClass('wait');
-                    }
+                if (item.studentAnswer.length > 0) {
+                    checkOpenStatus({
+                        type: 'manual',
+                        studentAnswer: item.studentAnswer,
+                        contentID,
+                    });
+                    const userAnswer = JSON.parse(item.studentAnswer[0].content);
+                    $(`#${contentID} textarea`).val(userAnswer);
                 }
 
                 // 重新註冊事件
@@ -651,12 +671,26 @@ function lessonContentModel(data, field) {
                         if (selectItem[i].value.length > 0) {
                             userAnswer.push(selectItem[i].value);
 
-                            $(`#${contentID} .status`).addClass('wait');
+                            // 有填才會送資料到後台
 
-                            checkLessonStatus();
+                            let score = -1;
 
-                            // TODO: 有填才會送資料到後台
-                            // 還沒過期前可以重複送
+                            checkOpenStatus({
+                                type: 'manual',
+                                studentAnswer: [
+                                    {
+                                        score,
+                                    },
+                                ],
+                                contentID,
+                            });
+
+                            submitAnswer({
+                                homeworkID: item.id,
+                                studentAnswer: JSON.stringify(userAnswer),
+                            });
+
+                            updateLessonStatus();
                         } else {
                             selectItem.eq(i).parent().addClass('alert');
 
@@ -673,17 +707,98 @@ function lessonContentModel(data, field) {
                 });
 
                 break;
-            case '':
-                break;
         }
     });
 
     // 塞完之後檢查任務完成狀況
-    checkLessonStatus();
+    updateLessonStatus();
 
-    function checkLessonStatus() {
+    function updateLessonStatus() {
         $('#currentFinishNum').text($('.quiz > .status.done').length);
         $('#totalNum').text($('.quiz > .status:not(.done,.wait)').length);
         $('#waitForScoreNum').text($('.quiz > .status.wait').length);
+    }
+
+    function submitAnswer(props) {
+        $.ajax({
+            type: 'POST',
+            url: `../../API/submitHomework.php`,
+            data: {
+                ...props,
+            },
+            dataType: 'json',
+            success: function (userAnswerStatus) {
+                console.log('submitHomework', userAnswerStatus);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('submitHomework Fail', jqXHR, textStatus, errorThrown);
+            },
+        });
+    }
+
+    function checkOpenStatus(props) {
+        let { type, studentAnswer, passLimit, contentID } = props;
+
+        switch (type) {
+            case 'auto':
+                for (let i = 0; i < studentAnswer.length; i++) {
+                    // 答對過
+                    // 因為時間是最新的在前面，所以只要找到第一筆就可以中斷了
+                    if (studentAnswer[i].score == passLimit) {
+                        // 有答對過就顯示勾
+                        $(`#${contentID} .status`).addClass('done');
+
+                        const lastPassSubmitTime = new Date(studentAnswer[i].submitTime);
+                        let nextOpenTime = new Date(lastPassSubmitTime);
+                        nextOpenTime.setDate(lastPassSubmitTime.getDate() + 1);
+                        const now = new Date();
+
+                        if (now < nextOpenTime) {
+                            // 不開放就把提交刪掉，以及下次可作答時間
+                            $(`#${contentID} .submitAnswer`).remove();
+                            $(`#${contentID} .sectionContentArea`).append(
+                                `<p>下次開放時間：${formattedTime(nextOpenTime)}</p>`,
+                            );
+                        }
+
+                        break;
+                    }
+                }
+                break;
+            case 'manual':
+                // MUST: studentAnswer, type, score, contentID
+                for (let i = 0; i < studentAnswer.length; i++) {
+                    // 答對過
+                    // 因為時間是最新的在前面，所以只要找到第一筆就可以中斷了
+
+                    if (studentAnswer[i].score == null || studentAnswer[i].score < 0) {
+                        // 等待評分
+                        $(`#${contentID} .status`).addClass('wait');
+                        $(`#${contentID} .sectionContentArea`).append(
+                            `<p>教師未批改之前皆可重交</p>`,
+                        );
+                        break;
+                    }
+                    if (studentAnswer[i].score >= 0) {
+                        // 有批改過就顯示勾，並且不接受重交
+                        $(`#${contentID} .status`).addClass('done');
+                        $(`#${contentID} .submitAnswer`).remove();
+
+                        break;
+                    }
+                }
+                break;
+        }
+    }
+
+    function formattedTime(time) {
+        const month = time.getMonth() + 1 > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1);
+        const date = time.getDate() > 9 ? time.getDate() : '0' + time.getDate();
+        const hour = time.getHours() > 9 ? time.getHours() : '0' + time.getHours();
+        const minute = time.getMinutes() > 9 ? time.getMinutes() : '0' + time.getMinutes();
+        let formatted_time =
+            time.getFullYear() + '-' + month + '-' + date + ' ' + hour + ':' + minute;
+
+        return formatted_time;
     }
 }
