@@ -15,7 +15,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
         $userDataStatus = -1;
     } else {
 
-        $classCode = isset($POST['classCode']) ? $POST['classCode'] : null;
+        $classCode = isset($_POST['classCode']) ? $_POST['classCode'] : null;
         $avatar = isset($_POST['avatar']) ? $_POST['avatar'] : null;
         $nickName = isset($_POST['nickName']) ? $_POST['nickName'] : null;
 

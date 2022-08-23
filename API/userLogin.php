@@ -34,7 +34,7 @@ if (isset($_POST['loginType'])) {
 
         $loginStatus = 1;
 
-        $userData = array("id" => $userDataItem["id"], "email" => $userDataItem["email"], "name" => $userDataItem["name"], "nickName" => $userDataItem["nickName"], "avatar" => $userDataItem["avatar"], "point" => $userDataItem["point"], 'class' => $attendClass);
+        $userData = array("id" => $userDataItem["id"], "email" => $userDataItem["email"], "name" => $userDataItem["name"], "nickName" => $userDataItem["nickName"], "avatar" => $userDataItem["avatar"], "point" => $userDataItem["point"], 'userClass' => $attendClass);
     }
 
     $_SESSION['userID'] = $userDataItem["id"];
@@ -42,7 +42,7 @@ if (isset($_POST['loginType'])) {
     $_SESSION['userName'] = $userDataItem["name"];
     $_SESSION['userNickName'] = $userDataItem["nickName"];
     $_SESSION['userAvatar'] = $userDataItem["avatar"];
-    $_SESSION['userPoints'] = $userDataItem["points"];
+    $_SESSION['userPoint'] = $userDataItem["point"];
     $_SESSION['userClass'] = $attendClass; // class_ID
 
     $userDataRes = array("status" => '200', "data" => $userData, "login_status" => $loginStatus);

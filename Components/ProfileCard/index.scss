@@ -12,6 +12,11 @@
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     box-shadow: 0 1px 15px 0px rgba(45, 68, 215, 0.68);
 
+    &.hollow {
+        background: none;
+        box-shadow: none;
+    }
+
     .user {
         display: flex;
         align-items: center;

@@ -36,6 +36,7 @@ $(document).ready(function () {
                         $('#classCodeArea .selectItems').append(option);
                     }
                 } else if (applyClass.length > 0) {
+                    setPopMsg({ msg: '申請加入班級中，請聯絡班級教師加快流程' });
                 } else {
                     setPopMsg({ msg: '目前未加入班級，前往 [設定頁面] 申請' });
                 }

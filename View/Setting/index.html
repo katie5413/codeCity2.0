@@ -10,12 +10,17 @@
         <link rel="stylesheet" type="text/css" href="../../Dependencies/marked/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/Cropper/cropper.min.css" />
-        <link rel="stylesheet" type="text/css" href="../../Dependencies/slick/slick.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../Dependencies/datatables/datatables.css"
+        />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Layout/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Link/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Table/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Checkbox/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/SideMenu/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Footer/index.css" />
@@ -24,12 +29,7 @@
         <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Pop/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/DropBox/index.css" />
-
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="../../Components/LessonContentModule/index.css"
-        />
+        <link rel="stylesheet" type="text/css" href="../../Components/LoginTab/index.css" />
 
         <link rel="stylesheet" type="text/css" href="index.css" />
         <link rel="shortcut icon" type="image/png" href="../../Images/icon/logo.svg" />
@@ -76,7 +76,7 @@
                     <img class="logo" src="../../Images/icon/logo.svg" alt="logo" />
                     <h3>CodeCity</h3>
                     <nav>
-                        <li id="navTopicMap" class="active">
+                        <li id="navTopicMap">
                             <a href="../Map/">
                                 <div class="item" aria-hidden="true">
                                     <img
@@ -148,7 +148,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li id="navPerson">
+                        <li id="navPerson" class="active">
                             <a href="../Setting/">
                                 <div class="item" aria-hidden="true">
                                     <img
@@ -191,18 +191,105 @@
                     </div>
                 </div>
             </div>
-            <div class="contentWrapper oneBlock">
-                <main id="mapContent" class="content">
+            <div class="contentWrapper twoBlock fixFullScreen">
+                <main id="settingContent" class="content">
+                    <div class="idCard">
+                        <div class="profileCard hollow">
+                            <div class="user">
+                                <div class="avatarWrapper">
+                                    <img
+                                        id="userAvatarDisplay"
+                                        class="avatar"
+                                        src="https://lh3.googleusercontent.com/a-/AOh14GhuRRxSpxR-cwqlgUiNNZobtlHTnoYIzXILq0rA=s96-c"
+                                        alt="user"
+                                    />
+                                </div>
+                                <div id="userNameDisplay"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settingArea">
+                        <div class="sectionHead">
+                            <h3 class="">個人</h3>
+                            <button class="iconButton">
+                                <img src="../../Images/icon/general/edit-white.svg" />
+                            </button>
+                        </div>
+
+                        <div class="settingItem" data-type="nickName">
+                            <div class="title">暱稱</div>
+                            <div id="userNickNameDisplay" class="content"></div>
+                        </div>
+                        <div class="settingItem" data-type="email">
+                            <div class="title">信箱</div>
+                            <div id="userEmailDisplay" class="content"></div>
+                        </div>
+
+                        <div class="sectionHead">
+                            <h3 class="">班級</h3>
+                        </div>
+                        <div class="formArea" action="applyClassCode">
+                            <div id="applyClassCode" class="formInput iconWithTitle">
+                                <div class="title">申請加入</div>
+                                <div class="box">
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        maxlength="6"
+                                        placeholder="班級代號"
+                                        onkeyup="value=value.replace(/[\W]/g,'')"
+                                    />
+                                    <div class="iconArea">
+                                        <img
+                                            src="../../Images/icon/general/groups-dark.svg"
+                                            alt="班級代號"
+                                        />
+                                    </div>
+                                    <button id="applyClassBtn" class="iconButton">
+                                        <img src="../../Images/icon/general/send-white.svg" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item" data-feedback="false">
+                                <div class="feedbackMsg errorMsg fillAvailable">
+                                    <span class="icon"></span>
+                                    <span class="text">error message</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settingItem" data-type="class">
+                            <div class="table__container">
+                                <table id="userClassTable" class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>班級名稱</th>
+                                            <th>狀態</th>
+                                            <th>身份</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </main>
-            </div>
-        </div>
-        <div id="classCodeArea">
-            <div class="dropBox">
-                <input class="selectSelected" type="text" placeholder="請選擇班級" />
-                <img src="../../Images/icon/direction/drop-right.svg" alt="icon" class="icon" />
-                <img src="../../Images/icon/general/clear.svg" alt="icon" class="drop__clear" />
-                <div class="line"></div>
-                <div class="selectItems"></div>
+                <!-- <div class="section">
+                    <div class="table__container">
+                        <table id="systemLogTable" class="stripe" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>時間</th>
+                                    <th>行為代碼</th>
+                                    <th>來源</th>
+                                    <th>積分</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div> -->
             </div>
         </div>
         <div class="pop">
@@ -217,13 +304,163 @@
                 </div>
             </div>
         </div>
+        <div id="userDataModal" class="modal">
+            <div class="modalWrapper">
+                <div class="content">
+                    <div class="top">
+                        <img class="icon" src="../../Images/icon/general/edit-white.svg" />
+                        <div class="title">編輯個人資料</div>
+                    </div>
+                    <div class="middle">
+                        <div class="formArea">
+                            <div class="left">
+                                <div id="userName" class="formInput iconWithTitle">
+                                    <div class="title">
+                                        姓名<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <div class="iconArea">
+                                        <img
+                                            src="../../Images/icon/general/user-dark.svg"
+                                            alt="name"
+                                        />
+                                    </div>
+                                    <input
+                                        class="input mustFill"
+                                        type="text"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9]/g, '')"
+                                    />
+                                </div>
+                                <div id="userEmail" class="formInput iconWithTitle">
+                                    <div class="title">
+                                        信箱<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <div class="iconArea">
+                                        <img src="../../Images/icon/general/mail.svg" alt="mail" />
+                                    </div>
+                                    <input
+                                        class="input mustFill emailVerify"
+                                        type="text"
+                                        onkeyup="value=value.replace(/[^\w_@.-]/g,'')"
+                                    />
+                                </div>
+                                <div id="userPassword" class="formInput iconWithTitle">
+                                    <div class="title">
+                                        密碼<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <div class="iconArea">
+                                        <img
+                                            src="../../Images/icon/general/lock.svg"
+                                            alt="password"
+                                        />
+                                    </div>
+                                    <input
+                                        class="input mustFill"
+                                        type="password"
+                                        onkeyup="value=value.replace(/[^\w_-]/g,'')"
+                                    />
+                                </div>
+                                <div id="userPasswordCheck" class="formInput iconWithTitle">
+                                    <div class="title">
+                                        確認密碼<span class="mustFillLabel">必填</span>
+                                    </div>
+                                    <div class="iconArea">
+                                        <img
+                                            src="../../Images/icon/general/lock.svg"
+                                            alt="password"
+                                        />
+                                    </div>
+                                    <input
+                                        class="input mustFill passwordVerify"
+                                        type="password"
+                                        onkeyup="value=value.replace(/[^\w_-]/g,'')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="divider-vertical"></div>
+                            <div class="right">
+                                <div id="profileAvatar">
+                                    <input
+                                        type="file"
+                                        name="upload_user_img"
+                                        id="upload_user_img"
+                                        accept=".jpg, .jpeg, .png, .svg"
+                                        hidden
+                                    />
+                                    <div id="user_img_area" class="img">
+                                        <img
+                                            id="userAvatar"
+                                            src="../../Images/avatar.png"
+                                            alt="member_submit"
+                                        />
+                                    </div>
+                                    <label for="upload_user_img">
+                                        <img
+                                            src="../../Images/icon/general/edit.svg"
+                                            alt="image upload"
+                                        />
+                                    </label>
+                                </div>
+
+                                <div id="userNickName" class="formInput iconWithTitle">
+                                    <div class="title">暱稱</div>
+                                    <div class="iconArea">
+                                        <img
+                                            src="../../Images/icon/general/idCard.svg"
+                                            alt="班級代號"
+                                        />
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        placeholder="（選填）"
+                                        onkeyup="value=value.replace(/[^\w\u3400-\u4DBF\u3100-\u312F\u2E80-\u2FDF\u4E00-\u9FFF\uF900-\uFAFF\u02C9\u02CA\u02C7\u02CB\u02D9]/g, '')"
+                                    />
+                                </div>
+                                <div id="userClassCode" class="formInput iconWithTitle">
+                                    <div class="title">班級代號</div>
+                                    <div class="iconArea">
+                                        <img
+                                            src="../../Images/icon/general/groups-dark.svg"
+                                            alt="班級代號"
+                                        />
+                                    </div>
+                                    <input
+                                        class="input"
+                                        type="text"
+                                        maxlength="6"
+                                        placeholder="（選填）"
+                                        onkeyup="value=value.replace(/[\W]/g,'')"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-feedback="false">
+                            <div class="feedbackMsg errorMsg fillAvailable">
+                                <span class="icon"></span>
+                                <span class="text">error message</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="buttonGroup">
+                            <button class="button btn-primary btn-hollow modalCancel">取消</button>
+                            <button class="button btn-primary modalConfirm">確認</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="../../Common/util.js"></script>
         <script src="../../Dependencies/jquery/jquery.min.js"></script>
-        <script src="../../Dependencies/slick/slick.min.js"></script>
         <script src="../../Components/Loader/index.js"></script>
+        <script src="../../Dependencies/datatables/datatables.min.js"></script>
+        <script src="../../Dependencies/datatables/dataTables.scrollResize.min.js"></script>
+        <script src="../../Components/Table/index.js"></script>
+        <script src="../../Dependencies/Cropper/cropper.min.js"></script>
         <script src="../../Components/SideMenu/index.js"></script>
         <script src="../../Components/Pop/index.js"></script>
         <script src="../../Components/DropBox/index.js"></script>
+        <script src="../../Components/FeedbackMsg/index.js"></script>
         <script src="index.js"></script>
     </body>
     <!-- Google Tag Manager (noscript) -->

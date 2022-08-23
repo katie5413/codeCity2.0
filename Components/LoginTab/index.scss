@@ -1,3 +1,60 @@
+.formArea {
+    margin-bottom: 16px;
+
+    .formInput.iconWithTitle {
+        .input {
+            padding-left: 40px;
+        }
+
+        .iconArea {
+            position: absolute;
+            top: 40px;
+            left: 16px;
+        }
+    }
+
+    #userName .iconArea {
+        top: 42px;
+        left: -2px;
+        transform: translate(50%, 0);
+    }
+
+    #userEmail .iconArea {
+        top: 50%;
+        left: 0;
+        transform: translate(50%, 50%);
+    }
+
+    #userEmail .iconArea {
+        top: 50%;
+        left: 0;
+        transform: translate(50%, 50%);
+    }
+
+    #userNickName .iconArea {
+        left: -2px;
+        transform: translate(50%, 0);
+    }
+
+    #userPassword .iconArea,
+    #userPasswordCheck .iconArea {
+        top: 50%;
+        left: 4px;
+        transform: translate(50%, 25%);
+    }
+
+    #userClassCode {
+        input {
+            text-transform: uppercase;
+        }
+
+        .iconArea {
+            left: -2px;
+            transform: translate(50%, 0);
+        }
+    }
+}
+
 .tab {
     position: absolute;
     height: fit-content;
@@ -57,63 +114,6 @@
                 #ab4ff72d,
                 #4f9bf72d
             );
-
-            .formArea {
-                margin-bottom: 16px;
-
-                .formInput.iconWithTitle {
-                    .input {
-                        padding-left: 40px;
-                    }
-
-                    .iconArea {
-                        position: absolute;
-                        top: 40px;
-                        left: 16px;
-                    }
-                }
-
-                #userName .iconArea {
-                    top: 42px;
-                    left: -2px;
-                    transform: translate(50%, 0);
-                }
-
-                #userEmail .iconArea {
-                    top: 50%;
-                    left: 0;
-                    transform: translate(50%, 50%);
-                }
-
-                #userEmail .iconArea {
-                    top: 50%;
-                    left: 0;
-                    transform: translate(50%, 50%);
-                }
-
-                #userNickName .iconArea {
-                    left: -2px;
-                    transform: translate(50%, 0);
-                }
-
-                #userPassword .iconArea,
-                #userPasswordCheck .iconArea {
-                    top: 50%;
-                    left: 4px;
-                    transform: translate(50%, 25%);
-                }
-
-                #userClassCode {
-                    input {
-                        text-transform: uppercase;
-                    }
-
-                    .iconArea {
-                        left: -2px;
-                        transform: translate(50%, 0);
-                    }
-                }
-            }
 
             .divider {
                 height: 2px;

@@ -292,7 +292,7 @@ $(document).ready(function () {
         <tr data-topic-id="{{id}}">
             <td>{{index}}</td>
             <td><button class="manage manageLesson">{{name}}</button></td>
-            <td class="topicDescrption">{{description}}</td>
+            <td class="topicDescription">{{description}}</td>
             <td><button class="iconButton edit"><img class="editTopic" src="../../Images/icon/general/edit-white.svg" /></button></td>
             <td><button class="iconButton delete"><img class="deleteTopic" src="../../Images/icon/general/delete-white.svg" /></button></td>
         </tr>
