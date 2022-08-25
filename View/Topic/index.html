@@ -10,6 +10,11 @@
         <link rel="stylesheet" type="text/css" href="../../Dependencies/marked/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/Cropper/cropper.min.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../Dependencies/datatables/datatables.css"
+        />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/slick/slick.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
@@ -18,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Checkbox/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/SideMenu/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Table/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Footer/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/ProfileCard/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/FeedbackMsg/index.css" />
@@ -192,11 +198,23 @@
                 </div>
             </div>
             <div class="contentWrapper oneBlock">
-                <main id="mapContent" class="content">
+                <main id="lessonContent" class="content">
+                    <div class="table__container">
+                        <table id="lessonTable" class="stripe" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>章節名稱</th>
+                                    <th>簡介</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </main>
             </div>
         </div>
-        <div id="classCodeArea">
+        <!-- <div id="classCodeArea">
             <div class="dropBox">
                 <input class="selectSelected" type="text" placeholder="請選擇班級" />
                 <img src="../../Images/icon/direction/drop-right.svg" alt="icon" class="icon" />
@@ -204,7 +222,7 @@
                 <div class="line"></div>
                 <div class="selectItems"></div>
             </div>
-        </div>
+        </div> -->
         <div class="pop">
             <div class="contentWrapper">
                 <div class="top">
@@ -220,6 +238,9 @@
         <script src="../../Common/util.js"></script>
         <script src="../../Dependencies/jquery/jquery.min.js"></script>
         <script src="../../Dependencies/slick/slick.min.js"></script>
+        <script src="../../Dependencies/datatables/datatables.min.js"></script>
+        <script src="../../Dependencies/datatables/dataTables.scrollResize.min.js"></script>
+        <script src="../../Components/Table/index.js"></script>
         <script src="../../Components/Loader/index.js"></script>
         <script src="../../Components/SideMenu/index.js"></script>
         <script src="../../Components/Pop/index.js"></script>

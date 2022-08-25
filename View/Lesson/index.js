@@ -16,29 +16,34 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (res) {
             console.log('getTopicLessonName', res);
+            updateSideMenuTopicName(res.data);
+
+
+            // 單元標題
+            $('#pageTitle').text(res.data.lessonName);
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('getTopicLessonName Fail', jqXHR, textStatus, errorThrown);
         },
     });
 
-    // 動態顯示單元內容
-    const pageData = {
-        title: '單元標題',
-    };
+    function updateSideMenuTopicName(data) {
+        const { topicID, topicName } = data;
 
-    $('#pageTitle').text(pageData.title);
+        // 處理側邊欄
 
-    // 處理側邊欄
+        addSideMenuSubPage({
+            targetID: 'navTopicMap',
+            subPage: [
+                { id: `topicID-${topicID}`, name: topicName, link: `../Topic/?topicID=${topicID}` },
+            ],
+        });
 
-    addSideMenuSubPage({
-        targetID: 'navTopicMap',
-        subPage: [{ id: 'lessonID', name: pageData.title, link: '#' }],
-    });
+        activeSideMenu({ id: `topicID-${topicID}`, type: 'sub' });
 
-    activeSideMenu({ id: 'lessonID', type: 'sub' });
-
-    // 側邊欄 END
+        // 側邊欄 END
+    }
 
     $.ajax({
         type: 'POST',
@@ -51,6 +56,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (lessonContent) {
             console.log('getLessonData', lessonContent);
+
             // 塞課程內容
             lessonContentModel(lessonContent.data, $('#lessonContent'));
         },
@@ -58,5 +64,4 @@ $(document).ready(function () {
             console.log('getLessonData Fail', jqXHR, textStatus, errorThrown);
         },
     });
-
 });
