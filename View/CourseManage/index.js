@@ -617,11 +617,11 @@ $(document).ready(function () {
             success: function (res) {
                 // 塞表格內容
                 let lessonContentData = res.data;
-                console.log(lessonContentData);
+                console.log('get lessonContentData success', lessonContentData);
                 activeLessonContentTab(lessonContentData);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log('getTopicData Fail', jqXHR, textStatus, errorThrown);
+                console.log('get lessonContentData Fail', jqXHR, textStatus, errorThrown);
             },
         });
     }
@@ -639,6 +639,7 @@ $(document).ready(function () {
         embedLink,
         markdown,
     }) {
+        console.log('setLessonContentModalData');
         if (quizTitle) {
             $(`#lessonContentModal .${contentType}Form .quizTitle input`).val(quizTitle);
         }
@@ -678,10 +679,11 @@ $(document).ready(function () {
             }
 
             if (quizChoiceAnswer) {
+                console.log('quizChoiceAnswer', quizChoiceAnswer);
                 for (let i = 0; i < quizChoiceAnswer.length; i++) {
                     $(
                         `#lessonContentModal .${contentType}Form .quizOption input[type="checkbox"][select-id="${quizChoiceAnswer[i]}"]`,
-                    ).click();
+                    ).not(':checked').click();
                 }
             }
         }

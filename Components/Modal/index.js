@@ -15,14 +15,15 @@ function openModal({ targetModal, modalTitle, actionType }) {
 }
 
 function closeModal() {
+    console.log('closeModal');
     $('.modal').removeClass('active');
 
     // 一般 input
     $('.modal').find('input').val('');
 
     // dropBox
-    $('.modal').find('label.active').removeClass('active');
-    $('.modal').find('input').attr('select-id', '');
+    $('.modal .dropBox').find('label.active').removeClass('active');
+    $('.modal .dropBox').find('input').attr('select-id', '');
 
     // textarea
     $('.modal').find('textarea').val('');
