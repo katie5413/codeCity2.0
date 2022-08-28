@@ -527,7 +527,7 @@ $(document).ready(function () {
                     type: 'POST',
                     url: `../../API/deleteLesson.php`,
                     data: {
-                        id: topicID,
+                        id: targetID,
                     },
                     dataType: 'json',
                     success: function (res) {

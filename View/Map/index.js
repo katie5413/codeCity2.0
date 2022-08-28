@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    const windowID = generateUniqueId();
+    // 進入頁面
+    sendActionLog({ actionCode: 'enterPageMap', windowID: windowID });
+
+    // 離開頁面
+    window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        sendActionLog({ actionCode: 'closePageMap', windowID: windowID });
+        e.returnValue = 'beforeunload';
+    });
+
     // 先拿 user 資料
     $.ajax({
         type: 'POST',
@@ -26,7 +37,6 @@ $(document).ready(function () {
                     $('#classCodeArea input').val(enrollClass[0].className);
                     sessionStorage.setItem('classID', enrollClass[0].classID);
 
-
                     // deal dropBox options
                     for (let i = 0; i < enrollClass.length; i++) {
                         let option = document.createElement('div');
@@ -42,7 +52,6 @@ $(document).ready(function () {
                 }
 
                 console.log(enrollClass, applyClass);
-
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -51,7 +60,6 @@ $(document).ready(function () {
             }
         },
     });
-    //
 
     // const topicData = [
     //     {
@@ -187,5 +195,4 @@ $(document).ready(function () {
     // $(window).resize(function () {
     //     $('#mapContent').slick('resize');
     // });
-
 });
