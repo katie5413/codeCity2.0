@@ -6,7 +6,7 @@ include "../pdoInc.php";
 $lessonData = array();
 if (isset($_POST['lessonID'])) {
     // getLessonContent
-    $findLessonContent = $dbh->prepare('SELECT * FROM lessonContent WHERE lesson_ID = ?');
+    $findLessonContent = $dbh->prepare('SELECT * FROM lessonContent WHERE lesson_ID = ? ORDER BY content_order');
     $findLessonContent->execute(array($_POST['lessonID']));
 
     $lessonContentArr = array();
