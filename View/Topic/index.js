@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const topicID = urlParams.get('topicID');
+
+    const windowID = generateUniqueId();
+
     // 先拿 user 資料
     $.ajax({
         type: 'POST',
@@ -6,19 +12,28 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (res) {
             console.log(res);
-            if (res.user_status == 1) {
-                const userClassData = res.data.userClass;
 
-                // get Topics data
-                $(document).on('click', '#classCodeArea .dropBox .option', function () {
-                    getTopicsData($(this).attr('value'));
+            if (res.user_status == 1) {
+                // 先拿課程資料
+                getLessonData(topicID);
+
+                const windowID = generateUniqueId();
+                // 進入頁面
+                sendActionLog({ actionCode: `enterPage-Topic-${topicID}`, windowID: windowID });
+            
+                // 離開頁面
+                window.addEventListener('beforeunload', function (e) {
+                    sendActionLog({ actionCode: `closePage-Topic-${topicID}`, windowID: windowID });
                 });
 
-                const queryString = window.location.search;
-                const urlParams = new URLSearchParams(queryString);
-                const topicID = urlParams.get('topicID');
+                const userClassData = res.data.userClass;
 
-                getLessonData(topicID);
+                // // get Topics data
+                // $(document).on('click', '#classCodeArea .dropBox .option', function () {
+                //     getTopicsData($(this).attr('value'));
+                // });
+
+                
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -41,6 +56,7 @@ $(document).ready(function () {
                 let lessonData = res.data;
 
                 console.log(lessonData);
+                $('#loader').fadeOut(800);
                 activeLessonTable(lessonData);
             },
             error: function (jqXHR, textStatus, errorThrown) {

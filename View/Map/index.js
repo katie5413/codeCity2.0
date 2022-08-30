@@ -1,15 +1,5 @@
 $(document).ready(function () {
     const windowID = generateUniqueId();
-    // 進入頁面
-    sendActionLog({ actionCode: 'enterPageMap', windowID: windowID });
-
-    // 離開頁面
-    window.addEventListener('beforeunload', function (e) {
-        e.preventDefault();
-        sendActionLog({ actionCode: 'closePageMap', windowID: windowID });
-        e.returnValue = 'beforeunload';
-    });
-
     // 先拿 user 資料
     $.ajax({
         type: 'POST',
@@ -18,6 +8,14 @@ $(document).ready(function () {
         success: function (res) {
             console.log(res);
             if (res.user_status == 1) {
+                // 進入頁面
+                sendActionLog({ actionCode: 'enterPage-Map', windowID: windowID });
+
+                // 離開頁面
+                window.addEventListener('beforeunload', function (e) {
+                    sendActionLog({ actionCode: 'closePage-Map', windowID: windowID });
+                });
+
                 const userClassData = res.data.userClass;
 
                 let enrollClass = [];

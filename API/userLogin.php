@@ -37,6 +37,9 @@ if (isset($_POST['loginType'])) {
         $userData = array("id" => $userDataItem["id"], "email" => $userDataItem["email"], "name" => $userDataItem["name"], "nickName" => $userDataItem["nickName"], "avatar" => $userDataItem["avatar"], "point" => $userDataItem["point"], 'userClass' => $attendClass);
     }
 
+    $windowID = substr(uniqid(), 0, 8);;
+    $_SESSION['windowID'] = $windowID;
+
     $_SESSION['userID'] = $userDataItem["id"];
     $_SESSION['userEmail'] = $userDataItem["email"];
     $_SESSION['userName'] = $userDataItem["name"];

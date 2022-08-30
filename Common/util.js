@@ -56,3 +56,21 @@ function transformToJQuery(element) {
 
     return $el;
 }
+
+function sendActionLog(props) {
+    const { actionCode, windowID } = props;
+
+    // 先拿 user 資料
+    $.ajax({
+        type: 'POST',
+        url: `../../API/addActionLog.php`,
+        dataType: 'json',
+        data: {
+            actionCode: actionCode,
+            windowID: windowID.slice(0, 8),
+        },
+        success: function (res) {
+            console.log('sendActionLog', res);
+        },
+    });
+}
