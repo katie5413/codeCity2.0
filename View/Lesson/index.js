@@ -21,14 +21,15 @@ $(document).ready(function () {
                     sendActionLog({ actionCode: `closePage-Lesson-${lessonID}`, windowID: windowID });
                 });
 
-                displaySideMenuData();
+                // 顯示麵包屑
+                displayCourseBreadcrumb({ lessonID });
 
-                const data = {
+                const lessonContentData = {
                     lessonID,
                     studentID: res.data.id,
                 };
 
-                getLessonContentData(data);
+                getLessonContentData(lessonContentData);
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -37,44 +38,6 @@ $(document).ready(function () {
             }
         },
     });
-
-    function displaySideMenuData() {
-        $.ajax({
-            type: 'POST',
-            url: `../../API/getTopicLessonNameByLessonID.php`,
-            data: {
-                lessonID: lessonID,
-            },
-            dataType: 'json',
-            success: function (res) {
-                console.log('getTopicLessonName', res);
-                updateSideMenuTopicName(res.data);
-
-                // 單元標題
-                $('#pageTitle').text(res.data.lessonName);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('getTopicLessonName Fail', jqXHR, textStatus, errorThrown);
-            },
-        });
-    }
-
-    function updateSideMenuTopicName(data) {
-        const { topicID, topicName } = data;
-
-        // 處理側邊欄
-
-        addSideMenuSubPage({
-            targetID: 'navTopicMap',
-            subPage: [
-                { id: `topicID-${topicID}`, name: topicName, link: `../Topic/?topicID=${topicID}` },
-            ],
-        });
-
-        activeSideMenu({ id: `topicID-${topicID}`, type: 'sub' });
-
-        // 側邊欄 END
-    }
 
     function getLessonContentData(props) {
         const { lessonID, studentID } = props;

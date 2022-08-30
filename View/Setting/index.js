@@ -1,5 +1,6 @@
 $(document).ready(function () {
     getUserData();
+    const windowID = generateUniqueId();
 
     function getUserData() {
         // 先拿 user 資料
@@ -12,7 +13,13 @@ $(document).ready(function () {
 
                 if (res.user_status == 1) {
                     displayUserData(res.data);
-                    // getSystemLog();
+                    // 進入頁面
+                    sendActionLog({ actionCode: `enterPage-Setting`, windowID: windowID });
+
+                    // 離開頁面
+                    window.addEventListener('beforeunload', function (e) {
+                        sendActionLog({ actionCode: `closePage-Setting`, windowID: windowID });
+                    });
                 } else {
                     setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                     setTimeout(function () {

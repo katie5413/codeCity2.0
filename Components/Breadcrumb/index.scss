@@ -1,6 +1,57 @@
 #breadcrumb {
     position: absolute;
-    top: 10px;
+    top: 24px;
     left: 90px;
-    height: fit-content;
+    z-index: 2;
+
+    display: flex;
+
+    .item {
+        display: flex;
+
+        a {
+            font-size: 20px;
+            color: var(--grey1);
+
+            &:hover {
+                color: var(--primary-dark);
+            }
+        }
+
+        img {
+            margin: auto 8px;
+        }
+
+        &:first-of-type {
+            position: relative;
+            margin-left: 12px;
+
+            &:before {
+                position: absolute;
+                content: ' ';
+                background-color: var(--primary);
+                width: 4px;
+                height: 24px;
+                top: 50%;
+                left: -12px;
+                transform: translate(0, -50%);
+                border-radius: 8px;
+            }
+        }
+
+        &:last-of-type {
+            a {
+                font-weight: bold;
+                color: var(--primary);
+                pointer-events: none;
+
+                &:hover {
+                    color: var(--primary-dark);
+                }
+            }
+            img {
+                display: none;
+            }
+        }
+    }
 }

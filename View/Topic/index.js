@@ -20,11 +20,14 @@ $(document).ready(function () {
                 const windowID = generateUniqueId();
                 // 進入頁面
                 sendActionLog({ actionCode: `enterPage-Topic-${topicID}`, windowID: windowID });
-            
+
                 // 離開頁面
                 window.addEventListener('beforeunload', function (e) {
                     sendActionLog({ actionCode: `closePage-Topic-${topicID}`, windowID: windowID });
                 });
+
+                // 顯示麵包屑
+                displayCourseBreadcrumb({ topicID });
 
                 const userClassData = res.data.userClass;
 
@@ -32,8 +35,6 @@ $(document).ready(function () {
                 // $(document).on('click', '#classCodeArea .dropBox .option', function () {
                 //     getTopicsData($(this).attr('value'));
                 // });
-
-                
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -101,7 +102,10 @@ $(document).ready(function () {
                 search: '<img src="../../Images/icon/general/search.svg">',
                 searchPlaceholder: '篩選',
             },
-            columnDefs: [{ width: '5%', targets: 0 },{ width: '15%', targets: 1 }],
+            columnDefs: [
+                { width: '5%', targets: 0 },
+                { width: '15%', targets: 1 },
+            ],
         });
 
         lessonTable.columns.adjust().draw();
