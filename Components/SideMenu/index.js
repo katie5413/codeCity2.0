@@ -25,9 +25,20 @@ function addSideMenuSubPage({ targetID, subPage = [] }) {
     targetElem.append(newElm);
 }
 
-function activeSideMenu({ id, type }) {
+function activeSideMenu({ id, type, identity, windowID }) {
     const targetElem = document.getElementById(id);
     const navOldActive = document.querySelector('nav li.active');
+
+    switch (identity) {
+        case 'teacher':
+            $('#navClassManage').removeClass('hide');
+            $('#navTopicManage').removeClass('hide');
+            break;
+        default:
+            $('#navClassManage').remove();
+            $('#navTopicManage').remove();
+            break;
+    }
 
     switch (type) {
         case 'main':
@@ -40,11 +51,18 @@ function activeSideMenu({ id, type }) {
             targetElem.parentElement.parentElement.classList.add('active');
             break;
     }
-}
 
-document.getElementById('navLogOut').addEventListener('click', function () {
-    logout();
-});
+    $('nav a').on('click', function (e) {
+        let target = $(this).closest('li').attr('id').slice(3);
+        console.log(target);
+        sendActionLog({ actionCode: `nav-goTo-${target}`, windowID: windowID });
+    });
+
+    document.getElementById('navLogOut').addEventListener('click', function () {
+        sendActionLog({ actionCode: 'logout', windowID: windowID });
+        logout();
+    });
+}
 
 function logout() {
     $.ajax({

@@ -11,7 +11,7 @@ if (isset($_POST['actionCode']) && isset($_POST['windowID'])) {
     $user_ID = $_SESSION['userID'];
 
 
-    $addActionLog = $dbh->prepare('INSERT INTO actionLog (student_ID, action_code, window_ID) VALUES (?, ?, ?)');
+    $addActionLog = $dbh->prepare('INSERT INTO actionLog (user_ID, action_code, window_ID) VALUES (?, ?, ?)');
     $addActionLog->execute(array($user_ID, $actionCodeName, $window_ID));
 
 

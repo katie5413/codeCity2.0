@@ -17,7 +17,6 @@ $(document).ready(function () {
                 // 先拿課程資料
                 getLessonData(topicID);
 
-                const windowID = generateUniqueId();
                 // 進入頁面
                 sendActionLog({ actionCode: `enterPage-Topic-${topicID}`, windowID: windowID });
 
@@ -29,12 +28,15 @@ $(document).ready(function () {
                 // 顯示麵包屑
                 displayCourseBreadcrumb({ topicID });
 
-                const userClassData = res.data.userClass;
+                // 側邊欄
+                const isTeacher = checkUserIdentity(res.data);
 
-                // // get Topics data
-                // $(document).on('click', '#classCodeArea .dropBox .option', function () {
-                //     getTopicsData($(this).attr('value'));
-                // });
+                activeSideMenu({
+                    id: 'navMap',
+                    type: 'main',
+                    identity: isTeacher ? 'teacher' : 'student',
+                    windowID: windowID,
+                });
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -106,6 +108,11 @@ $(document).ready(function () {
                 { width: '5%', targets: 0 },
                 { width: '15%', targets: 1 },
             ],
+        });
+
+        $('#lessonTable .classLink').on('click', function () {
+            const lessonID = $(this).closest('tr').attr('data-lesson-id');
+            sendActionLog({ actionCode: `goTo-Lesson-${lessonID}`, windowID: windowID });
         });
 
         lessonTable.columns.adjust().draw();

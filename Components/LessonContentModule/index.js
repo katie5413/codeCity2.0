@@ -1,7 +1,10 @@
-function lessonContentModel(data, field) {
+function lessonContentModel(props) {
+    const { data, field, windowID } = props;
     data.forEach((item) => {
         // 每道題目會用「題型」＋「id」組成識別用的唯一 id
         let contentID = `${item.type}${item.id}`;
+
+        let avgScore = item.studentAnswer != null ? getAvgScore(item.studentAnswer) : -1;
 
         // 非測驗： markdown, embedRepl, embedYoutube
         // 測驗（自動批改）： singleChoice, multipleChoice, fillblank
@@ -73,6 +76,20 @@ function lessonContentModel(data, field) {
                 field.append(generateHtml(embedTemplate));
 
                 break;
+            case 'embedIframe':
+                let iFrameCode = item.content.code;
+
+                const embedIframeTemplate = `
+                        <div id="${contentID}" class="section embedBlock">
+                            <div class="sectionContentArea">
+                                ${iFrameCode}
+                            </div>
+                        </div>
+                    `;
+
+                field.append(generateHtml(embedIframeTemplate));
+
+                break;
             case 'embedYoutube':
                 let urlYoutube = item.content.url;
 
@@ -108,6 +125,7 @@ function lessonContentModel(data, field) {
                 const multipleChoiceTemplate = `
                     <div id="{{quizTypeId}}" class="section quiz {{quizType}}" data-feedback="false">
                         <div class="halfCircle"></div>
+                        <div class="score"></div>
                         <h3 class="sectionTitle">
                             <img
                                 class="icon"
@@ -137,9 +155,18 @@ function lessonContentModel(data, field) {
                         >
                     </div>
                 </div>`;
-                function generateMultipleChoice({ quizTypeId, id, quizType, content }) {
+                function generateMultipleChoice({ quizTypeId, id, quizType, content, score }) {
                     let template = multipleChoiceTemplate;
                     let optionHTML = ``;
+
+                    if (score > -1) {
+                        template = template.replace(
+                            '<div class="score"></div>',
+                            `<div class="score">${score}</div>`,
+                        );
+                    } else {
+                        template = template.replace('<div class="score"></div>', ``);
+                    }
 
                     if (content.quizDetail) {
                         template = template.replace(
@@ -195,6 +222,7 @@ function lessonContentModel(data, field) {
                         quizTypeId,
                         quizType,
                         quizTitle: content.quizTitle,
+                        score,
                     });
                 }
 
@@ -204,6 +232,7 @@ function lessonContentModel(data, field) {
                         quizTypeId: `${contentID}`,
                         quizType: item.type,
                         content: item.content,
+                        score: avgScore,
                     }),
                 );
 
@@ -249,6 +278,11 @@ function lessonContentModel(data, field) {
                             // 改該題的 status
                             score = 100;
 
+                            sendActionLog({
+                                actionCode: `submitPractice-Correct-${contentID}`,
+                                windowID: windowID,
+                            });
+
                             checkOpenStatus({
                                 type: 'auto',
                                 studentAnswer: [
@@ -261,6 +295,11 @@ function lessonContentModel(data, field) {
                                 contentID,
                             });
                         } else {
+                            // 選擇題：全對或全錯
+                            sendActionLog({
+                                actionCode: `submitPractice-Wrong-${contentID}`,
+                                windowID: windowID,
+                            });
                             setFieldFeedback($(`#${contentID}`), '再檢查一下吧', 'error');
                         }
 
@@ -283,6 +322,7 @@ function lessonContentModel(data, field) {
                 const fillBlankTemplate = `
                 <div id="{{quizTypeId}}" class="section quiz {{quizType}}" data-feedback="false">
                         <div class="halfCircle"></div>
+                        <div class="score"></div>
                         <h3 class="sectionTitle">
                             <img
                                 class="icon"
@@ -316,9 +356,18 @@ function lessonContentModel(data, field) {
             </div>
                 `;
 
-                function generateFillBlank({ id, quizTypeId, quizType, content }) {
+                function generateFillBlank({ id, quizTypeId, quizType, content, score }) {
                     let template = fillBlankTemplate;
                     let optionHTML = ``;
+
+                    if (score > -1) {
+                        template = template.replace(
+                            '<div class="score"></div>',
+                            `<div class="score">${score}</div>`,
+                        );
+                    } else {
+                        template = template.replace('<div class="score"></div>', ``);
+                    }
 
                     if (content.quizImageAlt) {
                         template = template.replace(
@@ -363,6 +412,7 @@ function lessonContentModel(data, field) {
                         quizType,
                         quizTitle: content.quizTitle,
                         quizImage: content.quizImage,
+                        score,
                     });
                 }
 
@@ -372,6 +422,7 @@ function lessonContentModel(data, field) {
                         quizTypeId: `${contentID}`,
                         quizType: item.type,
                         content: item.content,
+                        score: avgScore,
                     }),
                 );
 
@@ -432,7 +483,15 @@ function lessonContentModel(data, field) {
                                 passLimit: 100,
                                 contentID,
                             });
+                            sendActionLog({
+                                actionCode: `submitPractice-Correct-${contentID}`,
+                                windowID: windowID,
+                            });
                         } else {
+                            sendActionLog({
+                                actionCode: `submitPractice-Wrong-${contentID}`,
+                                windowID: windowID,
+                            });
                             setFieldFeedback($(`#${contentID}`), '再檢查一下吧', 'error');
                         }
 
@@ -458,6 +517,7 @@ function lessonContentModel(data, field) {
                 const uploadImageTemplate = `
                 <div id="{{quizTypeId}}" class="section quiz {{quizType}}" data-feedback="false">
                     <div class="halfCircle"></div>
+                    <div class="score"></div>
                     <h3 class="sectionTitle">
                         <img class="icon" src="../../Images/icon/type/uploadImage.svg" />{{quizTitle}}
                     </h3>
@@ -483,8 +543,17 @@ function lessonContentModel(data, field) {
                 </div>
                 `;
 
-                function generateUploadImage({ quizTypeId, id, quizType, content }) {
+                function generateUploadImage({ quizTypeId, id, quizType, content, score }) {
                     let template = uploadImageTemplate;
+
+                    if (score > -1) {
+                        template = template.replace(
+                            '<div class="score"></div>',
+                            `<div class="score">${score}</div>`,
+                        );
+                    } else {
+                        template = template.replace('<div class="score"></div>', ``);
+                    }
 
                     if (content.quizDetail) {
                         template = template.replace(
@@ -498,6 +567,7 @@ function lessonContentModel(data, field) {
                         quizTypeId,
                         quizType,
                         quizTitle: content.quizTitle,
+                        score,
                     });
                 }
 
@@ -507,6 +577,7 @@ function lessonContentModel(data, field) {
                         quizTypeId: `${contentID}`,
                         quizType: item.type,
                         content: item.content,
+                        score: avgScore,
                     }),
                 );
 
@@ -566,6 +637,11 @@ function lessonContentModel(data, field) {
                         contentID,
                     });
 
+                    sendActionLog({
+                        actionCode: `submitHomework-${contentID}`,
+                        windowID: windowID,
+                    });
+
                     submitAnswer({
                         homeworkID: item.id,
                         studentAnswer: JSON.stringify(userAnswer),
@@ -579,6 +655,7 @@ function lessonContentModel(data, field) {
                 const textAreaTemplate = `
                 <div id="{{quizTypeId}}" class="section quiz {{quizType}}" data-feedback="false">
                     <div class="halfCircle"></div>
+                    <div class="score"></div>
                     <h3 class="sectionTitle">
                         <img
                             class="icon"
@@ -603,8 +680,17 @@ function lessonContentModel(data, field) {
                 </div>
             `;
 
-                function generateTextArea({ quizTypeId, id, quizType, content }) {
+                function generateTextArea({ quizTypeId, id, quizType, content, score }) {
                     let template = textAreaTemplate;
+
+                    if (score > -1) {
+                        template = template.replace(
+                            '<div class="score"></div>',
+                            `<div class="score">${score}</div>`,
+                        );
+                    } else {
+                        template = template.replace('<div class="score"></div>', ``);
+                    }
 
                     if (content.quizDetail) {
                         template = template.replace(
@@ -637,6 +723,7 @@ function lessonContentModel(data, field) {
                         quizTypeId,
                         quizType,
                         quizTitle: content.quizTitle,
+                        score,
                     });
                 }
 
@@ -646,6 +733,7 @@ function lessonContentModel(data, field) {
                         quizTypeId: `${contentID}`,
                         quizType: item.type,
                         content: item.content,
+                        score: avgScore,
                     }),
                 );
 
@@ -683,6 +771,11 @@ function lessonContentModel(data, field) {
                                     },
                                 ],
                                 contentID,
+                            });
+
+                            sendActionLog({
+                                actionCode: `submitHomework-${contentID}`,
+                                windowID: windowID,
                             });
 
                             submitAnswer({
@@ -789,6 +882,23 @@ function lessonContentModel(data, field) {
                 }
                 break;
         }
+    }
+
+    function getAvgScore(studentAnswer) {
+        let totalScore = 0;
+        let totalRecordNum = 0;
+        studentAnswer.forEach((record) => {
+            if (record.score >= 0 && record.score != null) {
+                totalScore += record.score;
+                totalRecordNum++;
+            }
+        });
+
+        if (totalRecordNum == 0) {
+            return -1;
+        }
+
+        return Math.round((totalScore * 10) / totalRecordNum) / 10;
     }
 
     function formattedTime(time) {

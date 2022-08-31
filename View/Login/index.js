@@ -19,10 +19,12 @@ function handleCredentialResponse(response) {
         success: function (res) {
             if (res.login_status == 1) {
                 window.location.href = '../Map';
+                sendActionLog({ actionCode: 'loginSuccess-Google', windowID: responsePayload.email });
             } else {
                 $('#userEmail').addClass('alert');
                 $('#userEmail input').focus();
                 setFieldFeedback($('#loginTab'), `帳號或密碼錯誤`, 'error');
+                sendActionLog({ actionCode: 'loginFail-Google', windowID: responsePayload.email });
 
                 $('#userEmail input').on('click input', function () {
                     $(this).parent().removeClass('alert');
@@ -81,10 +83,12 @@ $(document).ready(function () {
                 success: function (res) {
                     if (res.login_status == 1) {
                         window.location.href = '../Map';
+                        sendActionLog({ actionCode: 'loginSuccess-Normal', windowID: email });
                     } else {
                         $('#userEmail').addClass('alert');
                         $('#userEmail input').focus();
                         setFieldFeedback($('#loginTab'), `帳號或密碼錯誤`, 'error');
+                        sendActionLog({ actionCode: 'loginFail-Normal', windowID: email });
 
                         $('#userEmail input').on('click input', function () {
                             $(this).parent().removeClass('alert');

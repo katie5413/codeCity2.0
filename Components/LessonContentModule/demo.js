@@ -98,7 +98,6 @@ const fakeData = [
     },
 ];
 
-
 $(document).ready(function () {
-    lessonContentModel(fakeData, $('#lessonContent'));
+    lessonContentModel({ data: fakeData, field: $('#lessonContent') });
 });

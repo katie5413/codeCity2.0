@@ -1,10 +1,47 @@
 $(document).ready(function () {
-    // setTimeout(function () {
-    //     $('#loader').fadeOut(800);
-    // }, 2000);
+    const windowID = generateUniqueId();
 
-    // 處理側邊欄
-    activeSideMenu({ id: 'navTopicManage', type: 'main' });
+    // 先拿 user 資料
+    $.ajax({
+        type: 'POST',
+        url: `../../API/getUser.php`,
+        dataType: 'json',
+        success: function (res) {
+            console.log(res);
+            if (res.user_status == 1) {
+                // 進入頁面
+                sendActionLog({ actionCode: `enterPage-CourseManage`, windowID: windowID });
+
+                // 離開頁面
+                window.addEventListener('beforeunload', function (e) {
+                    sendActionLog({
+                        actionCode: `closePage-CourseManage`,
+                        windowID: windowID,
+                    });
+                });
+
+                // 側邊欄
+                const isTeacher = checkUserIdentity(res.data);
+
+                activeSideMenu({
+                    id: 'navCourseManage',
+                    type: 'main',
+                    identity: isTeacher ? 'teacher' : 'student',
+                    windowID: windowID,
+                });
+
+                // 一進入：拿主題資料
+                getTopicData();
+
+
+            } else {
+                setPopMsg({ msg: '未登入，三秒後自動跳轉' });
+                setTimeout(function () {
+                    window.location.href = '../Login';
+                }, 3000);
+            }
+        },
+    });
 
     // Common
     function switchContentTopStatus({ topic, lesson }) {
@@ -39,62 +76,6 @@ $(document).ready(function () {
             });
         }
     }
-
-    // Topic
-
-    // return 的時候直接按照 order 排
-    // let topicData = [
-    //     {
-    //         id: '11',
-    //         name: '人工智慧簡介',
-    //         description: '簡介文字簡介文字簡介文字',
-    //     },
-    //     {
-    //         id: '22',
-    //         name: '資料收集與前處理',
-    //         description: '簡介文字',
-    //     },
-    //     {
-    //         id: '33',
-    //         name: '特徵選擇',
-    //         description: '簡介文字簡介文字簡介文字',
-    //     },
-    //     { id: '44', name: '特徵標準化', description: '簡介文字' },
-    //     {
-    //         id: '55',
-    //         name: '數據集分割',
-    //         description: '簡介文字簡介文字簡介文字',
-    //     },
-    //     { id: '66', name: '監督式學習', description: '簡介文字' },
-    //     {
-    //         id: '77',
-    //         name: '最短距離、KNN',
-    //         description: '簡介文字',
-    //     },
-    //     {
-    //         id: '88',
-    //         name: '決策樹原理',
-    //         description: '簡介文字簡介文字簡介文字',
-    //     },
-    //     { id: '99', name: '決策樹實作', description: '簡介文字' },
-    //     {
-    //         id: '100',
-    //         name: '非監督式學習',
-    //         description: '簡介文字',
-    //     },
-    //     {
-    //         id: '110',
-    //         name: 'K-means 分群',
-    //         description: '簡介文字',
-    //     },
-    //     {
-    //         id: '120',
-    //         name: '階層式分群',
-    //         description: '簡介文字',
-    //     },
-    // ];
-
-    getTopicData();
 
     function getTopicData() {
         $.ajax({
@@ -683,7 +664,9 @@ $(document).ready(function () {
                 for (let i = 0; i < quizChoiceAnswer.length; i++) {
                     $(
                         `#lessonContentModal .${contentType}Form .quizOption input[type="checkbox"][select-id="${quizChoiceAnswer[i]}"]`,
-                    ).not(':checked').click();
+                    )
+                        .not(':checked')
+                        .click();
                 }
             }
         }
@@ -859,7 +842,11 @@ $(document).ready(function () {
 
             $('#lessonContent').children().remove();
 
-            lessonContentModel(targetData, $('#lessonContent'));
+            lessonContentModel({
+                data: targetData,
+                field: $('#lessonContent'),
+                windowID: windowID,
+            });
         });
 
         // 編輯

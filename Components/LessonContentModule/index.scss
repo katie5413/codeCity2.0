@@ -38,6 +38,10 @@
             width: 40px;
         }
 
+        & > .score {
+            display: none;
+        }
+
         & > .sectionTitle {
             display: flex;
             align-items: center;

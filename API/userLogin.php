@@ -33,7 +33,6 @@ if (isset($_POST['loginType'])) {
         }
 
         $loginStatus = 1;
-
         $userData = array("id" => $userDataItem["id"], "email" => $userDataItem["email"], "name" => $userDataItem["name"], "nickName" => $userDataItem["nickName"], "avatar" => $userDataItem["avatar"], "point" => $userDataItem["point"], 'userClass' => $attendClass);
     }
 

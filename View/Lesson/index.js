@@ -18,15 +18,29 @@ $(document).ready(function () {
 
                 // 離開頁面
                 window.addEventListener('beforeunload', function (e) {
-                    sendActionLog({ actionCode: `closePage-Lesson-${lessonID}`, windowID: windowID });
+                    sendActionLog({
+                        actionCode: `closePage-Lesson-${lessonID}`,
+                        windowID: windowID,
+                    });
                 });
 
                 // 顯示麵包屑
                 displayCourseBreadcrumb({ lessonID });
 
+                // 側邊欄
+                const isTeacher = checkUserIdentity(res.data);
+
+                activeSideMenu({
+                    id: 'navMap',
+                    type: 'main',
+                    identity: isTeacher ? 'teacher' : 'student',
+                    windowID: windowID,
+                });
+
                 const lessonContentData = {
                     lessonID,
                     studentID: res.data.id,
+                    windowID: windowID,
                 };
 
                 getLessonContentData(lessonContentData);
@@ -40,7 +54,7 @@ $(document).ready(function () {
     });
 
     function getLessonContentData(props) {
-        const { lessonID, studentID } = props;
+        const { lessonID, studentID, windowID } = props;
         $.ajax({
             type: 'POST',
             url: `../../API/getLessonContentData.php`,
@@ -51,10 +65,14 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (lessonContent) {
                 console.log('getLessonData', lessonContent);
-                
+
                 $('#loader').fadeOut(800);
                 // 塞課程內容
-                lessonContentModel(lessonContent.data, $('#lessonContent'));
+                lessonContentModel({
+                    data: lessonContent.data,
+                    field: $('#lessonContent'),
+                    windowID: windowID,
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log('getLessonData Fail', jqXHR, textStatus, errorThrown);

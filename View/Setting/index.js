@@ -20,6 +20,16 @@ $(document).ready(function () {
                     window.addEventListener('beforeunload', function (e) {
                         sendActionLog({ actionCode: `closePage-Setting`, windowID: windowID });
                     });
+
+                    // 側邊欄
+                    const isTeacher = checkUserIdentity(res.data);
+
+                    activeSideMenu({
+                        id: 'navSetting',
+                        type: 'sub',
+                        identity: isTeacher ? 'teacher' : 'student',
+                        windowID: windowID,
+                    });
                 } else {
                     setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                     setTimeout(function () {
@@ -139,7 +149,6 @@ $(document).ready(function () {
     // applyClass
     $('#applyClassBtn').on('click', function () {
         const classCode = $('#applyClassCode input').val().toUpperCase();
-
         checkClassCodeExist(classCode);
     });
 
@@ -171,6 +180,11 @@ $(document).ready(function () {
                             clearFieldFeedback($('.formArea[action="applyClassCode"]'));
                         });
 
+                        sendActionLog({
+                            action: `applyClass-Fail-${classCode}`,
+                            windowID: windowID,
+                        });
+
                         break;
                     case 0:
                     // 可直接加入
@@ -187,6 +201,11 @@ $(document).ready(function () {
                             success: function (res) {
                                 console.log('applyClass', res);
                                 $('#userClassTable').DataTable().clear().destroy();
+                                sendActionLog({
+                                    action: `applyClass-Success-${classCode}`,
+                                    windowID: windowID,
+                                });
+
                                 getUserData();
                             },
                             error: function (jqXHR, textStatus, errorThrown) {

@@ -57,6 +57,25 @@ function transformToJQuery(element) {
     return $el;
 }
 
+function checkUserIdentity(props) {
+    const { userClass } = props;
+
+    const userClassData = userClass;
+
+    let enrollClass = [];
+    let applyClass = [];
+    let isTeacher = false;
+
+    // 檢查登記班級是否有可成功加入
+    for (let i = 0; i < userClassData.length; i++) {
+        if (userClassData[i].enrollTime != null && userClassData[i].identity == 1) {
+            isTeacher = true;
+        }
+    }
+
+    return isTeacher;
+}
+
 function sendActionLog(props) {
     const { actionCode, windowID } = props;
 
@@ -70,7 +89,7 @@ function sendActionLog(props) {
             windowID: windowID.slice(0, 8),
         },
         success: function (res) {
-            console.log('sendActionLog', res);
+            console.log('sendActionLog', res.data);
         },
     });
 }

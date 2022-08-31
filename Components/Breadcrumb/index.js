@@ -33,9 +33,15 @@ function generateBreadcrumbItem({ link, name }) {
 }
 
 function displayCourseBreadcrumb(props) {
-    const { topicID, lessonID } = props;
+    // 只會有一個或是都沒有
+    const { topicID, lessonID, isMap } = props;
 
-    if(lessonID){
+    let breadcrumbItem = [{ link: '../Map', name: '地圖' }];
+
+    if (isMap) {
+        // Map only
+        activeBreadcrumb({ breadcrumbItem });
+    } else if (lessonID) {
         $.ajax({
             type: 'POST',
             url: `../../API/getTopicLessonNameByLessonID.php`,
@@ -46,11 +52,14 @@ function displayCourseBreadcrumb(props) {
             success: function (res) {
                 console.log('getTopicLessonName', res);
 
-                const breadcrumbItem = [
-                    { link: '../Map', name: '地圖' },
-                    { link: `../Topic/?topicID=${res.data.topicID}`, name: res.data.topicName },
-                    { link: `../Lesson/?lessonID=${res.data.lessonID}`, name: res.data.lessonName },
-                ];
+                breadcrumbItem.push({
+                    link: `../Topic/?topicID=${res.data.topicID}`,
+                    name: res.data.topicName,
+                });
+                breadcrumbItem.push({
+                    link: `../Lesson/?lessonID=${res.data.lessonID}`,
+                    name: res.data.lessonName,
+                });
 
                 activeBreadcrumb({ breadcrumbItem });
 
@@ -61,9 +70,7 @@ function displayCourseBreadcrumb(props) {
                 console.log('getTopicLessonName Fail', jqXHR, textStatus, errorThrown);
             },
         });
-    }
-
-    if (topicID) {
+    } else if (topicID) {
         $.ajax({
             type: 'POST',
             url: `../../API/getTopicNameByTopicID.php`,
@@ -74,10 +81,10 @@ function displayCourseBreadcrumb(props) {
             success: function (res) {
                 console.log('getTopicName', res);
 
-                const breadcrumbItem = [
-                    { link: '../Map', name: '地圖' },
-                    { link: `../Topic/?topicID=${topicID}`, name: res.data.topicName },
-                ];
+                breadcrumbItem.push({
+                    link: `../Topic/?topicID=${res.data.topicID}`,
+                    name: res.data.topicName,
+                });
 
                 activeBreadcrumb({ breadcrumbItem });
             },
@@ -86,5 +93,4 @@ function displayCourseBreadcrumb(props) {
             },
         });
     }
-
 }
