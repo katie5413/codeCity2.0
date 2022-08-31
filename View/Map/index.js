@@ -560,9 +560,7 @@ $(document).ready(function () {
 
         topicOrder.forEach((topicID) => {
             $('.gridMap').append(`<div class="grid" rank='0' targetID=${topicID}></div>`);
-            console.log(topicID);
             for (let gridID = 1; gridID <= 9; gridID++) {
-                console.log(gridID);
                 $(`.grid[targetID=${topicID}]`).append(
                     generateGridItem({
                         topicID: topicID,
@@ -575,6 +573,11 @@ $(document).ready(function () {
                     }),
                 );
             }
+        });
+
+        $('.gridMap a').on('click', function () {
+            let targetTopicID = $(this).closest('.grid').attr('targetID');
+            sendActionLog({ actionCode: `map-goTo-Topic-${targetTopicID}`, windowID: windowID });
         });
     }
 
