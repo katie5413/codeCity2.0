@@ -28,6 +28,11 @@ $(document).ready(function () {
                     identity: isTeacher ? 'teacher' : 'student',
                     windowID: windowID,
                 });
+
+                generateGridMap({
+                    userID: res.data.id,
+                    identity: isTeacher ? 'teacher' : 'student',
+                });
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -555,13 +560,13 @@ $(document).ready(function () {
         });
     }
 
-    function generateGridMap() {
+    function generateGridMap({ userID, identity }) {
         const topicOrder = [1, 2, 4, 3, 5, 6, 10, 7, 11, 8, 12, 9];
 
         topicOrder.forEach((topicID) => {
-            $('.gridMap').append(`<div class="grid" rank='0' targetID=${topicID}></div>`);
+            $('.gridMap').append(`<div class="grid" rank='0' target-id=${topicID}></div>`);
             for (let gridID = 1; gridID <= 9; gridID++) {
-                $(`.grid[targetID=${topicID}]`).append(
+                $(`.grid[target-id=${topicID}]`).append(
                     generateGridItem({
                         topicID: topicID,
                         gridID: gridID,
@@ -576,12 +581,67 @@ $(document).ready(function () {
         });
 
         $('.gridMap a').on('click', function () {
-            let targetTopicID = $(this).closest('.grid').attr('targetID');
+            let targetTopicID = $(this).closest('.grid').attr('target-id');
             sendActionLog({ actionCode: `map-goTo-Topic-${targetTopicID}`, windowID: windowID });
+        });
+
+        getUserAllTopicScore({ userID, identity });
+    }
+
+    const rankTable = {
+        1: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        2: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        3: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        4: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        5: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        6: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        7: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        8: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        9: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        10: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        11: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        12: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+    };
+
+    function checkRank({ scoreData }) {
+        let rank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        scoreData.forEach((item) => {
+            rankTable[item.topic_ID].forEach((rankLimit, i) => {
+                if (parseInt(item.sum, 10) > rankLimit) {
+                    rank[item.topic_ID - 1]++;
+                }
+            });
+        });
+
+        return rank;
+    }
+
+    function updateMapByRank(rank) {
+        rank.forEach((topicRank, i) => {
+            $(`.grid[target-id=${i + 1}]`).attr('rank', topicRank);
         });
     }
 
-    generateGridMap();
+    function getUserAllTopicScore({ userID, identity }) {
+        $.ajax({
+            type: 'POST',
+            url: `../../API/getOneStudentAllTopicScore.php`,
+            dataType: 'json',
+            data: {
+                userID,
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.status == 200) {
+                    console.log(res.data);
+
+                    const rank = checkRank({ scoreData: res.data });
+                    console.log(rank);
+                    updateMapByRank(rank);
+                }
+            },
+        });
+    }
 
     // const topicData = [
     //     {
