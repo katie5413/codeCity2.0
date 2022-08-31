@@ -315,27 +315,6 @@ $(document).ready(function () {
 
     // Lesson
 
-    // let lessonData = [
-    //     {
-    //         id: '11',
-    //         name: '資料搜集的方法',
-    //         description: '',
-    //         contentOrder: '1',
-    //     },
-    //     {
-    //         id: '22',
-    //         name: '資料前處理',
-    //         description: '簡介文字',
-    //         contentOrder: '2',
-    //     },
-    //     {
-    //         id: '33',
-    //         name: '特徵選擇',
-    //         description: '簡介文字',
-    //         contentOrder: '3',
-    //     },
-    // ];
-
     function getLessonData(topicID) {
         $.ajax({
             type: 'POST',

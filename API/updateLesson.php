@@ -2,7 +2,7 @@
 session_start();
 include "../pdoInc.php";
 
-$lessonDataRes = array();
+$res = array();
 
 if (isset($_POST['name']) && isset($_POST['id'])) {
 
@@ -11,14 +11,14 @@ if (isset($_POST['name']) && isset($_POST['id'])) {
     $contentOrder = $_POST['contentOrder'];
 
 
-    $updateLesson = $dbh->prepare('UPDATE lesson SET title = ?, introduction = ?, contentOrder = ? WHERE id = ?');
+    $updateLesson = $dbh->prepare('UPDATE lesson SET title = ?, introduction = ?, content_order = ? WHERE id = ?');
     $updateLesson->execute(array($name, $introduction, $contentOrder, $_POST['id']));
 
-    $lessonData = array("name" => $name, "introduction" => $introduction,);
+    $lessonData = array("name" => $name, "introduction" => $introduction, 'contentOrder' => $contentOrder);
 
-    $lessonDataRes = array("status" => '200', "data" => $lessonData);
+    $res = array("status" => '200', "data" => $lessonData);
 } else {
-    $lessonDataRes = array("status" => '404');
+    $res = array("status" => '404');
 }
 
-echo json_encode($lessonDataRes);
+echo json_encode($res);
