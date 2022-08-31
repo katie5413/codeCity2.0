@@ -607,7 +607,7 @@ $(document).ready(function () {
         let rank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         scoreData.forEach((item) => {
             rankTable[item.topic_ID].forEach((rankLimit, i) => {
-                if (parseInt(item.sum, 10) > rankLimit) {
+                if (parseInt(item.sum, 10) >= rankLimit) {
                     rank[item.topic_ID - 1]++;
                 }
             });

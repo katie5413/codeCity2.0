@@ -320,7 +320,7 @@ function lessonContentModel(props) {
                 break;
             case 'fillBlank':
                 const fillBlankTemplate = `
-                <div id="{{quizTypeId}}" class="section quiz {{quizType}}" data-feedback="false">
+                    <div id="{{quizTypeId}}" class="section quiz {{quizType}}" data-feedback="false">
                         <div class="halfCircle"></div>
                         <div class="score"></div>
                         <h3 class="sectionTitle">
@@ -337,7 +337,7 @@ function lessonContentModel(props) {
                             </div>
                             <div class="optionArea"></div>
                             <div class="feedbackMsg maxContent">
-                            <span class="icon"></span/>
+                                <span class="icon"></span/>
                                 <span class="text">error message</span>
                             </div>
                             <button class="submitAnswer quiz-{{quizType}} button btn-secondary">提交</button>
@@ -347,13 +347,13 @@ function lessonContentModel(props) {
                 `;
                 const fillBlankInputTemplate = `
                 <div class="formInput icon">
-                <div class="iconArea">{{quizIndex}}</div>
-                <input
-                    id="{{quizTypeIdIndex}}"
-                    class="input"
-                    type="text"
-                />
-            </div>
+                    <div class="iconArea">{{quizIndex}}</div>
+                    <input
+                        id="{{quizTypeIdIndex}}"
+                        class="input"
+                        type="text"
+                    />
+                </div>
                 `;
 
                 function generateFillBlank({ id, quizTypeId, quizType, content, score }) {
@@ -375,7 +375,7 @@ function lessonContentModel(props) {
                             `<div class="content-img-content"><small>${content.quizImageAlt}</small></div>`,
                         );
                     } else {
-                        template = template.replace('<div class="content-img-content">', '');
+                        template = template.replace('<div class="content-img-content"></div>', '');
                     }
 
                     if (content.quizDetail) {
