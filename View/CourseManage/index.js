@@ -24,7 +24,7 @@ $(document).ready(function () {
                 const isTeacher = checkUserIdentity(res.data);
 
                 activeSideMenu({
-                    id: 'navCourseManage',
+                    id: 'navClassManage',
                     type: 'main',
                     identity: isTeacher ? 'teacher' : 'student',
                     windowID: windowID,

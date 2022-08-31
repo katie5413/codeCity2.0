@@ -32,11 +32,11 @@ function activeSideMenu({ id, type, identity, windowID }) {
     switch (identity) {
         case 'teacher':
             $('#navClassManage').removeClass('hide');
-            $('#navTopicManage').removeClass('hide');
+            $('#navCourseManage').removeClass('hide');
             break;
         default:
             $('#navClassManage').remove();
-            $('#navTopicManage').remove();
+            $('#navCourseManage').remove();
             break;
     }
 
