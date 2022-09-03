@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <link rel="shortcut icon" type="image/png" href="" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
+
+        <title>Input</title>
+    </head>
+    <body>
+        <div
+            class="container"
+            style="position: relative; width: 100%; display: block; margin: 24px"
+        >
+            <div id="userClassCode" class="formInput">
+                <div class="title">班級代號</div>
+                <input
+                    class="input"
+                    type="text"
+                    maxlength="8"
+                    placeholder="班級代號"
+                    onkeyup="value=value.replace(/[\W]/g,'')"
+                />
+            </div>
+            <div class="formInput mustFill">
+                <div class="title">學生名單</div>
+                <textarea id="studentData"></textarea>
+            </div>
+            <div id="result"></div>
+            <button id="submitStudentData">送出</button>
+        </div>
+        <script src="../../Dependencies/jquery/jquery.min.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>
