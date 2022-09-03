@@ -22,7 +22,11 @@ $(document).ready(function () {
                     });
 
                     // 側邊欄
-                    const isTeacher = checkUserIdentity(res.data);
+                    const { isTeacher, enrollClass } = checkUserIdentity(res.data);
+
+                    if (isTeacher) {
+                        addMenuClass({ enrollClass });
+                    }
 
                     activeSideMenu({
                         id: 'navSetting',

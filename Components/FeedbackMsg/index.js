@@ -25,7 +25,7 @@ function setFieldFeedback(field, msg, type) {
         }
     }
 
-    console.log('setFeedBack');
+    // console.log('setFeedBack');
 }
 function activeFeedBack() {
     setFieldFeedback();
@@ -47,5 +47,5 @@ function clearFieldFeedback(field) {
             $field.find('.feedbackMsg .text').text('');
         }
     }
-    console.log('clearFeedBack');
+    // console.log('clearFeedBack');
 }

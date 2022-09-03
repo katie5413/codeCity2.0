@@ -16,6 +16,7 @@ function generateNavItem({ id, link, name }) {
     return newElm;
 }
 
+// 班級管理（子選項）
 function addSideMenuSubPage({ targetID, subPage = [] }) {
     const targetElem = document.getElementById(targetID);
     let newElm = document.createElement('ul');
@@ -23,6 +24,13 @@ function addSideMenuSubPage({ targetID, subPage = [] }) {
         newElm.append(generateNavItem({ id: page.id, link: page.link, name: page.name }));
     });
     targetElem.append(newElm);
+
+    // // 重新註冊
+    // $(`#${targetID} a`).on('click', function (e) {
+    //     let target = $(this).closest('li').attr('id').slice(3);
+    //     console.log(target);
+    //     sendActionLog({ actionCode: `nav-goTo-${target}`, windowID: windowID });
+    // });
 }
 
 function activeSideMenu({ id, type, identity, windowID }) {

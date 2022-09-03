@@ -21,10 +21,14 @@ $(document).ready(function () {
                 });
 
                 // 側邊欄
-                const isTeacher = checkUserIdentity(res.data);
+                const { isTeacher, enrollClass } = checkUserIdentity(res.data);
+
+                if (isTeacher) {
+                    addMenuClass({ enrollClass });
+                }
 
                 activeSideMenu({
-                    id: 'navClassManage',
+                    id: 'navCourseManage',
                     type: 'main',
                     identity: isTeacher ? 'teacher' : 'student',
                     windowID: windowID,
@@ -32,8 +36,6 @@ $(document).ready(function () {
 
                 // 一進入：拿主題資料
                 getTopicData();
-
-
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -568,7 +570,7 @@ $(document).ready(function () {
     function getLessonContentData(lessonID) {
         $.ajax({
             type: 'POST',
-            url: `../../API/getLessonContentData.php`,
+            url: `../../API/getAllLessonContentDataByLessonID.php`,
             data: {
                 lessonID: lessonID,
                 studentID: 0,

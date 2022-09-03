@@ -1,5 +1,5 @@
 function lessonContentModel(props) {
-    const { data, field, windowID } = props;
+    const { data, field, windowID, showStudentAnswer } = props;
     data.forEach((item) => {
         // 每道題目會用「題型」＋「id」組成識別用的唯一 id
         let contentID = `${item.type}${item.id}`;
@@ -244,6 +244,14 @@ function lessonContentModel(props) {
                         passLimit: 100,
                         contentID,
                     });
+
+                    if (showStudentAnswer) {
+                        const userAnswer = JSON.parse(item.studentAnswer[0].content);
+
+                        for (let i = 0; i < userAnswer.length; i++) {
+                            $(`#${item.type}${item.id}-${userAnswer[i]}`).click();
+                        }
+                    }
                 }
 
                 // 提交
@@ -434,6 +442,14 @@ function lessonContentModel(props) {
                         passLimit: 100,
                         contentID,
                     });
+
+                    if (showStudentAnswer) {
+                        const userAnswer = JSON.parse(item.studentAnswer[0].content);
+
+                        for (let i = 0; i < userAnswer.length; i++) {
+                            $(`#${item.type}${item.id}-${i}`).attr('value', userAnswer[i]);
+                        }
+                    }
                 }
 
                 // 提交
@@ -744,7 +760,6 @@ function lessonContentModel(props) {
                         studentAnswer: item.studentAnswer,
                         contentID,
                     });
-                    const userAnswer = JSON.parse(item.studentAnswer[0].content);
                     $(`#${contentID} textarea`).val(userAnswer);
                 }
 

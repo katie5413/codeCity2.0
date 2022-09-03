@@ -28,8 +28,12 @@ $(document).ready(function () {
                 displayCourseBreadcrumb({ lessonID });
 
                 // 側邊欄
-                const isTeacher = checkUserIdentity(res.data);
+                const { isTeacher, enrollClass }  = checkUserIdentity(res.data);
 
+                if (isTeacher) {
+                    addMenuClass({ enrollClass });
+                }
+                
                 activeSideMenu({
                     id: 'navMap',
                     type: 'main',
@@ -57,7 +61,7 @@ $(document).ready(function () {
         const { lessonID, studentID, windowID } = props;
         $.ajax({
             type: 'POST',
-            url: `../../API/getLessonContentData.php`,
+            url: `../../API/getAllLessonContentDataByLessonID.php`,
             data: {
                 lessonID: lessonID,
                 studentID: studentID,

@@ -68,7 +68,7 @@
 
             gtag('config', 'G-CMZ45H5BZ4');
         </script>
-        <title>CourseManage</title>
+        <title>ClassManage</title>
     </head>
 
     <body>
@@ -130,7 +130,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li id="navClassManage">
+                        <li id="navClassManage" class="active">
                             <a href="../ClassManage/">
                                 <div class="item" aria-hidden="true">
                                     <img
@@ -142,7 +142,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li id="navCourseManage" class="active">
+                        <li id="navCourseManage">
                             <a href="../CourseManage/">
                                 <div class="item" aria-hidden="true">
                                     <img
@@ -195,14 +195,33 @@
                 </div>
             </div>
             <div class="contentWrapper oneBlock fixFullScreen">
-                <main class="content" active-tab="topic">
+                <main class="content" active-tab="studentList">
                     <div class="contentTopArea">
-                        <img id="lessonIcon" src="../../Images/icon/type/book.svg" />
+                        <img id="classManageIcon" src="../../Images/icon/general/groups.svg" />
                         <h3 id="pageTitle">
-                            <a href="../CourseManage/">課程管理</a>
-                            <button class="pageTopicName"></button>
-                            <button class="pageLessonName"></button>
+                            <a href="../ClassManage/">班級管理</a>
                         </h3>
+                        <div id="classCodeArea">
+                            <div class="dropBox">
+                                <input
+                                    class="selectSelected"
+                                    type="text"
+                                    placeholder="請選擇班級"
+                                />
+                                <img
+                                    src="../../Images/icon/direction/drop-right.svg"
+                                    alt="icon"
+                                    class="icon"
+                                />
+                                <img
+                                    src="../../Images/icon/general/clear.svg"
+                                    alt="icon"
+                                    class="drop__clear"
+                                />
+                                <div class="line"></div>
+                                <div class="selectItems"></div>
+                            </div>
+                        </div>
                         <div class="right">
                             <div class="dropBox selectLessonContent">
                                 <input
@@ -223,52 +242,57 @@
                                 <div class="line"></div>
                                 <div class="selectItems">
                                     <div class="option" value="markdown">markdown</div>
-                                    <!-- <div class="option" value="textArea">textArea</div> -->
+                                    <div class="option" value="textArea">textArea</div>
                                     <div class="option" value="singleChoice">singleChoice</div>
                                     <div class="option" value="multipleChoice">multipleChoice</div>
                                     <div class="option" value="fillBlank">fillBlank</div>
-                                    <!-- <div class="option" value="uploadImage">uploadImage</div> -->
+                                    <div class="option" value="uploadImage">uploadImage</div>
                                     <div class="option" value="embed">embed</div>
                                     <div class="option" value="embedYoutube">embedYoutube</div>
                                 </div>
                             </div>
-                            <button
+                            <!-- <button
                                 action-type="add"
                                 action-target="topic"
                                 class="button btn-secondary openModal"
                             >
                                 新增
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <div class="contentMainArea">
-                        <div class="tab" tab-name="topic">
+                        <div class="tabMenu">
+                            <button class="tabMenuBtn active" target="studentList">學生名單</button>
+                            <button class="tabMenuBtn" target="homeworkList">作業管理</button>
+                        </div>
+                        <div class="tab" tab-name="studentList">
                             <div class="table__container">
-                                <table id="topicTable" class="stripe" style="width: 100%">
+                                <table id="studentListTable" class="stripe" style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>主題名稱</th>
-                                            <th>簡介</th>
-                                            <th>編輯</th>
-                                            <th>刪除</th>
+                                            <th>姓名</th>
+                                            <th>信箱</th>
+                                            <th>積分</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="tab" tab-name="lesson">
+                        <div class="tab" tab-name="homeworkList">
                             <div class="table__container">
-                                <table id="lessonTable" class="stripe" style="width: 100%">
+                                <table id="homeworkListTable" class="stripe" style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>順序權重</th>
+                                            <th>姓名</th>
+                                            <th>提交時間</th>
+                                            <th>分數</th>
+                                            <th>主題名稱</th>
                                             <th>章節名稱</th>
-                                            <th>簡介</th>
-                                            <th>編輯</th>
-                                            <th>刪除</th>
+                                            <th>題型</th>
+                                            <th>查看</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -310,7 +334,6 @@
                     <div class="bottom">
                         <div class="buttonGroup">
                             <button class="button btn-primary btn-hollow close-pop">取消</button>
-                            <button class="button btn-alert confirm-pop">確認</button>
                         </div>
                     </div>
                 </div>
@@ -897,6 +920,7 @@
         <script src="../../Components/FeedbackMsg/index.js"></script>
         <script src="../../Components/Input/index.js"></script>
         <script src="../../Components/DropBox/index.js"></script>
+        <script src="../../Components/DropBox/selectClassCode.js"></script>
         <script src="../../Components/MultiDropBox/index.js"></script>
         <script src="../../Components/Modal/index.js"></script>
         <script src="../../Components/Pop/index.js"></script>

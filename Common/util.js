@@ -68,12 +68,34 @@ function checkUserIdentity(props) {
 
     // 檢查登記班級是否有可成功加入
     for (let i = 0; i < userClassData.length; i++) {
-        if (userClassData[i].enrollTime != null && userClassData[i].identity == 1) {
+        if (userClassData[i].identity == 1) {
             isTeacher = true;
+        }
+        if (userClassData[i].enrollTime != null) {
+            enrollClass.push({
+                classID: userClassData[i].classID,
+                className: userClassData[i].className,
+                classCode: userClassData[i].classCode,
+            });
         }
     }
 
-    return isTeacher;
+    return { isTeacher, enrollClass };
+}
+
+function addMenuClass(props) {
+    const { enrollClass } = props;
+    // { id: page.id, link: page.link, name: page.name }
+    let subPage = [];
+    enrollClass.forEach((item) => {
+        subPage.push({
+            id: `class-${item.classCode}`,
+            link: `../../View/ClassManage/?classCode=${item.classCode}`,
+            name: item.className,
+        });
+    });
+
+    addSideMenuSubPage({ targetID: `navClassManage`, subPage });
 }
 
 function sendActionLog(props) {
