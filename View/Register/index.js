@@ -193,7 +193,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     success: function (res) {
                         if (res.user_status == 1) {
-                            window.location.href = '../Map';
+                            window.location.href = '../Login';
                         } else {
                             $('#userEmail').addClass('alert');
                             $('#userEmail input').focus();
@@ -225,7 +225,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 console.log('applyClass success', res.data);
-                window.location.href = '../Map';
+                window.location.href = '../Login';
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log('applyClassFail', jqXHR, textStatus, errorThrown);
