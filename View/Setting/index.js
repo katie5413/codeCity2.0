@@ -1,6 +1,7 @@
 $(document).ready(function () {
     getUserData();
     const windowID = generateUniqueId();
+    let userID;
 
     function getUserData() {
         // 先拿 user 資料
@@ -12,6 +13,7 @@ $(document).ready(function () {
                 console.log(res);
 
                 if (res.user_status == 1) {
+                    userID = res.data.id;
                     displayUserData(res.data);
                     // 進入頁面
                     sendActionLog({ actionCode: `enterPage-Setting`, windowID: windowID });
@@ -200,6 +202,7 @@ $(document).ready(function () {
                             data: {
                                 classOpenStatus: classStatus,
                                 classID: classID,
+                                userID: userID,
                             },
                             dataType: 'json',
                             success: function (res) {

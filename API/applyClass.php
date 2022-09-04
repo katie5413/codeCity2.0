@@ -4,10 +4,26 @@ include "../pdoInc.php";
 
 
 $res = array();
-if (isset($_POST['classID']) && isset($_SESSION["userID"]) && isset($_POST['classOpenStatus'])) {
+if (isset($_POST['classID']) && isset($_POST['classOpenStatus'])) {
 
 
-    $userID = $_SESSION["userID"];
+    $classOpenStatus = $_POST["classOpenStatus"] || 1;
+
+    if ($_POST['email']) {
+        $findUserData = $dbh->prepare('SELECT id, `name` FROM user WHERE email = ?');
+        $findUserData->execute(array($_POST['email']));
+        $userDataItem = $findUserData->fetch(PDO::FETCH_ASSOC);
+
+        $userID  = $userDataItem['id'];
+    }
+
+    if ($_POST["userID"]) {
+        $findUserData = $dbh->prepare('SELECT id, `name` FROM user WHERE id = ?');
+        $findUserData->execute(array($_POST['userID']));
+        $userDataItem = $findUserData->fetch(PDO::FETCH_ASSOC);
+
+        $userID  = $userDataItem['id'];
+    }
 
 
     // 如果有輸入班級代號，且班級是公開的，才可以加入

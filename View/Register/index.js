@@ -113,6 +113,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     success: function (res) {
                         const classStatus = res.open_status;
+                        const classID = res.class_id;
 
                         switch (classStatus) {
                             case -1:
@@ -139,15 +140,18 @@ $(document).ready(function () {
                                         email: email,
                                         password: password,
                                         nickName: nickName,
-                                        classID: res.class_id,
                                         avatar: avatar,
-                                        classOpenStatus: classStatus,
-                                        classCode: classCode,
                                     },
                                     dataType: 'json',
                                     success: function (res) {
                                         if (res.user_status == 1) {
-                                            window.location.href = '../Map';
+                                            console.log('addUser success', res.data);
+
+                                            applyClass({
+                                                classID,
+                                                email,
+                                                classOpenStatus: classStatus,
+                                            });
                                         } else {
                                             $('#userEmail').addClass('alert');
                                             $('#userEmail input').focus();
@@ -208,4 +212,24 @@ $(document).ready(function () {
             }
         }
     });
+
+    function applyClass({ classID, email, classOpenStatus }) {
+        $.ajax({
+            type: 'POST',
+            url: `../../API/applyClass.php`,
+            data: {
+                classID,
+                email,
+                classOpenStatus,
+            },
+            dataType: 'json',
+            success: function (res) {
+                console.log('applyClass success', res.data);
+                window.location.href = '../Map';
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('applyClassFail', jqXHR, textStatus, errorThrown);
+            },
+        });
+    }
 });
