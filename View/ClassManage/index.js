@@ -434,6 +434,8 @@ $(document).ready(function () {
                 sumScore += parseInt(item.avg, 10);
             });
 
+            console.log('student_name:',studentData[i].name,'score:',scoreList);
+
             $('#topicScoreTable tbody').append(
                 generateTopicScoreDataTr({
                     index: i + 1,
@@ -455,6 +457,7 @@ $(document).ready(function () {
                     avgScore: sumScore == 0 ? '0' : Math.round((sumScore * 10) / 12) / 10,
                 }),
             );
+
         }
 
         initTopicScoreTable();
