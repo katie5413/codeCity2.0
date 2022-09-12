@@ -404,9 +404,9 @@ $(document).ready(function () {
                     data: {
                         classID,
                     },
-                    success: function (res) {
-                        if (res.status == 200) {
-                            const studentTopicScore = res.data;
+                    success: function (resScore) {
+                        if (resScore.status == 200) {
+                            const studentTopicScore = resScore.data;
 
                             $('#topicScoreTable').DataTable().clear().destroy();
                             activeTopicScoreTab({ studentData, studentTopicScore });
@@ -433,8 +433,6 @@ $(document).ready(function () {
                 scoreList[item.topic_ID - 1] = parseInt(item.avg, 10);
                 sumScore += parseInt(item.avg, 10);
             });
-
-            console.log('student_name:',studentData[i].name,'score:',scoreList);
 
             $('#topicScoreTable tbody').append(
                 generateTopicScoreDataTr({

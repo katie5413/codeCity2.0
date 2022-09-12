@@ -19,7 +19,7 @@ if (isset($_POST['classID'])) {
     LEFT JOIN `user` 
     ON user.id = classEnroll.user_ID
     WHERE `class_ID` = ? AND `identity` != 1)  AND homeworkSubmit.score is NOT NULL
-    GROUP BY lesson.topic_ID");
+    GROUP BY homeworkSubmit.student_ID, lesson.topic_ID");
     $findTopicScore->execute(array($_POST['classID']));
 
     $topicDataArr = array();
@@ -45,5 +45,5 @@ echo json_encode($res);
 // FROM `classEnroll` 
 // LEFT JOIN `user` 
 // ON user.id = classEnroll.user_ID
-// WHERE `class_ID` = 1 AND `identity` != 1) AND homeworkSubmit.score is NOT NULL
-// GROUP BY lesson.topic_ID
+// WHERE `class_ID` = 3 AND `identity` != 1) AND homeworkSubmit.score is NOT NULL
+// GROUP BY homeworkSubmit.student_ID, lesson.topic_ID
