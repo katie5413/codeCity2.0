@@ -6,8 +6,8 @@ include "../pdoInc.php";
 $lessonData = array();
 if (isset($_POST['lessonID'])) {
     // getLessonContent
-    $findLessonContent = $dbh->prepare('SELECT * FROM lessonContent WHERE lesson_ID = ? ORDER BY content_order');
-    $findLessonContent->execute(array($_POST['lessonID']));
+    $findLessonContent = $dbh->prepare('SELECT * FROM lessonContent WHERE lesson_ID = ? AND contentType != ? AND contentType != ? ORDER BY content_order');
+    $findLessonContent->execute(array($_POST['lessonID'], 'uploadImage', 'textArea'));
 
     $lessonContentArr = array();
     while ($lessonContentItem = $findLessonContent->fetch(PDO::FETCH_ASSOC)) {
@@ -34,8 +34,8 @@ if (isset($_POST['lessonID'])) {
                     //     }
                     // }
                     // break;
-                case 'uploadImage':
-                case 'textArea':
+                    // case 'uploadImage':
+                    // case 'textArea':
                     $lessonContentItem["studentAnswer"] = array('content' => array(), 'score' => null);
 
                     $findLessonContentSubmit = $dbh->prepare('SELECT submitTime, score, content FROM homeworkSubmit WHERE student_ID = ? and homework_ID =? ORDER BY submitTime Desc');
