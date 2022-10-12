@@ -66,324 +66,41 @@ $(document).ready(function () {
         },
     });
 
-    const mapType = {
-        1: {
-            1: 'deco',
-            2: 'land',
-            3: 'deco',
-            4: 'land',
-            5: 'building',
-            6: 'road_--',
-            7: 'deco',
-            8: 'deco',
-            9: 'land',
-        },
-        2: {
-            1: 'land',
-            2: 'deco',
-            3: 'deco',
-            4: 'road_--',
-            5: 'building',
-            6: 'land',
-            7: 'deco',
-            8: 'road_I',
-            9: 'deco',
-        },
-        3: {
-            1: 'deco',
-            2: 'road_I',
-            3: 'land',
-            4: 'road_--',
-            5: 'building',
-            6: 'deco',
-            7: 'land',
-            8: 'deco',
-            9: 'land',
-        },
-        4: {
-            1: 'deco',
-            2: 'land',
-            3: 'deco',
-            4: 'land',
-            5: 'building',
-            6: 'road_--',
-            7: 'deco',
-            8: 'road_I',
-            9: 'deco',
-        },
-        5: {
-            1: 'deco',
-            2: 'road_I',
-            3: 'land',
-            4: 'land',
-            5: 'building',
-            6: 'road_--',
-            7: 'deco',
-            8: 'road_I',
-            9: 'deco',
-        },
-        6: {
-            1: 'deco',
-            2: 'deco',
-            3: 'land',
-            4: 'road_--',
-            5: 'building',
-            6: 'land',
-            7: 'deco',
-            8: 'road_I',
-            9: 'deco',
-        },
-        7: {
-            1: 'land',
-            2: 'road_I',
-            3: 'land',
-            4: 'deco',
-            5: 'building',
-            6: 'land',
-            7: 'deco',
-            8: 'road_I',
-            9: 'deco',
-        },
-        8: {
-            1: 'land',
-            2: 'road_I',
-            3: 'deco',
-            4: 'deco',
-            5: 'building',
-            6: 'land',
-            7: 'land',
-            8: 'road_I',
-            9: 'deco',
-        },
-        9: {
-            1: 'deco',
-            2: 'road_I',
-            3: 'deco',
-            4: 'land',
-            5: 'building',
-            6: 'land',
-            7: 'deco',
-            8: 'land',
-            9: 'deco',
-        },
-        10: {
-            1: 'land',
-            2: 'road_I',
-            3: 'deco',
-            4: 'land',
-            5: 'building',
-            6: 'deco',
-            7: 'deco',
-            8: 'road_I',
-            9: 'land',
-        },
-        11: {
-            1: 'land',
-            2: 'road_I',
-            3: 'deco',
-            4: 'land',
-            5: 'building',
-            6: 'land',
-            7: 'deco',
-            8: 'road_I',
-            9: 'deco',
-        },
-        12: {
-            1: 'deco',
-            2: 'road_I',
-            3: 'land',
-            4: 'land',
-            5: 'building',
-            6: 'deco',
-            7: 'deco',
-            8: 'land',
-            9: 'land',
-        },
-    };
-
-    const mapLimit = {
-        1: {
-            1: 6,
-            2: 7,
-            3: 5,
-            4: 3,
-            5: 0,
-            6: 1,
-            7: 8,
-            8: 2,
-            9: 4,
-        },
-        2: {
-            1: 4,
-            2: 5,
-            3: 8,
-            4: 1,
-            5: 0,
-            6: 3,
-            7: 6,
-            8: 2,
-            9: 7,
-        },
-        3: {
-            1: 6,
-            2: 1,
-            3: 3,
-            4: 2,
-            5: 0,
-            6: 7,
-            7: 5,
-            8: 8,
-            9: 4,
-        },
-        4: {
-            1: 3,
-            2: 6,
-            3: 8,
-            4: 5,
-            5: 0,
-            6: 1,
-            7: 4,
-            8: 2,
-            9: 7,
-        },
-
-        5: {
-            1: 8,
-            2: 1,
-            3: 6,
-            4: 4,
-            5: 0,
-            6: 2,
-            7: 5,
-            8: 3,
-            9: 7,
-        },
-        6: {
-            1: 8,
-            2: 7,
-            3: 6,
-            4: 1,
-            5: 0,
-            6: 3,
-            7: 4,
-            8: 2,
-            9: 5,
-        },
-        7: {
-            1: 7,
-            2: 1,
-            3: 3,
-            4: 8,
-            5: 0,
-            6: 4,
-            7: 5,
-            8: 2,
-            9: 6,
-        },
-        8: {
-            1: 3,
-            2: 1,
-            3: 6,
-            4: 7,
-            5: 0,
-            6: 5,
-            7: 4,
-            8: 2,
-            9: 8,
-        },
-        9: {
-            1: 6,
-            2: 1,
-            3: 8,
-            4: 2,
-            5: 0,
-            6: 3,
-            7: 5,
-            8: 4,
-            9: 7,
-        },
-        10: {
-            1: 3,
-            2: 1,
-            3: 7,
-            4: 6,
-            5: 0,
-            6: 8,
-            7: 4,
-            8: 2,
-            9: 5,
-        },
-        11: {
-            1: 3,
-            2: 1,
-            3: 6,
-            4: 4,
-            5: 0,
-            6: 5,
-            7: 7,
-            8: 2,
-            9: 8,
-        },
-        12: {
-            1: 7,
-            2: 1,
-            3: 2,
-            4: 6,
-            5: 0,
-            6: 5,
-            7: 8,
-            8: 4,
-            9: 3,
-        },
-    };
-
     const mapBuilding = {
         1: {
-            backgroundUrl: 'road_-.png',
             name: '人工智慧簡介',
         },
         2: {
-            backgroundUrl: 'road_⌝.png',
             name: '資料收集與前處理',
         },
         3: {
-            backgroundUrl: 'road_⌟.png',
             name: '特徵選擇',
         },
         4: {
-            backgroundUrl: 'road_⌜.png',
             name: '特徵標準化',
         },
         5: {
-            backgroundUrl: 'road_I-.png',
             name: '數據集分割',
         },
         6: {
-            backgroundUrl: 'road_⌝.png',
             name: '監督式學習',
         },
         7: {
-            backgroundUrl: 'road_I.png',
             name: '最短距離、KNN',
         },
         8: {
-            backgroundUrl: 'road_I.png',
             name: '決策樹原理',
         },
         9: {
-            backgroundUrl: 'road_1.png',
             name: '決策樹實作',
         },
         10: {
-            backgroundUrl: 'road_I.png',
             name: '非監督式學習',
         },
         11: {
-            backgroundUrl: 'road_I.png',
             name: 'K-means 分群',
         },
         12: {
-            backgroundUrl: 'road_1.png',
             name: '階層式分群',
         },
     };
@@ -392,18 +109,6 @@ $(document).ready(function () {
     const gridItemTemplate = `
         <div class="gridItem" limit="{{limit}}">
             <img class="{{type}} {{style}}" src="../../Images/map/{{type}}-{{topicID}}-{{gridID}}.png" />
-        </div>
-    `;
-
-    const gridItemLandTemplate = `
-        <div class="gridItem" limit="{{limit}}">
-            <img class="land" src="../../Images/map/land.png" />
-        </div>
-    `;
-
-    const gridItemRoadTemplate = `
-        <div class="gridItem" limit="{{limit}}">
-            <img class="road" src="../../Images/map/{{type}}.png" />
         </div>
     `;
 
@@ -427,26 +132,14 @@ $(document).ready(function () {
             case 'building':
                 template = gridItemBuildingTemplate;
                 break;
-            case 'road_--':
-            case 'road_I':
-                template = gridItemRoadTemplate;
-                break;
-            case 'deco':
-                template = gridItemTemplate;
-                break;
-            case 'land':
-                template = gridItemLandTemplate;
-                break;
         }
 
         return generateHtml(template, {
             topicID,
             gridID,
             type,
-            limit,
             style,
             name,
-            backgroundUrl,
             order: topicID > 9 ? topicID : `0${topicID}`,
         });
     }
@@ -461,9 +154,7 @@ $(document).ready(function () {
                 generateGridItem({
                     topicID: topicID,
                     type: 'building',
-                    limit: mapLimit[topicID],
                     name: mapBuilding[topicID].name,
-                    backgroundUrl: mapBuilding[topicID].backgroundUrl,
                 }),
             );
         });
