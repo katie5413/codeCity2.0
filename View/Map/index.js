@@ -24,6 +24,26 @@ $(document).ready(function () {
 
                 if (isTeacher) {
                     addMenuClass({ enrollClass });
+
+                    // deal selectClass dropBox options
+                    for (let i = 0; i < enrollClass.length; i++) {
+                        let option = document.createElement('div');
+                        option.classList.add('option');
+                        option.setAttribute('value', enrollClass[i].classID);
+                        option.append(document.createTextNode(enrollClass[i].className));
+                        $('#classCodeArea .selectItems').append(option);
+                    }
+
+                    let classID;
+
+                    // setClassCode
+                    $(document).on('click', '#classCodeArea .dropBox .option', function () {
+                        classID = $(this).attr('value');
+                        // 拿學生名單
+                        getStudentData({ classID });
+                    });
+
+                    activeMagicBox();
                 }
 
                 activeSideMenu({
@@ -180,6 +200,7 @@ $(document).ready(function () {
             9: 'land',
         },
     };
+
     const mapLimit = {
         1: {
             1: 6,
@@ -316,141 +337,6 @@ $(document).ready(function () {
         },
     };
 
-    const mapStyle = {
-        1: {
-            1: '',
-            2: '',
-            3: 'lg',
-            4: '',
-            5: '',
-            6: '',
-            7: 'md',
-            8: 'xl',
-            9: '',
-        },
-        2: {
-            1: '',
-            2: 'md',
-            3: 'lg',
-            4: '',
-            5: '',
-            6: '',
-            7: 'sm',
-            8: '',
-            9: 'md',
-        },
-        3: {
-            1: 'md',
-            2: '',
-            3: '',
-            4: '',
-            5: '',
-            6: 'sm',
-            7: '',
-            8: '',
-            9: '',
-        },
-        4: {
-            1: 'xl',
-            2: '',
-            3: 'md',
-            4: '',
-            5: '',
-            6: '',
-            7: 'md',
-            8: '',
-            9: '',
-        },
-        5: {
-            1: 'lg',
-            2: '',
-            3: '',
-            4: '',
-            5: '',
-            6: '',
-            7: 'md',
-            8: '',
-            9: 'md',
-        },
-        6: {
-            1: '',
-            2: 'lg',
-            3: '',
-            4: '',
-            5: '',
-            6: '',
-            7: 'xl',
-            8: '',
-            9: 'md',
-        },
-        7: {
-            1: '',
-            2: '',
-            3: '',
-            4: '',
-            5: '',
-            6: '',
-            7: '',
-            8: '',
-            9: 'md',
-        },
-        8: {
-            1: '',
-            2: '',
-            3: 'lg',
-            4: 'lg',
-            5: '',
-            6: '',
-            7: '',
-            8: '',
-            9: 'md',
-        },
-        9: {
-            1: 'lg',
-            2: '',
-            3: 'lg',
-            4: '',
-            5: '',
-            6: '',
-            7: 'lg',
-            8: '',
-            9: 'lg',
-        },
-        10: {
-            1: '',
-            2: '',
-            3: 'lg',
-            4: '',
-            5: '',
-            6: 'xl',
-            7: 'md',
-            8: '',
-            9: '',
-        },
-        11: {
-            1: '',
-            2: '',
-            3: '',
-            4: '',
-            5: '',
-            6: '',
-            7: 'md',
-            8: '',
-            9: '',
-        },
-        12: {
-            1: 'lg',
-            2: '',
-            3: '',
-            4: '',
-            5: '',
-            6: 'lg',
-            7: 'lg',
-            8: '',
-            9: '',
-        },
-    };
-
     const mapBuilding = {
         1: {
             backgroundUrl: 'road_-.png',
@@ -523,12 +409,13 @@ $(document).ready(function () {
 
     // building
     const gridItemBuildingTemplate = `
-        <div class="gridItem" limit="0">
+        <div class="gridItem">
             <a href="../../View/Topic/?topicID={{topicID}}">
                 <span class="order">{{order}}</span>
-                <img class="background" src="../../Images/map/{{backgroundUrl}}" />
-                <img class="building" src="../../Images/map/building-{{topicID}}.png" />
-                <span class="title">{{name}}</span>
+                <img class="building" level="0" src="../../Images/island/island.png" />
+                <img class="building" level="1" src="../../Images/island/island-{{topicID}}-1.png" />
+                <img class="building" level="2" src="../../Images/island/island-{{topicID}}-2.png" />
+                <p class="title">{{name}} <span class="score"></span></p>
             </a>
         </div>
     `;
@@ -565,23 +452,20 @@ $(document).ready(function () {
     }
 
     function generateGridMap({ userID, identity }) {
-        const topicOrder = [1, 2, 4, 3, 5, 6, 10, 7, 11, 8, 12, 9];
+        const topicOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         topicOrder.forEach((topicID) => {
             $('.gridMap').append(`<div class="grid" rank='0' target-id=${topicID}></div>`);
-            for (let gridID = 1; gridID <= 9; gridID++) {
-                $(`.grid[target-id=${topicID}]`).append(
-                    generateGridItem({
-                        topicID: topicID,
-                        gridID: gridID,
-                        type: mapType[topicID][gridID],
-                        limit: mapLimit[topicID][gridID],
-                        style: mapStyle[topicID][gridID],
-                        name: mapBuilding[topicID].name,
-                        backgroundUrl: mapBuilding[topicID].backgroundUrl,
-                    }),
-                );
-            }
+
+            $(`.grid[target-id=${topicID}]`).append(
+                generateGridItem({
+                    topicID: topicID,
+                    type: 'building',
+                    limit: mapLimit[topicID],
+                    name: mapBuilding[topicID].name,
+                    backgroundUrl: mapBuilding[topicID].backgroundUrl,
+                }),
+            );
         });
 
         $('.gridMap a').on('click', function () {
@@ -592,37 +476,50 @@ $(document).ready(function () {
         getUserAllTopicScore({ userID, identity });
     }
 
+    // 不確定每個單元標準是否不同，所以先維持原本的
     const rankTable = {
-        1: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        2: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        3: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        4: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        5: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        6: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        7: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        8: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        9: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        10: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        11: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
-        12: [300, 500, 1000, 1500, 3000, 4500, 5500, 6000],
+        1: [60, 80],
+        2: [60, 80],
+        3: [60, 80],
+        4: [60, 80],
+        5: [60, 80],
+        6: [60, 80],
+        7: [60, 80],
+        8: [60, 80],
+        9: [60, 80],
+        10: [60, 80],
+        11: [60, 80],
+        12: [60, 80],
     };
 
     function checkRank({ scoreData }) {
         let rank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         scoreData.forEach((item) => {
+            const avg = parseInt(item.avg, 10);
             rankTable[item.topic_ID].forEach((rankLimit, i) => {
-                if (parseInt(item.sum, 10) >= rankLimit) {
+                if (avg >= rankLimit) {
                     rank[item.topic_ID - 1]++;
                 }
             });
+
+            if (avg > 0) {
+                score[item.topic_ID - 1] = avg;
+            }
         });
 
-        return rank;
+        return { rank, score };
     }
 
-    function updateMapByRank(rank) {
+    function updateMapByRank({ rank, score }) {
         rank.forEach((topicRank, i) => {
             $(`.grid[target-id=${i + 1}]`).attr('rank', topicRank);
+        });
+
+        score.forEach((topicScore, i) => {
+            $(`.grid[target-id=${i + 1}]`)
+                .find('.score')
+                .text(topicScore);
         });
     }
 
@@ -639,203 +536,10 @@ $(document).ready(function () {
                 if (res.status == 200) {
                     console.log(res.data);
 
-                    const rank = checkRank({ scoreData: res.data });
-                    console.log(rank);
-                    updateMapByRank(rank);
+                    const { rank, score } = checkRank({ scoreData: res.data });
+                    updateMapByRank({ rank, score });
                 }
             },
         });
     }
-
-    // const topicData = [
-    //     {
-    //         id: 'one',
-    //         data: [
-    //             { id: 1, name: '人工智慧簡介' },
-    //             { id: 2, name: '資料收集與前處理' },
-    //         ],
-    //     },
-    //     {
-    //         id: 'two',
-    //         data: [
-    //             { id: 3, name: '特徵選擇' },
-    //             { id: 4, name: '特徵標準化' },
-    //             { id: 5, name: '數據集分割' },
-    //         ],
-    //     },
-    //     {
-    //         id: 'three',
-    //         data: [
-    //             { id: 6, name: '監督式學習' },
-    //             { id: 7, name: '最短距離、KNN' },
-    //             { id: 8, name: '決策樹原理' },
-    //             { id: 9, name: '決策樹實作' },
-    //         ],
-    //     },
-    //     {
-    //         id: 'four',
-    //         data: [
-    //             { id: 10, name: '非監督式學習' },
-    //             { id: 11, name: 'K-means 分群' },
-    //             { id: 12, name: '階層式分群' },
-    //         ],
-    //     },
-    // ];
-
-    // function generateMapItem(props) {
-    //     let template = `
-    //         <div class="mapItem" id="map-topic-{{id}}">
-    //             <a href="../../View/Topic/?topicID={{id}}">
-    //                 <img class="city" src="../../Images/city/city{{id}}.jpg" />
-    //                 <span class="name">{{orderName}}</span>
-    //             </a>
-    //         </div>
-    //     `;
-
-    //     return generateHtml(template, {
-    //         ...props,
-    //         orderName: props.id > 9 ? `${props.id} ${props.name}` : `0${props.id} ${props.name}`,
-    //     });
-    // }
-
-    // topicData.forEach((chapter) => {
-    //     chapter.data.forEach((topic) => {
-    //         $(`#mapContent .chapter[chapter=${chapter.id}]`).append(generateMapItem(topic));
-    //     });
-    // });
-
-    // const topicData = [
-    //     {
-    //         id: '1',
-    //         title: '人工智慧簡介',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-01.jpg',
-    //         openStatus: true,
-    //     },
-    //     {
-    //         id: '2',
-    //         title: '資料收集與前處理',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-02.jpg',
-    //         openStatus: true,
-    //     },
-    //     {
-    //         id: '3',
-    //         title: '特徵的選擇',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-03.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '4',
-    //         title: '特徵的標準化',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-04.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '5',
-    //         title: '數劇集分割',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-01.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '6',
-    //         title: '監督式學習',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-02.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '7',
-    //         title: '最短距離、KNN',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-03.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '8',
-    //         title: '決策樹的原理',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-04.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '9',
-    //         title: '決策樹實作',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-01.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '10',
-    //         title: 'K-means 分群',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-02.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '11',
-    //         title: '非監督式學習',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-03.jpg',
-    //         openStatus: false,
-    //     },
-    //     {
-    //         id: '12',
-    //         title: '階層式分群',
-    //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    //         bgImage: '../../Images/map-04.jpg',
-    //         openStatus: false,
-    //     },
-    // ];
-
-    // const topicTemplate = `
-    // <div class="card-wrap {{disable}}" topic-id="{{id}}">
-    //     <div class="card">
-    //         <div
-    //             class="card-bg"
-    //             style="background-image: url('../../Images/map-0{{imgIndex}}.jpg')"
-    //         ></div>
-    //         <div class="card-info">
-    //             <h3>{{title}}</h3>
-    //             <p>{{description}}</p>
-    //         </div>
-    //     </div>
-    // </div>
-    // `;
-
-    // topicData.forEach((item, index) => {
-    //     $('#mapContent').append(
-    //         generateTopicCard({
-    //             id: item.id,
-    //             index: index,
-    //             openStatus: item.openStatus,
-    //             title: item.title,
-    //             description: item.description,
-    //         }),
-    //     );
-    // });
-
-    // function generateTopicCard(props) {
-    //     let template = topicTemplate;
-
-    //     return generateHtml(template, {
-    //         imgIndex: (props.index % 4) + 1,
-    //         disable: props.openStatus ? '' : 'disable',
-    //         ...props,
-    //     });
-    // }
-
-    // $('#mapContent').slick({
-    //     infinite: false,
-    //     slidesToShow: 4,
-    //     slidesToScroll: 4,
-    //     arrows: false,
-    // });
-
-    // $(window).resize(function () {
-    //     $('#mapContent').slick('resize');
-    // });
 });

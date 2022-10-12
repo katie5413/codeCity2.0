@@ -28,154 +28,39 @@ p + p {
             padding: 0;
         }
 
-        // .chapter {
-        //     display: flex;
-        //     flex-direction: column;
-        //     justify-content: center;
-        //     align-items: center;
-        //     padding: 16px;
-        //     gap: 16px;
-        //     width: max-content;
-        //     margin: 0 auto 16px;
-        //     border-radius: 8px;
-
-        //     .mapItem {
-        //         display: flex;
-        //         width: -webkit-fill-available;
-
-        //         a {
-        //             font-size: 16px;
-        //             display: flex;
-        //             align-items: center;
-        //             gap: 16px;
-
-        //             img {
-        //                 height: 120px;
-        //                 width: 120px;
-        //                 object-fit: cover;
-        //                 box-sizing: border-box;
-        //                 border: 4px solid white;
-        //                 border-radius: 8px;
-        //             }
-        //         }
-        //     }
-
-        //     &[chapter='one'] {
-        //         background-color: var(--grey4);
-
-        //         .mapItem {
-        //             span {
-        //                 color: var(--grey2);
-        //             }
-
-        //             &:hover {
-        //                 span {
-        //                     color: var(--grey1);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     &[chapter='two'] {
-        //         background-color: var(--primary-light);
-
-        //         .mapItem {
-        //             span {
-        //                 color: var(--primary);
-        //             }
-
-        //             &:hover {
-        //                 span {
-        //                     color: var(--primary-dark);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     &[chapter='three'] {
-        //         background-color: var(--alert-light);
-
-        //         .mapItem {
-        //             span {
-        //                 color: var(--alert);
-        //             }
-
-        //             &:hover {
-        //                 span {
-        //                     color: var(--alert-dark);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     &[chapter='four'] {
-        //         background-color: var(--success-light);
-
-        //         .mapItem {
-        //             span {
-        //                 color: var(--success);
-        //             }
-
-        //             &:hover {
-        //                 span {
-        //                     color: var(--success-dark);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
         .gridMap {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            width: 80%;
+            grid-template-columns: repeat(4, 1fr);
             border-radius: 8px;
             overflow: hidden;
             opacity: 0.9;
             background-image: url('../../Images/city/land-10.jpeg');
+            padding: 24px;
         }
 
         .grid {
-            display: grid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            grid-template-rows: repeat(3, 1fr);
-            grid-template-columns: repeat(3, 1fr);
 
             .gridItem {
-                position: relative;
                 display: flex;
                 align-items: center;
+                height: 180px;
+                width: 180px;
+                position: relative;
 
                 img {
                     width: 100%;
-
-                    &.sm {
-                        padding: 48px;
-                    }
-
-                    &.md {
-                        padding: 36px;
-                    }
-
-                    &.lg {
-                        padding: 24px;
-                    }
-
-                    &.xl {
-                        padding: 12px;
-                    }
-
-                    &.background {
-                        position: absolute;
-                        z-index: 0;
-                        top: 0;
-                    }
                 }
 
                 a {
-                    span {
+                    p,span {
                         padding: 4px;
                         transition: all 0.3s ease;
-                        position: absolute;
                         z-index: 2;
-                        color: var(--grey1);
+                        
                     }
 
                     .order {
@@ -187,7 +72,13 @@ p + p {
                         font-weight: bold;
                     }
 
+                    .score {
+                        line-height: 1;
+                        color: var(--grey4);
+                    }
+
                     .title {
+                        position: absolute;
                         bottom: 10px;
                         padding: 4px 8px;
                         width: max-content;
@@ -203,7 +94,7 @@ p + p {
                     }
 
                     .building {
-                        position: absolute;
+                        display: none;
                         top: -10px;
                         z-index: 1;
                         padding: 24px;
@@ -218,191 +109,29 @@ p + p {
                         .title {
                             background-color: rgba(255, 255, 255, 1);
                         }
-                    }
-                }
 
-                &::before {
-                    content: ' ';
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(255, 255, 255, 0.8);
+                        .score {
+                            background-color: rgba(255, 255, 255, 1);
+                        }
+                    }
                 }
             }
 
-            *[limit='0'] {
-                img {
-                    opacity: 1;
-                }
-                &::before {
-                    display: none;
+            &[rank='0'] {
+                img.building[level='0'] {
+                    display: block;
                 }
             }
 
             &[rank='1'] {
-                *[limit='1'] {
-                    img {
-                        opacity: 1;
-
-                        *[limit='2'],
-                        *[limit='3'],
-                        &[limit='4'],
-                        &[limit='5'],
-                        &[limit='6'],
-                        &[limit='7'],
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
+                img.building[level='1'] {
+                    display: block;
                 }
             }
 
             &[rank='2'] {
-                *[limit='1'],
-                *[limit='2'] {
-                    img {
-                        opacity: 1;
-
-                        *[limit='3'],
-                        &[limit='4'],
-                        &[limit='5'],
-                        &[limit='6'],
-                        &[limit='7'],
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-
-            &[rank='3'] {
-                *[limit='1'],
-                *[limit='2'],
-                *[limit='3'] {
-                    img {
-                        opacity: 1;
-
-                        &[limit='4'],
-                        &[limit='5'],
-                        &[limit='6'],
-                        &[limit='7'],
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-
-            &[rank='4'] {
-                *[limit='1'],
-                *[limit='2'],
-                *[limit='3'],
-                *[limit='4'] {
-                    img {
-                        opacity: 1;
-
-                        &[limit='5'],
-                        &[limit='6'],
-                        &[limit='7'],
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-
-            &[rank='5'] {
-                *[limit='1'],
-                *[limit='2'],
-                *[limit='3'],
-                *[limit='4'],
-                *[limit='5'] {
-                    img {
-                        opacity: 1;
-
-                        &[limit='6'],
-                        &[limit='7'],
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-
-            &[rank='6'] {
-                *[limit='1'],
-                *[limit='2'],
-                *[limit='3'],
-                *[limit='4'],
-                *[limit='5'],
-                &[limit='6'] {
-                    img {
-                        opacity: 1;
-
-                        &[limit='7'],
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-
-            &[rank='7'] {
-                *[limit='1'],
-                *[limit='2'],
-                *[limit='3'],
-                *[limit='4'],
-                *[limit='5'],
-                &[limit='6'],
-                &[limit='7'] {
-                    img {
-                        opacity: 1;
-
-                        &[limit='8'] {
-                            opacity: 0.2;
-                        }
-                    }
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-
-            &[rank='8'] {
-                *[limit='1'],
-                *[limit='2'],
-                *[limit='3'],
-                *[limit='4'],
-                *[limit='5'],
-                &[limit='6'],
-                &[limit='7'],
-                &[limit='8'] {
-                    img {
-                        opacity: 1;
-                    }
-                    &::before {
-                        display: none;
-                    }
+                img.building[level='2'] {
+                    display: block;
                 }
             }
         }
