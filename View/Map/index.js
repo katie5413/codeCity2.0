@@ -116,11 +116,11 @@ $(document).ready(function () {
     const gridItemBuildingTemplate = `
         <div class="gridItem">
             <a href="../../View/Topic/?topicID={{topicID}}">
-                <span class="order">{{order}}</span>
+                <span class="score"></span>
                 <img class="building" level="0" src="../../Images/island/island.png" />
                 <img class="building" level="1" src="../../Images/island/island-{{topicID}}-1.png" />
                 <img class="building" level="2" src="../../Images/island/island-{{topicID}}-2.png" />
-                <p class="title">{{name}} <span class="score"></span></p>
+                <p class="title">{{order}} {{name}}</p>
             </a>
         </div>
     `;

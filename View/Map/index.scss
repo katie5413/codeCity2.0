@@ -63,16 +63,14 @@ p + p {
                         z-index: 2;
                     }
 
-                    .order {
+                    .score {
                         position: absolute;
                         top: 0;
                         font-size: 16px;
+                        padding: 10px 4px 4px 8px;
                         z-index: 2;
                         color: rgb(106, 74, 15);
                         font-weight: bold;
-                    }
-
-                    .score {
                         line-height: 1;
                         color: var(--grey4);
                     }
@@ -109,10 +107,6 @@ p + p {
                         .title {
                             background-color: rgba(255, 255, 255, 1);
                         }
-
-                        .score {
-                            background-color: rgba(255, 255, 255, 1);
-                        }
                     }
                 }
             }
@@ -121,17 +115,65 @@ p + p {
                 img.building[level='0'] {
                     display: block;
                 }
+
+                .score {
+                    &::after {
+                        position: absolute;
+                        content: ' ';
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: -1;
+                        background-size: 100%;
+                        background-position: center;
+                        width: 45px;
+                        height: 45px;
+                        background-image: url(../../Images/rank/rank-0.png);
+                    }
+                }
             }
 
             &[rank='1'] {
                 img.building[level='1'] {
                     display: block;
                 }
+
+                .score {
+                    &::after {
+                        position: absolute;
+                        content: ' ';
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: -1;
+                        background-size: 100%;
+                        background-position: center;
+                        width: 45px;
+                        height: 45px;
+                        background-image: url(../../Images/rank/rank-1.png);
+                    }
+                }
             }
 
             &[rank='2'] {
                 img.building[level='2'] {
                     display: block;
+                }
+
+                .score {
+                    &::after {
+                        position: absolute;
+                        content: ' ';
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: -1;
+                        background-size: 100%;
+                        background-position: center;
+                        width: 45px;
+                        height: 45px;
+                        background-image: url(../../Images/rank/rank-2.png);
+                    }
                 }
             }
         }
