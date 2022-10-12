@@ -43,7 +43,7 @@ $(document).ready(function () {
                         getStudentData({ classID });
                     });
 
-                    activeMagicBox();
+                    // activeMagicBox();
                 }
 
                 activeSideMenu({
