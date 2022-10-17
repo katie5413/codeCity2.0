@@ -22,6 +22,7 @@ p + p {
         background-color: transparent;
         box-shadow: none;
         width: 100%;
+        height: calc(100% - 90px);
 
         .content {
             margin: 0;
@@ -34,9 +35,11 @@ p + p {
             border-radius: 8px;
             overflow: hidden;
             opacity: 0.9;
-            // background-image: url('../../Images/city/land-10.jpeg');
+            background-image: url('../../Images/island/map.jpeg');
+            background-size: 100% 100%;
             padding: 24px;
             grid-row-gap: 30px;
+            height: 100%;
         }
 
         .grid {

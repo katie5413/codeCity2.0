@@ -145,7 +145,7 @@ $(document).ready(function () {
     }
 
     function generateGridMap({ userID, identity }) {
-        const topicOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        const topicOrder = [1, 2, 3, 4, 12, 11, 10, 5, 9, 8, 7, 6];
 
         topicOrder.forEach((topicID) => {
             $('.gridMap').append(`<div class="grid" rank='0' target-id=${topicID}></div>`);
