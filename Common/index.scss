@@ -43,10 +43,10 @@ body {
     width: 100%;
     background-color: white;
 
-    &.no-scroll {
-        position: fixed;
-        overflow-y: scroll;
-    }
+    &:global(.no-scroll) {
+		position: fixed;
+		overflow-y: scroll;
+	}
 
     & > #content {
         display: flex;

@@ -62,7 +62,6 @@ function activeSideMenu({ id, type, identity, windowID }) {
 
     $('nav a').on('click', function (e) {
         let target = $(this).closest('li').attr('id').slice(3);
-        console.log(target);
         sendActionLog({ actionCode: `nav-goTo-${target}`, windowID: windowID });
     });
 

@@ -10,23 +10,27 @@
         <link rel="stylesheet" type="text/css" href="../../Dependencies/marked/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Dependencies/Cropper/cropper.min.css" />
-        <link rel="stylesheet" type="text/css" href="../../Dependencies/slick/slick.css" />
-        <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../Dependencies/datatables/datatables.css"
+        />
         <link rel="stylesheet" type="text/css" href="../../Components/Loader/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Layout/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Link/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Button/index.css" />
-        <link rel="stylesheet" type="text/css" href="../../Components/Breadcrumb/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Checkbox/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/SideMenu/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Table/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Footer/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/ProfileCard/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/FeedbackMsg/index.css" />
-        <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Pop/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/Input/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/DropBox/index.css" />
-        <link rel="stylesheet" type="text/css" href="../../Components/MagicBox/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Components/MultiDropBox/index.css" />
         <link rel="stylesheet" type="text/css" href="../../Components/Modal/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../Dependencies/hljs/index.css" />
         <link
             rel="stylesheet"
             type="text/css"
@@ -64,7 +68,7 @@
 
             gtag('config', 'G-CMZ45H5BZ4');
         </script>
-        <title>Map</title>
+        <title>News</title>
     </head>
 
     <body>
@@ -72,30 +76,13 @@
             <div class="loader-inner pacman"></div>
         </div> -->
         <div class="bg"></div>
-        <div id="breadcrumb"></div>
-        <p class="note">註：分數為主題內所有題目的平均</p>
-        <div class="profileCard">
-            <div class="user">
-                <div class="avatarWrapper">
-                    <img class="avatar" src="../../Images/avatar.png" alt="user" />
-                </div>
-                <h4 class="userName">name</h4>
-            </div>
-
-            <div class="status">
-                <div class="point">
-                    <img src="../../Images/icon/general/diamond.svg" alt="" />
-                    <p class="text">0</p>
-                </div>
-            </div>
-        </div>
         <div class="layout">
             <div class="sideMenuArea">
                 <div class="sideMenu">
                     <img class="logo" src="../../Images/icon/logo.svg" alt="logo" />
                     <h3>CodeCity</h3>
                     <nav>
-                        <li id="navMap" class="active">
+                        <li id="navMap">
                             <a href="../Map/">
                                 <div class="item" aria-hidden="true">
                                     <img
@@ -119,7 +106,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li id="navNews">
+                        <li id="navNews" class="active">
                             <a href="../News/">
                                 <div class="item" aria-hidden="true">
                                     <img
@@ -207,62 +194,13 @@
                     </div>
                 </div>
             </div>
-            <div class="contentWrapper oneBlock">
-                <main id="mapContent" class="content">
-                    <div class="gridMap">
-                        <div class="top">
-                            <div class="grid" rank="0" target-id="1"></div>
-                            <div class="grid" rank="0" target-id="2"></div>
-                            <div class="grid" rank="0" target-id="3"></div>
-                            <div class="grid" rank="0" target-id="4"></div>
-                            <div class="grid" rank="0" target-id="5"></div>
-                        </div>
-                        <div class="bottom">
-                            <div class="left">
-                                <div class="grid" rank="0" target-id="6"></div>
-                                <div class="grid" rank="0" target-id="7"></div>
-                                <div class="grid" rank="0" target-id="8"></div>
-                                <div class="grid" rank="0" target-id="9"></div>
-                            </div>
-                            <div class="right">
-                                <div class="grid" rank="0" target-id="10"></div>
-                                <div class="grid" rank="0" target-id="11"></div>
-                                <div class="grid" rank="0" target-id="12"></div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-        <!-- <div id="classCodeArea">
-            <div class="dropBox">
-                <input class="selectSelected" type="text" placeholder="請選擇班級" />
-                <img src="../../Images/icon/direction/drop-right.svg" alt="icon" class="icon" />
-                <img src="../../Images/icon/general/clear.svg" alt="icon" class="drop__clear" />
-                <div class="line"></div>
-                <div class="selectItems"></div>
-            </div>
-        </div> -->
-        <div class="pop">
-            <div class="contentWrapper">
-                <div class="top">
-                    <img class="icon" src="../../Images/icon/general/bell-primary.svg" alt="info" />
-                    <h3>通知</h3>
-                </div>
-                <p class="middle">這裡是提示文字</p>
-                <div class="bottom">
-                    <button class="button btn-primary close-pop">確認</button>
-                </div>
-            </div>
-        </div>
-        <div id="luckyDrawModal" class="modal">
-            <div class="modalWrapper">
-                <div class="content">
-                    <div class="top">
-                        <img class="icon" src="../../Images/icon/general/edit-white.svg" />
-                        <div class="title">抽人</div>
-                    </div>
-                    <div class="middle">
+            <div class="contentWrapper oneBlock fixFullScreen">
+                <main class="content" active-tab="homeworkList">
+                    <div class="contentTopArea">
+                        <img id="classManageIcon" src="../../Images/icon/general/bell.svg" />
+                        <h3 id="pageTitle">
+                            <a href="../News/">最新消息</a>
+                        </h3>
                         <div id="classCodeArea">
                             <div class="dropBox">
                                 <input
@@ -284,55 +222,94 @@
                                 <div class="selectItems"></div>
                             </div>
                         </div>
-                        <div id="luckyDrawContent"></div>
+                        <p class="note">註：可點擊表頭排序資料</p>
                     </div>
+                    <div class="contentMainArea">
+                        <div class="tabMenu">
+                            <button class="tabMenuBtn active" target="homeworkList">作業紀錄</button>
+                        </div>
+                        <div class="tab" tab-name="homeworkList">
+                            <div class="table__container">
+                                <table id="homeworkListTable" class="stripe" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>姓名</th>
+                                            <th>提交時間</th>
+                                            <th>分數</th>
+                                            <th>主題名稱</th>
+                                            <th>章節名稱</th>
+                                            <th>題型</th>
+                                            <th>查看</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div class="pop">
+                <div class="contentWrapper">
+                    <div class="top">
+                        <img
+                            class="icon"
+                            src="../../Images/icon/general/bell-primary.svg"
+                            alt="info"
+                        />
+                        <h3>通知</h3>
+                    </div>
+                    <p class="middle"></p>
                     <div class="bottom">
                         <div class="buttonGroup">
-                            <button class="button btn-primary btn-hollow modalCancel">取消</button>
-                            <button class="button btn-primary modalConfirm">確認</button>
+                            <button class="button btn-primary btn-hollow close-pop">取消</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="magicBox">
-            <div class="dropMenuBox">
-                <div class="selectSelected">
-                    <img src="../../Images/icon/general/dashboard.svg" />
-                    <span>工具箱</span>
-                </div>
-                <div class="selectItems">
-                    <div id="luckyDrawBtn" class="option" value="1">
-                        <img src="../../Images/icon/general/bell-primary.svg" />
-                        <span>抽人</span>
-                    </div>
-                    <div class="option" value="2">
-                        <img src="../../Images/icon/general/badge.svg" />
-                        <span>獎勵</span>
-                    </div>
-                    <div class="option" value="3">
-                        <img src="../../Images/icon/general/dashboard.svg" />
-                        <span>這個比較長</span>
-                    </div>
-                    <div class="option" value="4">
-                        <img src="../../Images/icon/general/dashboard.svg" />
-                        <span>抽人</span>
+            <div id="previewLessonContentModal" class="modal">
+                <div class="modalWrapper">
+                    <div class="content">
+                        <div class="top">
+                            <img class="icon" src="../../Images/icon/general/edit-white.svg" />
+                            <div class="title">新增章節</div>
+                        </div>
+                        <div class="middle">
+                            <div id="lessonContent"></div>
+                        </div>
+                        <div class="bottom">
+                            <div class="buttonGroup">
+                                <button class="button btn-primary btn-hollow modalCancel">
+                                    取消
+                                </button>
+                                <button class="button btn-primary modalConfirm">確認</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <script src="../../Common/util.js"></script>
         <script src="../../Dependencies/jquery/jquery.min.js"></script>
-        <script src="../../Dependencies/slick/slick.min.js"></script>
+        <script src="../../Dependencies//hljs/highlight.min.js"></script>
+        <script src="../../Dependencies//hljs/highlightjs-line-numbers.min.js"></script>
+        <script src="../../Dependencies/marked/marked.min.js"></script>
+        <script src="../../Dependencies/marked/extension.js"></script>
+        <script src="../../Dependencies/datatables/datatables.min.js"></script>
+        <script src="../../Dependencies/datatables/dataTables.scrollResize.min.js"></script>
+        <script src="../../Components/Table/index.js"></script>
         <script src="../../Components/Loader/index.js"></script>
         <script src="../../Components/SideMenu/index.js"></script>
-        <script src="../../Components/Breadcrumb/index.js"></script>
-        <script src="../../Components/Pop/index.js"></script>
+        <script src="../../Components/FeedbackMsg/index.js"></script>
+        <script src="../../Components/Input/index.js"></script>
         <script src="../../Components/DropBox/index.js"></script>
         <script src="../../Components/DropBox/selectClassCode.js"></script>
-        <script src="../../Components/MagicBox/index.js"></script>
+        <script src="../../Components/MultiDropBox/index.js"></script>
         <script src="../../Components/Modal/index.js"></script>
-        <script src="../../Components/ProfileCard/index.js"></script>
+        <script src="../../Components/Pop/index.js"></script>
+        <script src="../../Dependencies/dotdotdot/index.js"></script>
+        <script src="../../Components/LessonContentModule/index.js"></script>
         <script src="index.js"></script>
     </body>
     <!-- Google Tag Manager (noscript) -->

@@ -1,23 +1,23 @@
 {
-  "name": "codecity",
-  "version": "2.0",
-  "description": "Gamification Learning Manage system",
-  "main": "index.js",
-  "repository": "https://github.com/katie5413/codeCity2.0",
-  "author": "13 <katie87827@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "archiver": "^5.3.0",
-    "babel-cli": "^6.26.0",
-    "node-sass": "^6.0.1"
-  },
-  "scripts": {
-    "sass": "node-sass -w sass -o css",
-    "start:watch": "(node-sass -w --output-style compressed Common -o Common) & (node-sass -w --output-style compressed Components -o Components) & (node-sass -w --output-style compressed View -o View)",
-    "watch:component": "node-sass -w --output-style compressed Components -o Components",
-    "compile": "node-sass --output-style compressed Components -o Components && node-sass --output-style compressed Room -o Room && node-sass --output-style compressed New -o New && node-sass --output-style compressed Backstage -o Backstage"
-  },
-  "dependencies": {
-    "loaders.css": "^0.1.2"
-  }
+    "name": "codecity",
+    "version": "2.0",
+    "description": "Gamification Learning Manage system",
+    "main": "index.js",
+    "repository": "https://github.com/katie5413/codeCity2.0",
+    "author": "13 <katie87827@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "archiver": "^5.3.0",
+        "babel-cli": "^6.26.0",
+        "node-sass": "^6.0.1"
+    },
+    "scripts": {
+        "sass": "node-sass -w sass -o css",
+        "start:watch": "(node-sass -w --output-style compressed Common -o Common) & (node-sass -w --output-style compressed Components -o Components) & (node-sass -w --output-style compressed View -o View)",
+        "watch:component": "node-sass -w --output-style compressed Components -o Components",
+        "compile": "node-sass --output-style compressed Components -o Components && node-sass --output-style compressed Room -o Room && node-sass --output-style compressed New -o New && node-sass --output-style compressed Backstage -o Backstage && node-sass --output-style compressed Rank -o Rank && node-sass --output-style compressed News -o News"
+    },
+    "dependencies": {
+        "loaders.css": "^0.1.2"
+    }
 }

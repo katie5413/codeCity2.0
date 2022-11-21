@@ -14,6 +14,13 @@ p + p {
     margin-top: 10px;
 }
 
+p.note {
+    position: absolute;
+    right: 36px;
+    top: 78px;
+    z-index: 3;
+}
+
 .layout {
     padding: 70px 30px 20px 90px;
     width: -webkit-fill-available;
@@ -22,7 +29,7 @@ p + p {
         background-color: transparent;
         box-shadow: none;
         width: calc(100%);
-        height: calc(100% - 90px);
+        // height: calc(100% - 90px);
 
         .content {
             margin: 0;
@@ -30,16 +37,28 @@ p + p {
         }
 
         .gridMap {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            flex-direction: column;
             border-radius: 8px;
             overflow: hidden;
             opacity: 0.9;
-            background-image: url('../../Images/island/map.jpeg');
+            background-image: url('../../Images/island/sky.png');
             background-size: 100% 100%;
             padding: 24px;
-            grid-row-gap: 30px;
             height: 100%;
+            gap: 30px;
+
+            .top,
+            .left,
+            .right {
+                display: grid;
+                gap: 30px;
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: space-around;
+            }
         }
 
         .grid {

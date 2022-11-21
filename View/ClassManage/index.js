@@ -27,7 +27,8 @@ $(document).ready(function () {
 
                 // 側邊欄
                 const { isTeacher, enrollClass } = checkUserIdentity(res.data);
-
+                addMenuRankClass({ enrollClass });
+                addMenuNewsClass({ enrollClass });
                 if (!isTeacher) {
                     setPopMsg({ msg: '非教師' });
                     setTimeout(function () {
@@ -35,7 +36,7 @@ $(document).ready(function () {
                     }, 3000);
                 } else {
                     // 處理側邊欄
-                    addMenuClass({ enrollClass });
+                    addMenuManageClass({ enrollClass });
                     activeSideMenu({
                         id: 'navClassManage',
                         type: 'main',
@@ -331,7 +332,7 @@ $(document).ready(function () {
     }
 
     const homeworkListDataTrTemplate = `
-    <tr data-submit-id="{{id}}" data-homework-id="{{lessonContentID}}" data-student-id="{{studentID}} data-topic-id="{{topicID}}" data-lesson-id="{{lessonID}}">
+    <tr data-submit-id="{{id}}" data-homework-id="{{lessonContentID}}" data-student-id="{{studentID}}" data-topic-id="{{topicID}}" data-lesson-id="{{lessonID}}">
         <td>{{index}}</td>
         <td>{{studentName}}</td>
         <td>{{submitTime}}</td>

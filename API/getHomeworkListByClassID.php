@@ -22,7 +22,7 @@ if (isset($_POST['class_ID'])) {
     FROM classEnroll 
     INNER JOIN user 
     ON user.id = classEnroll.user_ID
-    WHERE score IS NOT NULL AND class_ID = ? AND identity != 1)');
+    WHERE score IS NOT NULL AND class_ID = ?)'); //  AND identity != 1
     $findHomeworkData->execute(array($classID));
 
     $homeworkDataArr = array();

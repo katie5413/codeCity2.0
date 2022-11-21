@@ -29,7 +29,6 @@ function lessonContentModel(props) {
                 imgGroup.each(function (i, img) {
                     if (imgGroup.eq(i).next().hasClass('content-img')) {
                         flag++;
-                        console.log(flag);
                     } else if (flag > 1) {
                         for (let j = 0; j < flag; j++) {
                             imgGroup.eq(i - j).addClass(`group${flag}`);

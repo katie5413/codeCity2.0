@@ -28,12 +28,13 @@ $(document).ready(function () {
                 displayCourseBreadcrumb({ lessonID });
 
                 // 側邊欄
-                const { isTeacher, enrollClass }  = checkUserIdentity(res.data);
-
+                const { isTeacher, enrollClass } = checkUserIdentity(res.data);
+                addMenuRankClass({ enrollClass });
+                addMenuNewsClass({ enrollClass });
                 if (isTeacher) {
-                    addMenuClass({ enrollClass });
+                    addMenuManageClass({ enrollClass });
                 }
-                
+
                 activeSideMenu({
                     id: 'navMap',
                     type: 'main',

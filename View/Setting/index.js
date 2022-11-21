@@ -26,8 +26,10 @@ $(document).ready(function () {
                     // 側邊欄
                     const { isTeacher, enrollClass } = checkUserIdentity(res.data);
 
+                    addMenuRankClass({ enrollClass });
+                    addMenuNewsClass({ enrollClass });
                     if (isTeacher) {
-                        addMenuClass({ enrollClass });
+                        addMenuManageClass({ enrollClass });
                     }
 
                     activeSideMenu({

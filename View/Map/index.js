@@ -23,9 +23,10 @@ $(document).ready(function () {
 
                 // 側邊欄
                 const { isTeacher, enrollClass } = checkUserIdentity(res.data);
-
+                addMenuRankClass({ enrollClass });
+                addMenuNewsClass({ enrollClass });
                 if (isTeacher) {
-                    addMenuClass({ enrollClass });
+                    addMenuManageClass({ enrollClass });
 
                     // deal selectClass dropBox options
                     for (let i = 0; i < enrollClass.length; i++) {
@@ -150,8 +151,6 @@ $(document).ready(function () {
         const topicOrder = [1, 2, 3, 4, 12, 11, 10, 5, 9, 8, 7, 6];
 
         topicOrder.forEach((topicID) => {
-            $('.gridMap').append(`<div class="grid" rank='0' target-id=${topicID}></div>`);
-
             $(`.grid[target-id=${topicID}]`).append(
                 generateGridItem({
                     topicID: topicID,
@@ -227,8 +226,6 @@ $(document).ready(function () {
             success: function (res) {
                 console.log(res);
                 if (res.status == 200) {
-                    console.log(res.data);
-
                     const { rank, score } = checkRank({ scoreData: res.data });
                     updateMapByRank({ rank, score });
 

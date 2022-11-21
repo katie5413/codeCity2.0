@@ -83,7 +83,7 @@ function checkUserIdentity(props) {
     return { isTeacher, enrollClass };
 }
 
-function addMenuClass(props) {
+function addMenuManageClass(props) {
     const { enrollClass } = props;
     // { id: page.id, link: page.link, name: page.name }
     let subPage = [];
@@ -96,6 +96,36 @@ function addMenuClass(props) {
     });
 
     addSideMenuSubPage({ targetID: `navClassManage`, subPage });
+}
+
+function addMenuRankClass(props) {
+    const { enrollClass } = props;
+    // { id: page.id, link: page.link, name: page.name }
+    let subPage = [];
+    enrollClass.forEach((item) => {
+        subPage.push({
+            id: `class-${item.classCode}`,
+            link: `../../View/Rank/?classCode=${item.classCode}`,
+            name: item.className,
+        });
+    });
+
+    addSideMenuSubPage({ targetID: `navRank`, subPage });
+}
+
+function addMenuNewsClass(props) {
+    const { enrollClass } = props;
+    // { id: page.id, link: page.link, name: page.name }
+    let subPage = [];
+    enrollClass.forEach((item) => {
+        subPage.push({
+            id: `class-${item.classCode}`,
+            link: `../../View/News/?classCode=${item.classCode}`,
+            name: item.className,
+        });
+    });
+
+    addSideMenuSubPage({ targetID: `navNews`, subPage });
 }
 
 function sendActionLog(props) {
@@ -114,4 +144,23 @@ function sendActionLog(props) {
             console.log('sendActionLog', res.data);
         },
     });
+}
+
+function fixBackgroundScrollY() {
+    if (!document.body.classList.contains('no-scroll')) {
+        document.body.style.top = `-${window.pageYOffset}px`;
+        document.body.classList.add('no-scroll');
+    }
+}
+
+function unfixBackgroundScrollY() {
+    const classNameArray = document.body.classList.value.split(' ');
+    const newClassName = classNameArray.filter((item) => item !== 'no-scroll').join(' ');
+    document.body.classList = newClassName;
+
+    const matchesTop = document.body.style.top.match(/\d+/g);
+    document.body.style.top = 'unset';
+    if (matchesTop !== null && matchesTop.length > 0) {
+        window.scrollTo(0, parseInt(matchesTop[0], 10));
+    }
 }

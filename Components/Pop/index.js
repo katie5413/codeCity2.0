@@ -7,7 +7,10 @@ function setPopMsg({ msg, targetAction }) {
         $('.pop').attr('target-action', targetAction);
     }
 
+    fixBackgroundScrollY();
+
     $('.pop .close-pop').on('click', function () {
         $('.pop').removeClass('active');
+        unfixBackgroundScrollY();
     });
 }
