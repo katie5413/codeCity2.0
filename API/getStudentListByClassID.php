@@ -10,7 +10,7 @@ if (isset($_POST['class_ID'])) {
 
     $findStudentData = $dbh->prepare('SELECT classEnroll.user_ID, classEnroll.enroll_time ,user.name, user.point, user.email
     FROM classEnroll
-    LEFT JOIN user
+    INNER JOIN user
     ON user.id = classEnroll.user_ID
     WHERE class_ID = ? AND identity != 1 AND enroll_time IS NOT NULL');
     $findStudentData->execute(array($classID));
@@ -28,6 +28,6 @@ echo json_encode($res);
 
 // SELECT classEnroll.id, classEnroll.user_ID, classEnroll.enroll_time ,user.name, user.point, user.email
 // FROM `classEnroll` 
-// LEFT JOIN `user` 
+// INNER JOIN `user` 
 // ON user.id = classEnroll.user_ID
 // WHERE `class_ID` = 1 AND `identity` != 1

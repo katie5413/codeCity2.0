@@ -10,17 +10,17 @@ if (isset($_POST['class_ID'])) {
 
     $findHomeworkData = $dbh->prepare('SELECT homeworkSubmit.id, homeworkSubmit.student_ID, homeworkSubmit.score, homeworkSubmit.homework_ID, homeworkSubmit.submitTime, homeworkSubmit.content,user.name, lessonContent.lesson_ID, lessonContent.contentType, lesson.title as lessonName, lesson.topic_ID,topic.title as topicName
     FROM homeworkSubmit
-    LEFT JOIN `lessonContent`
+    INNER JOIN `lessonContent`
     ON homeworkSubmit.homework_ID = lessonContent.id
-    LEFT JOIN `lesson`
+    INNER JOIN `lesson`
     ON lessonContent.lesson_ID = lesson.id
-    LEFT JOIN topic
+    INNER JOIN topic
     ON topic.id = lesson.topic_ID
-    LEFT JOIN user
+    INNER JOIN user
     ON user.id = homeworkSubmit.student_ID
     WHERE student_ID in (SELECT classEnroll.user_ID
     FROM classEnroll 
-    LEFT JOIN user 
+    INNER JOIN user 
     ON user.id = classEnroll.user_ID
     WHERE score IS NOT NULL AND class_ID = ? AND identity != 1)');
     $findHomeworkData->execute(array($classID));
@@ -40,16 +40,16 @@ echo json_encode($res);
 //     homeworkSubmit.id, homeworkSubmit.student_ID, homeworkSubmit.score, homeworkSubmit.homework_ID, homeworkSubmit.submitTime, homeworkSubmit.content,user.name, lessonContent.lesson_ID, lesson.title as lessonName, lesson.topic_ID,topic.title as topicName
 // FROM
 //     `homeworkSubmit`
-// LEFT JOIN `lessonContent`
+// INNER JOIN `lessonContent`
 // ON homeworkSubmit.homework_ID = lessonContent.id
-// LEFT JOIN `lesson`
+// INNER JOIN `lesson`
 // ON lessonContent.lesson_ID = lesson.id
-// LEFT JOIN topic
+// INNER JOIN topic
 // ON topic.id = lesson.topic_ID
-// LEFT JOIN `user` 
+// INNER JOIN `user` 
 // ON user.id = homeworkSubmit.student_ID
 // WHERE student_ID in (SELECT classEnroll.user_ID
 // FROM `classEnroll` 
-// LEFT JOIN `user` 
+// INNER JOIN `user` 
 // ON user.id = classEnroll.user_ID
 // WHERE `class_ID` = 1 AND `identity` != 1)

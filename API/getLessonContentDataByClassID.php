@@ -12,7 +12,7 @@ if (isset($_POST['classID'])) {
         `homeworkSubmit`
     WHERE student_ID in (SELECT classEnroll.user_ID
     FROM `classEnroll` 
-    LEFT JOIN `user` 
+    INNER JOIN `user` 
     ON user.id = classEnroll.user_ID
     WHERE `class_ID` = ? AND `identity` != 1))
     ');
@@ -34,6 +34,6 @@ if (isset($_POST['classID'])) {
 //     `homeworkSubmit`
 // WHERE student_ID in (SELECT classEnroll.user_ID
 // FROM `classEnroll` 
-// LEFT JOIN `user` 
+// INNER JOIN `user` 
 // ON user.id = classEnroll.user_ID
 // WHERE `class_ID` = 1 AND `identity` != 1))

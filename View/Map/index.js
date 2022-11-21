@@ -19,6 +19,8 @@ $(document).ready(function () {
                 // 顯示麵包屑
                 displayCourseBreadcrumb({ isMap: true });
 
+                updateUserDashBoard(res.data);
+
                 // 側邊欄
                 const { isTeacher, enrollClass } = checkUserIdentity(res.data);
 
@@ -229,6 +231,55 @@ $(document).ready(function () {
 
                     const { rank, score } = checkRank({ scoreData: res.data });
                     updateMapByRank({ rank, score });
+
+                    // 拿到成績後順便檢查是否拿過本日獎勵
+                    checkGetTodayAward({ score });
+                }
+            },
+        });
+    }
+
+    function checkGetTodayAward({ score }) {
+        $.ajax({
+            type: 'POST',
+            url: `../../API/checkGetTodayAward.php`,
+            dataType: 'json',
+            success: function (res) {
+                let total = 0;
+
+                score = score.filter((item) => item != 0);
+                score.forEach((item) => {
+                    total += item;
+                });
+
+                if (!res.getTodayAward) {
+                    const msg = '本日登入獎勵 ' + score.join('+') + '=' + total + ' 積分';
+
+                    setPopMsg({ msg: msg });
+
+                    // 更新積分
+                    updateUserPoint({ updatePoint: total });
+
+                    // 送出 log
+                    sendActionLog({ actionCode: 'getTodayAward', windowID: windowID });
+                }
+            },
+        });
+    }
+
+    function updateUserPoint({ updatePoint }) {
+        $.ajax({
+            type: 'POST',
+            url: `../../API/updateUserPoint.php`,
+            data: {
+                updatePoint: updatePoint,
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.status === '200') {
+                    console.log(res);
+                    // updateUserPoint
+                    $('.profileCard .status .point p').text(res.data.point);
                 }
             },
         });

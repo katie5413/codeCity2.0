@@ -21,7 +21,7 @@ p + p {
     .contentWrapper {
         background-color: transparent;
         box-shadow: none;
-        width: 100%;
+        width: calc(100%);
         height: calc(100% - 90px);
 
         .content {

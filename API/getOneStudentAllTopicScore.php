@@ -10,9 +10,9 @@ if (isset($_POST['userID'])) {
     $findTopicScore = $dbh->prepare("SELECT homeworkSubmit.student_ID , lesson.topic_ID, SUM(homeworkSubmit.score),AVG(homeworkSubmit.score)
     FROM
     homeworkSubmit
-    LEFT JOIN lessonContent
+    INNER JOIN lessonContent
     ON homeworkSubmit.homework_ID = lessonContent.id 
-    LEFT JOIN lesson
+    INNER JOIN lesson
     ON lessonContent.lesson_ID = lesson.id
     WHERE homeworkSubmit.student_ID = ? AND homeworkSubmit.score is NOT NULL
     GROUP BY lesson.topic_ID");
@@ -34,9 +34,9 @@ echo json_encode($res);
 //     homeworkSubmit.student_ID , lesson.topic_ID, SUM(homeworkSubmit.score),AVG(homeworkSubmit.score)
 // FROM
 //     `homeworkSubmit`
-// LEFT JOIN `lessonContent`
+// INNER JOIN `lessonContent`
 // ON homeworkSubmit.homework_ID = lessonContent.id 
-// LEFT JOIN `lesson`
+// INNER JOIN `lesson`
 // ON lessonContent.lesson_ID = lesson.id
 // WHERE homeworkSubmit.student_ID = ? AND homeworkSubmit.score is NOT NULL
 // GROUP BY lesson.topic_ID

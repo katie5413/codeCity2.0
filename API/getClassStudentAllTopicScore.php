@@ -10,13 +10,13 @@ if (isset($_POST['classID'])) {
     $findTopicScore = $dbh->prepare("SELECT homeworkSubmit.student_ID , lesson.topic_ID, AVG(homeworkSubmit.score)
     FROM
     homeworkSubmit
-    LEFT JOIN lessonContent
+    INNER JOIN lessonContent
     ON homeworkSubmit.homework_ID = lessonContent.id 
-    LEFT JOIN lesson
+    INNER JOIN lesson
     ON lessonContent.lesson_ID = lesson.id
     WHERE homeworkSubmit.student_ID IN (SELECT classEnroll.user_ID
     FROM `classEnroll` 
-    LEFT JOIN `user` 
+    INNER JOIN `user` 
     ON user.id = classEnroll.user_ID
     WHERE `class_ID` = ? AND `identity` != 1)  AND homeworkSubmit.score is NOT NULL
     GROUP BY homeworkSubmit.student_ID, lesson.topic_ID");
@@ -37,13 +37,13 @@ echo json_encode($res);
 // SELECT homeworkSubmit.student_ID , lesson.topic_ID, AVG(homeworkSubmit.score)
 // FROM
 //     `homeworkSubmit`
-// LEFT JOIN `lessonContent`
+// INNER JOIN `lessonContent`
 // ON homeworkSubmit.homework_ID = lessonContent.id 
-// LEFT JOIN `lesson`
+// INNER JOIN `lesson`
 // ON lessonContent.lesson_ID = lesson.id
 // WHERE homeworkSubmit.student_ID IN (SELECT classEnroll.user_ID
 // FROM `classEnroll` 
-// LEFT JOIN `user` 
+// INNER JOIN `user` 
 // ON user.id = classEnroll.user_ID
 // WHERE `class_ID` = 3 AND `identity` != 1) AND homeworkSubmit.score is NOT NULL
 // GROUP BY homeworkSubmit.student_ID, lesson.topic_ID

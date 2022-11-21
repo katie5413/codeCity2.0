@@ -14,7 +14,7 @@ if (isset($_SESSION["userID"]) && isset($_SESSION["userEmail"])) {
         $attendClass = array();
 
         // 檢查班級狀態，並存成 array 
-        $findUserClass = $dbh->prepare('SELECT * FROM classEnroll LEFT JOIN class on classEnroll.class_ID = class.id WHERE user_ID = ?');
+        $findUserClass = $dbh->prepare('SELECT * FROM classEnroll INNER JOIN class on classEnroll.class_ID = class.id WHERE user_ID = ?');
         $findUserClass->execute(array($userDataItem["id"]));
 
         while ($userClassItem = $findUserClass->fetch(PDO::FETCH_ASSOC)) {
