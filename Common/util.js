@@ -129,7 +129,7 @@ function addMenuNewsClass(props) {
 }
 
 function sendActionLog(props) {
-    const { actionCode, windowID } = props;
+    const { actionCode, windowID, point } = props;
 
     // 先拿 user 資料
     $.ajax({
@@ -139,6 +139,7 @@ function sendActionLog(props) {
         data: {
             actionCode: actionCode,
             windowID: windowID.slice(0, 8),
+            point: point,
         },
         success: function (res) {
             console.log('sendActionLog', res.data);

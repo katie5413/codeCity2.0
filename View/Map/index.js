@@ -258,7 +258,11 @@ $(document).ready(function () {
                     updateUserPoint({ updatePoint: total });
 
                     // 送出 log
-                    sendActionLog({ actionCode: 'getTodayAward', windowID: windowID });
+                    sendActionLog({
+                        actionCode: 'getTodayAward',
+                        windowID: windowID,
+                        point: total,
+                    });
                 }
             },
         });
