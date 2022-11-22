@@ -243,6 +243,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 let total = 0;
+                console.log(res);
 
                 score = score.filter((item) => item != 0);
                 score.forEach((item) => {
