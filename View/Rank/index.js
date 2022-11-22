@@ -33,6 +33,7 @@ $(document).ready(function () {
                 IS_TEACHER = isTeacher;
 
                 addMenuRankClass({ enrollClass });
+                addMenuNewsClass({ enrollClass });
                 activeSideMenu({
                     id: 'navRank',
                     type: 'main',
