@@ -6,20 +6,19 @@ include "../pdoInc.php";
 $res = array();
 if (isset($_SESSION['userID'])) {
     // getActionLog
-    $findActionLog = $dbh->prepare('SELECT action_code FROM actionLog WHERE user_ID = ? AND action_code LIKE ? AND submit_time > ?');
-    $findActionLog->execute(array($_SESSION['userID'], 'getTodayAward', GETDATE()));
+    $findActionLog = $dbh->prepare('SELECT action_code, submit_time FROM actionLog WHERE user_ID = ? AND action_code LIKE ? AND submit_time > ?');
+    $findActionLog->execute(array($_SESSION['userID'], 'getTodayAward', date("Y-m-d")));
 
-    $actionLogItem = $findActionLog->fetch(PDO::FETCH_ASSOC);
+    $getTodayAward = false;
 
-    if ($findActionLog->rowCount() > 0) {
-        // 領過
+    while ($actionLogItem = $findActionLog->fetch(PDO::FETCH_ASSOC)) {
+
         $getTodayAward = true;
-    } else {
-        $getTodayAward = false;
     }
 
 
-    $res = array("status" => '200', "getTodayAward" => $getTodayAward);
+
+    $res = array("status" => '200', "getTodayAward" => $getTodayAward, "today" => date("Y-m-d"), 'studentID' => $_SESSION['userID']);
 } else {
     $res = array("status" => '404');
 }
