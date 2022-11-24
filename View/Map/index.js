@@ -119,7 +119,7 @@ $(document).ready(function () {
     const gridItemBuildingTemplate = `
         <div class="gridItem">
             <a href="../../View/Topic/?topicID={{topicID}}">
-                <span class="score"></span>
+                <span class="score hide"></span>
                 <img class="building" level="0" src="../../Images/island/island.png" />
                 <img class="building" level="1" src="../../Images/island/island-{{topicID}}-1.png" />
                 <img class="building" level="2" src="../../Images/island/island-{{topicID}}-2.png" />
@@ -209,9 +209,14 @@ $(document).ready(function () {
         });
 
         score.forEach((topicScore, i) => {
-            $(`.grid[target-id=${i + 1}]`)
-                .find('.score')
-                .text(topicScore);
+            const target = $(`.grid[target-id=${i + 1}]`).find('.score');
+
+            if (topicScore == 0) {
+                target.addClass('hide');
+            } else {
+                target.removeClass('hide');
+                target.text(topicScore);
+            }
         });
     }
 
