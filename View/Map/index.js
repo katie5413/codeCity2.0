@@ -1,5 +1,11 @@
 $(document).ready(function () {
     const windowID = generateUniqueId();
+
+$('.note .pill-button[data-type="rule"]').on('click', function(){
+    $(this).parent().toggleClass('active');
+})
+
+
     // 先拿 user 資料
     $.ajax({
         type: 'POST',

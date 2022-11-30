@@ -14,11 +14,45 @@ p + p {
     margin-top: 10px;
 }
 
-p.note {
+.note {
     position: absolute;
-    right: 36px;
+    left: 102px;
     top: 78px;
-    z-index: 3;
+    z-index: 1;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    .pill-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 8px;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        border-radius: 8px;
+        margin-bottom: 12px;
+        font-size: 16px;
+
+        .icon{
+            transition: all 0.3s ease;
+        }
+    }
+
+    .content {
+        transition: all 0.3s ease;
+        overflow: hidden;
+        max-height: 0;
+    }
+
+    &.active {
+        .content {
+            max-height: 100px;
+        }
+
+        .pill-button .icon {
+            transform: rotate(180deg);
+        }
+    }
 }
 
 .layout {
