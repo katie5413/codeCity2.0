@@ -3,13 +3,13 @@
 }
 
 .content {
-    .contentTopArea {
+    & > .contentTopArea {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         margin-bottom: 8px;
 
-        #lessonIcon {
+        & > #lessonIcon {
             margin-right: 8px;
             width: 40px;
             background: linear-gradient(45deg, var(--primary-dark), var(--secondary-dark));
@@ -18,13 +18,13 @@
             border-radius: 8px;
         }
 
-        #pageTitle {
+        & > #pageTitle {
             display: flex;
             align-items: center;
             margin-right: 8px;
         }
 
-        .status {
+        & > .status {
             display: flex;
             gap: 8px;
             border-radius: 8px;

@@ -225,12 +225,20 @@ function lessonContentModel(props) {
                     });
                 }
 
+                const quizTypeWording = {
+                    singleChoice: '（單選）',
+                    multipleChoice: `（應選${item.content.answer.length}個）`,
+                };
+
                 field.append(
                     generateMultipleChoice({
                         id: item.id,
                         quizTypeId: `${contentID}`,
                         quizType: item.type,
-                        content: item.content,
+                        content: {
+                            ...item.content,
+                            quizTitle: `${quizTypeWording[item.type]}${item.content.quizTitle}`,
+                        },
                         score: avgScore,
                     }),
                 );
@@ -856,17 +864,10 @@ function lessonContentModel(props) {
                         $(`#${contentID} .status`).addClass('done');
 
                         const lastPassSubmitTime = new Date(studentAnswer[i].submitTime);
-                        let nextOpenTime = new Date(lastPassSubmitTime);
-                        nextOpenTime.setDate(lastPassSubmitTime.getDate() + 1);
-                        const now = new Date();
 
-                        if (now < nextOpenTime) {
-                            // 不開放就把提交刪掉，以及下次可作答時間
-                            $(`#${contentID} .submitAnswer`).remove();
-                            $(`#${contentID} .sectionContentArea`).append(
-                                `<p>下次開放時間：${formattedTime(nextOpenTime)}</p>`,
-                            );
-                        }
+                        $(`#${contentID} .sectionContentArea`).append(
+                            `<p>上次作答時間：${formattedTime(lastPassSubmitTime)}</p>`,
+                        );
 
                         break;
                     }
