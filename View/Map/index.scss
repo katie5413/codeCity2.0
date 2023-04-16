@@ -33,7 +33,7 @@ p + p {
         margin-bottom: 12px;
         font-size: 16px;
 
-        .icon{
+        .icon {
             transition: all 0.3s ease;
         }
     }
@@ -73,6 +73,7 @@ p + p {
         .gridMap {
             display: flex;
             justify-content: center;
+            flex-direction: column;
             border-radius: 8px;
             overflow: hidden;
             opacity: 0.9;
@@ -87,6 +88,33 @@ p + p {
                 display: flex;
                 width: 100%;
                 align-items: center;
+                position: relative;
+                height: 100%;
+
+                &::after {
+                    position: absolute;
+                    content: ' ';
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                    background-color: var(--grey2);
+                    width: 75%;
+                    height: 6px;
+                }
+            }
+
+            .up {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+            }
+
+            .down {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                margin-top: 20px;
                 position: relative;
 
                 &::after {
@@ -117,14 +145,12 @@ p + p {
             }
 
             .bottom {
-                position: relative;
-                left: -80px;
-            }
-
-            .bottom {
                 display: grid;
                 gap: 30px;
                 width: 100%;
+                position: relative;
+                left: -80px;
+                height: 100%;
             }
         }
 

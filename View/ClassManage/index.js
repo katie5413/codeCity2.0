@@ -426,7 +426,7 @@ $(document).ready(function () {
 
         for (let i = 0; i < studentData.length; i++) {
             let sumScore = 0;
-            let scoreList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            let scoreList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             let scoreData = studentTopicScore.filter(
                 (item) => item.student_ID == studentData[i].studentID,
             );
@@ -453,7 +453,13 @@ $(document).ready(function () {
                     topic10: scoreList[9] == 0 ? '0' : scoreList[9],
                     topic11: scoreList[10] == 0 ? '0' : scoreList[10],
                     topic12: scoreList[11] == 0 ? '0' : scoreList[11],
-                    avgScore: sumScore == 0 ? '0' : Math.round((sumScore * 10) / 12) / 10,
+                    topic13: scoreList[12] == 0 ? '0' : scoreList[12],
+                    topic14: scoreList[13] == 0 ? '0' : scoreList[13],
+                    topic15: scoreList[14] == 0 ? '0' : scoreList[14],
+                    avgScore:
+                        sumScore == 0 || scoreData.length == 0
+                            ? '0'
+                            : Math.round((sumScore * 10) / scoreData.length) / 10,
                 }),
             );
 
@@ -480,6 +486,9 @@ $(document).ready(function () {
             <td>{{topic10}}</td>
             <td>{{topic11}}</td>
             <td>{{topic12}}</td>
+            <td>{{topic13}}</td>
+            <td>{{topic14}}</td>
+            <td>{{topic15}}</td>
             <td>{{avgScore}}</td>
         </tr>
         `;

@@ -169,14 +169,20 @@ $(document).ready(function () {
                 generateStudentListDataTr({
                     index: i + 1,
                     id: studentData[i].studentID,
-                    name:
-                        studentData[i].name === userData.name || IS_TEACHER
-                            ? studentData[i].name
-                            : '***',
+                    name: studentData[i].name,
                     point: studentData[i].point == 0 ? '0' : studentData[i].point,
                 }),
             );
         }
+
+        // $('.watchOtherStudent').on('click', function(){
+        //     const targetStudentID = $(this).parent().attr('data-student-id');
+        //     openModal({
+        //         targetModal: $('#watchOtherStudentModal'),
+        //         modalTitle: '拜訪島嶼',
+        //         actionType: 'preview',
+        //     });
+        // })
 
         initStudentListTable();
     }
@@ -185,7 +191,7 @@ $(document).ready(function () {
         let studentListDataTrTemplate = `
         <tr data-student-id="{{id}}">
             <td>{{index}}</td>
-            <td><button class="watch watchHomework">{{name}}</button></td>
+            <td><a class="watch watchOtherStudent" href="../Map/index.html?viewStudent={{id}}">{{name}}</a></td>
             <td class="studentPoint">{{point}}</td>
         </tr>
         `;
@@ -278,7 +284,7 @@ $(document).ready(function () {
 
         for (let i = 0; i < studentData.length; i++) {
             let sumScore = 0;
-            let scoreList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            let scoreList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             let scoreData = studentTopicScore.filter(
                 (item) => item.student_ID == studentData[i].studentID,
             );
@@ -291,10 +297,7 @@ $(document).ready(function () {
                 generateTopicScoreDataTr({
                     index: i + 1,
                     studentID: studentData[i].studentID,
-                    studentName:
-                        studentData[i].name === userData.name || IS_TEACHER
-                            ? studentData[i].name
-                            : '***',
+                    studentName: studentData[i].name,
                     topic1: scoreList[0] == 0 ? '0' : scoreList[0],
                     topic2: scoreList[1] == 0 ? '0' : scoreList[1],
                     topic3: scoreList[2] == 0 ? '0' : scoreList[2],
@@ -307,7 +310,13 @@ $(document).ready(function () {
                     topic10: scoreList[9] == 0 ? '0' : scoreList[9],
                     topic11: scoreList[10] == 0 ? '0' : scoreList[10],
                     topic12: scoreList[11] == 0 ? '0' : scoreList[11],
-                    avgScore: sumScore == 0 ? '0' : Math.round((sumScore * 10) / 12) / 10,
+                    topic13: scoreList[12] == 0 ? '0' : scoreList[12],
+                    topic14: scoreList[13] == 0 ? '0' : scoreList[13],
+                    topic15: scoreList[14] == 0 ? '0' : scoreList[14],
+                    avgScore:
+                        sumScore == 0 || scoreData.length == 0
+                            ? '0'
+                            : Math.round((sumScore * 10) / scoreData.length) / 10,
                 }),
             );
         }
@@ -319,7 +328,7 @@ $(document).ready(function () {
         let template = `
         <tr data-student-id="{{studentID}}">
             <td>{{index}}</td>
-            <td>{{studentName}}</td>
+            <td><a class="watch watchOtherStudent" href="../Map/index.html?viewStudent={{studentID}}">{{studentName}}</a></td>
             <td>{{topic1}}</td>
             <td>{{topic2}}</td>
             <td>{{topic3}}</td>
@@ -332,6 +341,9 @@ $(document).ready(function () {
             <td>{{topic10}}</td>
             <td>{{topic11}}</td>
             <td>{{topic12}}</td>
+            <td>{{topic13}}</td>
+            <td>{{topic14}}</td>
+            <td>{{topic15}}</td>
             <td>{{avgScore}}</td>
         </tr>
         `;

@@ -1,9 +1,9 @@
 $(document).ready(function () {
     const windowID = generateUniqueId();
 
-$('.note .pill-button[data-type="rule"]').on('click', function(){
-    $(this).parent().toggleClass('active');
-})
+    $('.note .pill-button[data-type="rule"]').on('click', function () {
+        $(this).parent().toggleClass('active');
+    });
 
     // 先拿 user 資料
     $.ajax({
@@ -61,10 +61,20 @@ $('.note .pill-button[data-type="rule"]').on('click', function(){
                     windowID: windowID,
                 });
 
-                generateGridMap({
-                    userID: res.data.id,
-                    identity: isTeacher ? 'teacher' : 'student',
-                });
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const viewStudentId = urlParams.get('viewStudent');
+                if (viewStudentId) {
+                    generateGridMap({
+                        userID: viewStudentId,
+                        identity: isTeacher ? 'teacher' : 'student',
+                    });
+                } else {
+                    generateGridMap({
+                        userID: res.data.id,
+                        identity: isTeacher ? 'teacher' : 'student',
+                    });
+                }
             } else {
                 setPopMsg({ msg: '未登入，三秒後自動跳轉' });
                 setTimeout(function () {
@@ -111,6 +121,15 @@ $('.note .pill-button[data-type="rule"]').on('click', function(){
         12: {
             name: '階層式分群',
         },
+        13: {
+            name: '資安生活',
+        },
+        14: {
+            name: '資安基礎實務',
+        },
+        15: {
+            name: '資訊倫理與法律',
+        },
     };
 
     // deco or land
@@ -153,7 +172,7 @@ $('.note .pill-button[data-type="rule"]').on('click', function(){
     }
 
     function generateGridMap({ userID, identity }) {
-        const topicOrder = [1, 2, 3, 4, 12, 11, 10, 5, 9, 8, 7, 6];
+        const topicOrder = [1, 2, 3, 4, 12, 11, 10, 5, 9, 8, 7, 6, 13, 14, 15];
 
         topicOrder.forEach((topicID) => {
             $(`.grid[target-id=${topicID}]`).append(
@@ -187,11 +206,14 @@ $('.note .pill-button[data-type="rule"]').on('click', function(){
         10: [60, 80],
         11: [60, 80],
         12: [60, 80],
+        13: [60, 80],
+        14: [60, 80],
+        15: [60, 80],
     };
 
     function checkRank({ scoreData }) {
-        let rank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        let score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let rank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         scoreData.forEach((item) => {
             const avg = parseInt(item.avg, 10);
             rankTable[item.topic_ID].forEach((rankLimit, i) => {
