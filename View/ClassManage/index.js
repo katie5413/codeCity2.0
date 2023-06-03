@@ -219,6 +219,17 @@ $(document).ready(function () {
             ],
         });
 
+        studentListTable
+            .on('order.dt search.dt', function () {
+                studentListTable
+                    .column(0, { search: 'applied', order: 'applied' })
+                    .nodes()
+                    .each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+            })
+            .draw();
+
         studentListTable.columns.adjust().draw();
         sortPosition();
     }
@@ -382,6 +393,18 @@ $(document).ready(function () {
             ],
         });
 
+        homeworkListTable
+            .on('order.dt search.dt', function () {
+                homeworkListTable
+                    .column(0, { search: 'applied', order: 'applied' })
+                    .nodes()
+                    .each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+            })
+            .draw();
+        
+
         homeworkListTable.columns.adjust().draw();
         sortPosition();
     }
@@ -520,6 +543,17 @@ $(document).ready(function () {
             },
             columnDefs: [{ width: '5%', targets: 0 }],
         });
+
+        topicScoreTable
+            .on('order.dt search.dt', function () {
+                topicScoreTable
+                    .column(0, { search: 'applied', order: 'applied' })
+                    .nodes()
+                    .each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+            })
+            .draw();
 
         topicScoreTable.columns.adjust().draw();
         sortPosition();
