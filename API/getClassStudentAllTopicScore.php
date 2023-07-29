@@ -34,7 +34,7 @@ if (isset($_POST['classID'])) {
 echo json_encode($res);
 
 
-// SELECT homeworkSubmit.student_ID , lesson.topic_ID, AVG(homeworkSubmit.score)
+// SELECT homeworkSubmit.student_ID , lesson.topic_ID, AVG(homeworkSubmit.score), COUNT(homeworkSubmit.score)
 // FROM
 //     `homeworkSubmit`
 // INNER JOIN `lessonContent`

@@ -33,3 +33,9 @@ if (isset($_POST['actionCode']) && isset($_POST['windowID'])) {
 }
 
 echo json_encode($res);
+
+// SELECT `user_ID`,`action_code`,`submit_time`,`window_ID`, `name` FROM `actionLog` inner join `user` on actionLog.user_ID =  user.id Where `user_ID` in (SELECT classEnroll.user_ID
+// FROM `classEnroll` 
+// INNER JOIN `user` 
+// ON user.id = classEnroll.user_ID
+// WHERE `class_ID` <= 3 AND `identity` != 1)

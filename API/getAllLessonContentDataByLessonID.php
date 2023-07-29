@@ -53,6 +53,9 @@ if (isset($_POST['lessonID'])) {
                     }
                     $lessonContentItem["studentAnswer"] = $answerSheet;
                     break;
+            default:
+                $lessonContentItem["studentAnswer"] = array();
+                break;
             }
             $lessonContent = array("id" => $lessonContentItem["id"], "type" => $lessonContentItem["contentType"], "contentOrder" => $lessonContentItem["content_order"], "content" => json_decode($lessonContentItem["content"]), 'studentAnswer' => $lessonContentItem["studentAnswer"]);
         }
